@@ -17,7 +17,7 @@ import ScrollSpyWrapper from "@/components/ScrollSpyWrapper";
 import { getHomePageData } from "@/lib/getHomePageData";
 
 export const revalidate = 10;
-
+//test 
 export const metadata: Metadata = {
   title: "The i-Capital Africa Institute",
 };
