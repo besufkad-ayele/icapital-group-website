@@ -17,7 +17,7 @@ interface SliderData {
 }
 
 const DEFAULT_SECTION_TITLE = "As Trusted by Top Companies";
-const ANIMATION_DURATION = 40; // slowed down from 20 for a smoother, premium feel
+const ANIMATION_DURATION = 7; // adjusted for a slightly faster but still smooth movement
 
 const logoVariants = {
   hidden: { opacity: 0, scale: 0.8, y: 20 },
