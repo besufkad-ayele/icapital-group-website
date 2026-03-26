@@ -1,0 +1,50 @@
+name: Deploy to Compute Engine
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Build Docker image
+        run: docker build -t us-central1-docker.pkg.dev/shofer-393807/icapital-website/icapital-website:latest .
+
+      - name: Authenticate with Google Cloud
+        uses: google-github-actions/auth@v2.1.2
+        with:
+          credentials_json: ${{ secrets.GCP_KEY }}
+
+      - name: "Set up Cloud SDK"
+        uses: "google-github-actions/setup-gcloud@v2.1.0"
+
+      - name: "Use gcloud CLI"
+        run: "gcloud info"
+
+      - name: "Docker auth"
+        run: |-
+          gcloud auth configure-docker us-central1-docker.pkg.dev --quiet
+
+      - name: Push image
+        run: docker push us-central1-docker.pkg.dev/shofer-393807/icapital-website/icapital-website
+
+      - name: Deploy to Compute Engine
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.HOST }}
+          username: besufkadmenji
+          key: ${{ secrets.GCP_SSH_PRIVATE_KEY }}
+          port: 22
+          script: |
+            docker stop $(docker ps -a -q --filter ancestor=us-central1-docker.pkg.dev/shofer-393807/icapital-website/icapital-website)
+            docker rm $(docker ps -a -q --filter ancestor=us-central1-docker.pkg.dev/shofer-393807/icapital-website/icapital-website)
+            IMAGE_ID=$(docker images -q us-central1-docker.pkg.dev/shofer-393807/icapital-website/icapital-website)
+            docker rmi -f $IMAGE_ID
+            docker pull us-central1-docker.pkg.dev/shofer-393807/icapital-website/icapital-website
+            docker run -d -p 17000:17000 us-central1-docker.pkg.dev/shofer-393807/icapital-website/icapital-website

@@ -1,0 +1,11 @@
+<svg viewBox="0 0 59.834 59.834">
+      <g id="Layer_1" data-name="Layer 1">
+            <path id="Path_1" data-name="Path 1"
+                  d="M47.113,17.2l-8.6,8.594-4.467-4.467,8.594-8.6L29.917,0,0,29.917l4.127,4.127,25.79-25.79,4.475,4.467-8.6,8.6L38.511,34.044l8.6-8.6,4.467,4.475L38.511,42.986,21.323,25.79,8.594,38.511l4.127,4.127,8.6-8.594,17.188,17.2L59.834,29.917Z"
+                  fill="#fff" />
+            <rect id="Rectangle_1" data-name="Rectangle 1" width="5.818" height="5.834"
+                  transform="translate(17.198 47.115) rotate(-45)" fill="#fff" />
+            <rect id="Rectangle_2" data-name="Rectangle 2" width="5.818" height="5.834"
+                  transform="translate(25.788 55.709) rotate(-45)" fill="#fff" />
+      </g>
+</svg>

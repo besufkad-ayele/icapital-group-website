@@ -1,0 +1,2188 @@
+"""Exposes a URL that specifies the behaviour of this scalar."""
+directive @specifiedBy(
+  """The URL that specifies the behaviour of this scalar."""
+  url: String!
+) on SCALAR
+
+type AdvisorySolutions {
+  image: UploadFileEntityResponse
+  youtubeUrl: String
+  solution(filters: ComponentSolutionSolutionFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): [ComponentSolutionSolution]
+  clients(filters: ComponentOrganizerOrganizerFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): [ComponentOrganizerOrganizer]
+  callToAction: String
+  description: String
+  createdAt: DateTime
+  updatedAt: DateTime
+  publishedAt: DateTime
+}
+
+type AdvisorySolutionsEntity {
+  id: ID
+  attributes: AdvisorySolutions
+}
+
+type AdvisorySolutionsEntityResponse {
+  data: AdvisorySolutionsEntity
+}
+
+input AdvisorySolutionsInput {
+  image: ID
+  youtubeUrl: String
+  solution: [ComponentSolutionSolutionInput]
+  clients: [ComponentOrganizerOrganizerInput]
+  callToAction: String
+  description: String
+  publishedAt: DateTime
+}
+
+type ApplyEafs {
+  title: String
+  description: String
+  logo: UploadFileEntityResponse
+  message: String
+  createdAt: DateTime
+  updatedAt: DateTime
+  publishedAt: DateTime
+}
+
+type ApplyEafsEntity {
+  id: ID
+  attributes: ApplyEafs
+}
+
+type ApplyEafsEntityResponse {
+  data: ApplyEafsEntity
+}
+
+input ApplyEafsInput {
+  title: String
+  description: String
+  logo: ID
+  message: String
+  publishedAt: DateTime
+}
+
+type Author {
+  name: String
+  email: String
+  position: String
+  blogs(filters: BlogFiltersInput, pagination: PaginationArg = {}, sort: [String] = [], publicationState: PublicationState = LIVE): BlogRelationResponseCollection
+  createdAt: DateTime
+  updatedAt: DateTime
+  publishedAt: DateTime
+}
+
+type AuthorEntity {
+  id: ID
+  attributes: Author
+}
+
+type AuthorEntityResponse {
+  data: AuthorEntity
+}
+
+type AuthorEntityResponseCollection {
+  data: [AuthorEntity!]!
+  meta: ResponseCollectionMeta!
+}
+
+input AuthorFiltersInput {
+  id: IDFilterInput
+  name: StringFilterInput
+  email: StringFilterInput
+  position: StringFilterInput
+  blogs: BlogFiltersInput
+  createdAt: DateTimeFilterInput
+  updatedAt: DateTimeFilterInput
+  publishedAt: DateTimeFilterInput
+  and: [AuthorFiltersInput]
+  or: [AuthorFiltersInput]
+  not: AuthorFiltersInput
+}
+
+input AuthorInput {
+  name: String
+  email: String
+  position: String
+  blogs: [ID]
+  publishedAt: DateTime
+}
+
+type Blog {
+  title: String
+  author: AuthorEntityResponse
+  image: UploadFileEntityResponse
+  slug: String
+  tags: String
+  content: String
+  hits: Long
+  description: String
+  createdAt: DateTime
+  updatedAt: DateTime
+  publishedAt: DateTime
+}
+
+type BlogEntity {
+  id: ID
+  attributes: Blog
+}
+
+type BlogEntityResponse {
+  data: BlogEntity
+}
+
+type BlogEntityResponseCollection {
+  data: [BlogEntity!]!
+  meta: ResponseCollectionMeta!
+}
+
+input BlogFiltersInput {
+  id: IDFilterInput
+  title: StringFilterInput
+  author: AuthorFiltersInput
+  slug: StringFilterInput
+  tags: StringFilterInput
+  content: StringFilterInput
+  hits: LongFilterInput
+  description: StringFilterInput
+  createdAt: DateTimeFilterInput
+  updatedAt: DateTimeFilterInput
+  publishedAt: DateTimeFilterInput
+  and: [BlogFiltersInput]
+  or: [BlogFiltersInput]
+  not: BlogFiltersInput
+}
+
+input BlogInput {
+  title: String
+  author: ID
+  image: ID
+  slug: String
+  tags: String
+  content: String
+  hits: Long
+  description: String
+  publishedAt: DateTime
+}
+
+type BlogRelationResponseCollection {
+  data: [BlogEntity!]!
+}
+
+input BooleanFilterInput {
+  and: [Boolean]
+  or: [Boolean]
+  not: BooleanFilterInput
+  eq: Boolean
+  eqi: Boolean
+  ne: Boolean
+  nei: Boolean
+  startsWith: Boolean
+  endsWith: Boolean
+  contains: Boolean
+  notContains: Boolean
+  containsi: Boolean
+  notContainsi: Boolean
+  gt: Boolean
+  gte: Boolean
+  lt: Boolean
+  lte: Boolean
+  null: Boolean
+  notNull: Boolean
+  in: [Boolean]
+  notIn: [Boolean]
+  between: [Boolean]
+}
+
+type ComponentCategoryCategory {
+  id: ID!
+  name: String
+  file(filters: ComponentFileFileFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): [ComponentFileFile]
+}
+
+input ComponentCategoryCategoryFiltersInput {
+  name: StringFilterInput
+  file: ComponentFileFileFiltersInput
+  and: [ComponentCategoryCategoryFiltersInput]
+  or: [ComponentCategoryCategoryFiltersInput]
+  not: ComponentCategoryCategoryFiltersInput
+}
+
+input ComponentCategoryCategoryInput {
+  id: ID
+  name: String
+  file: [ComponentFileFileInput]
+}
+
+type ComponentCbsPointCbsPoint {
+  id: ID!
+  title: String
+  description: String
+}
+
+input ComponentCbsPointCbsPointFiltersInput {
+  title: StringFilterInput
+  description: StringFilterInput
+  and: [ComponentCbsPointCbsPointFiltersInput]
+  or: [ComponentCbsPointCbsPointFiltersInput]
+  not: ComponentCbsPointCbsPointFiltersInput
+}
+
+input ComponentCbsPointCbsPointInput {
+  id: ID
+  title: String
+  description: String
+}
+
+type ComponentCertificationPackageCertificationPackage {
+  id: ID!
+  name: String
+  image: UploadFileEntityResponse
+  description: String
+}
+
+input ComponentCertificationPackageCertificationPackageFiltersInput {
+  name: StringFilterInput
+  description: StringFilterInput
+  and: [ComponentCertificationPackageCertificationPackageFiltersInput]
+  or: [ComponentCertificationPackageCertificationPackageFiltersInput]
+  not: ComponentCertificationPackageCertificationPackageFiltersInput
+}
+
+input ComponentCertificationPackageCertificationPackageInput {
+  id: ID
+  name: String
+  image: ID
+  description: String
+}
+
+type ComponentClientCounterClientCounter {
+  id: ID!
+  name: String
+  value: Long
+}
+
+input ComponentClientCounterClientCounterFiltersInput {
+  name: StringFilterInput
+  value: LongFilterInput
+  and: [ComponentClientCounterClientCounterFiltersInput]
+  or: [ComponentClientCounterClientCounterFiltersInput]
+  not: ComponentClientCounterClientCounterFiltersInput
+}
+
+input ComponentClientCounterClientCounterInput {
+  id: ID
+  name: String
+  value: Long
+}
+
+type ComponentEafsSessionEafsSession {
+  id: ID!
+  title: String
+  speaker(filters: ComponentPersonPersonFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): [ComponentPersonPerson]
+  moderator: ComponentPersonPerson
+  points(filters: ComponentPointPointsFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): [ComponentPointPoints]
+}
+
+input ComponentEafsSessionEafsSessionFiltersInput {
+  title: StringFilterInput
+  speaker: ComponentPersonPersonFiltersInput
+  moderator: ComponentPersonPersonFiltersInput
+  points: ComponentPointPointsFiltersInput
+  and: [ComponentEafsSessionEafsSessionFiltersInput]
+  or: [ComponentEafsSessionEafsSessionFiltersInput]
+  not: ComponentEafsSessionEafsSessionFiltersInput
+}
+
+input ComponentEafsSessionEafsSessionInput {
+  id: ID
+  title: String
+  speaker: [ComponentPersonPersonInput]
+  moderator: ComponentPersonPersonInput
+  points: [ComponentPointPointsInput]
+}
+
+type ComponentEafsSettingEafsSetting {
+  id: ID!
+  sectionName: String
+  published: Boolean
+  order: Int
+  title: String
+}
+
+input ComponentEafsSettingEafsSettingFiltersInput {
+  sectionName: StringFilterInput
+  published: BooleanFilterInput
+  order: IntFilterInput
+  title: StringFilterInput
+  and: [ComponentEafsSettingEafsSettingFiltersInput]
+  or: [ComponentEafsSettingEafsSettingFiltersInput]
+  not: ComponentEafsSettingEafsSettingFiltersInput
+}
+
+input ComponentEafsSettingEafsSettingInput {
+  id: ID
+  sectionName: String
+  published: Boolean
+  order: Int
+  title: String
+}
+
+type ComponentExposureProgramExposureProgram {
+  id: ID!
+  title: String
+  points(filters: ComponentPointPointsFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): [ComponentPointPoints]
+}
+
+input ComponentExposureProgramExposureProgramFiltersInput {
+  title: StringFilterInput
+  points: ComponentPointPointsFiltersInput
+  and: [ComponentExposureProgramExposureProgramFiltersInput]
+  or: [ComponentExposureProgramExposureProgramFiltersInput]
+  not: ComponentExposureProgramExposureProgramFiltersInput
+}
+
+input ComponentExposureProgramExposureProgramInput {
+  id: ID
+  title: String
+  points: [ComponentPointPointsInput]
+}
+
+type ComponentFileFile {
+  id: ID!
+  name: String
+  content: UploadFileEntityResponse
+}
+
+input ComponentFileFileFiltersInput {
+  name: StringFilterInput
+  and: [ComponentFileFileFiltersInput]
+  or: [ComponentFileFileFiltersInput]
+  not: ComponentFileFileFiltersInput
+}
+
+input ComponentFileFileInput {
+  id: ID
+  name: String
+  content: ID
+}
+
+type ComponentIntroIntro {
+  id: ID!
+  image: UploadFileEntityResponse
+  title: String
+  description: String
+  fullName: String
+  position: String
+}
+
+input ComponentIntroIntroInput {
+  id: ID
+  image: ID
+  title: String
+  description: String
+  fullName: String
+  position: String
+}
+
+type ComponentLsBannerLsBanner {
+  id: ID!
+  image: UploadFileEntityResponse
+  callToAction: String
+  callToActionLink: String
+}
+
+input ComponentLsBannerLsBannerInput {
+  id: ID
+  image: ID
+  callToAction: String
+  callToActionLink: String
+}
+
+type ComponentOpeningRemarkOpeningRemark {
+  id: ID!
+  picture: UploadFileEntityResponse
+  name: String
+  position: String
+  speechFile: UploadFileEntityResponse
+  youtubeUrl: String
+  remark: String
+}
+
+input ComponentOpeningRemarkOpeningRemarkFiltersInput {
+  name: StringFilterInput
+  position: StringFilterInput
+  youtubeUrl: StringFilterInput
+  remark: StringFilterInput
+  and: [ComponentOpeningRemarkOpeningRemarkFiltersInput]
+  or: [ComponentOpeningRemarkOpeningRemarkFiltersInput]
+  not: ComponentOpeningRemarkOpeningRemarkFiltersInput
+}
+
+input ComponentOpeningRemarkOpeningRemarkInput {
+  id: ID
+  picture: ID
+  name: String
+  position: String
+  speechFile: ID
+  youtubeUrl: String
+  remark: String
+}
+
+type ComponentOrganizerOrganizer {
+  id: ID!
+  logo: UploadFileEntityResponse
+  name: String
+  url: String
+}
+
+input ComponentOrganizerOrganizerFiltersInput {
+  name: StringFilterInput
+  url: StringFilterInput
+  and: [ComponentOrganizerOrganizerFiltersInput]
+  or: [ComponentOrganizerOrganizerFiltersInput]
+  not: ComponentOrganizerOrganizerFiltersInput
+}
+
+input ComponentOrganizerOrganizerInput {
+  id: ID
+  logo: ID
+  name: String
+  url: String
+}
+
+type ComponentOrganizerSponsor {
+  id: ID!
+}
+
+type ComponentPersonPerson {
+  id: ID!
+  name: String
+  picture: UploadFileEntityResponse
+  position: String
+  document: UploadFileEntityResponse
+  honourable: Boolean
+  bio: String
+  type: ENUM_COMPONENTPERSONPERSON_TYPE
+}
+
+input ComponentPersonPersonFiltersInput {
+  name: StringFilterInput
+  position: StringFilterInput
+  honourable: BooleanFilterInput
+  bio: StringFilterInput
+  type: StringFilterInput
+  and: [ComponentPersonPersonFiltersInput]
+  or: [ComponentPersonPersonFiltersInput]
+  not: ComponentPersonPersonFiltersInput
+}
+
+input ComponentPersonPersonInput {
+  id: ID
+  name: String
+  picture: ID
+  position: String
+  document: ID
+  honourable: Boolean
+  bio: String
+  type: ENUM_COMPONENTPERSONPERSON_TYPE
+}
+
+type ComponentPlatformPlatform {
+  id: ID!
+  banner: UploadFileEntityResponse
+  title: String
+  description: String
+  enableRegistration: Boolean
+  enableApplication: Boolean
+  themeColor: String
+}
+
+input ComponentPlatformPlatformFiltersInput {
+  title: StringFilterInput
+  description: StringFilterInput
+  enableRegistration: BooleanFilterInput
+  enableApplication: BooleanFilterInput
+  themeColor: StringFilterInput
+  and: [ComponentPlatformPlatformFiltersInput]
+  or: [ComponentPlatformPlatformFiltersInput]
+  not: ComponentPlatformPlatformFiltersInput
+}
+
+input ComponentPlatformPlatformInput {
+  id: ID
+  banner: ID
+  title: String
+  description: String
+  enableRegistration: Boolean
+  enableApplication: Boolean
+  themeColor: String
+}
+
+type ComponentPointPoints {
+  id: ID!
+  content: String
+}
+
+input ComponentPointPointsFiltersInput {
+  content: StringFilterInput
+  and: [ComponentPointPointsFiltersInput]
+  or: [ComponentPointPointsFiltersInput]
+  not: ComponentPointPointsFiltersInput
+}
+
+input ComponentPointPointsInput {
+  id: ID
+  content: String
+}
+
+type ComponentPricingPricing {
+  id: ID!
+  size: Int
+  price: Float
+}
+
+input ComponentPricingPricingFiltersInput {
+  size: IntFilterInput
+  price: FloatFilterInput
+  and: [ComponentPricingPricingFiltersInput]
+  or: [ComponentPricingPricingFiltersInput]
+  not: ComponentPricingPricingFiltersInput
+}
+
+input ComponentPricingPricingInput {
+  id: ID
+  size: Int
+  price: Float
+}
+
+type ComponentSessionSession {
+  id: ID!
+  title: String
+  description: String
+  sessionVideo(filters: ComponentSessionVideoVideoFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): [ComponentSessionVideoVideo]
+}
+
+input ComponentSessionSessionFiltersInput {
+  title: StringFilterInput
+  description: StringFilterInput
+  sessionVideo: ComponentSessionVideoVideoFiltersInput
+  and: [ComponentSessionSessionFiltersInput]
+  or: [ComponentSessionSessionFiltersInput]
+  not: ComponentSessionSessionFiltersInput
+}
+
+input ComponentSessionSessionInput {
+  id: ID
+  title: String
+  description: String
+  sessionVideo: [ComponentSessionVideoVideoInput]
+}
+
+type ComponentSessionVideoVideo {
+  id: ID!
+  title: String
+  description: String
+  youtubeUrl: String
+}
+
+input ComponentSessionVideoVideoFiltersInput {
+  title: StringFilterInput
+  description: StringFilterInput
+  youtubeUrl: StringFilterInput
+  and: [ComponentSessionVideoVideoFiltersInput]
+  or: [ComponentSessionVideoVideoFiltersInput]
+  not: ComponentSessionVideoVideoFiltersInput
+}
+
+input ComponentSessionVideoVideoInput {
+  id: ID
+  title: String
+  description: String
+  youtubeUrl: String
+}
+
+type ComponentSlideSlide {
+  id: ID!
+  title: String
+  description: String
+  cta: String
+  ctaLink: String
+  background: UploadFileEntityResponse
+}
+
+input ComponentSlideSlideFiltersInput {
+  title: StringFilterInput
+  description: StringFilterInput
+  cta: StringFilterInput
+  ctaLink: StringFilterInput
+  and: [ComponentSlideSlideFiltersInput]
+  or: [ComponentSlideSlideFiltersInput]
+  not: ComponentSlideSlideFiltersInput
+}
+
+input ComponentSlideSlideInput {
+  id: ID
+  title: String
+  description: String
+  cta: String
+  ctaLink: String
+  background: ID
+}
+
+type ComponentSolutionPointSolutionPoint {
+  id: ID!
+  point: String
+}
+
+input ComponentSolutionPointSolutionPointFiltersInput {
+  point: StringFilterInput
+  and: [ComponentSolutionPointSolutionPointFiltersInput]
+  or: [ComponentSolutionPointSolutionPointFiltersInput]
+  not: ComponentSolutionPointSolutionPointFiltersInput
+}
+
+input ComponentSolutionPointSolutionPointInput {
+  id: ID
+  point: String
+}
+
+type ComponentSolutionSolution {
+  id: ID!
+  icon: UploadFileEntityResponse
+  title: String
+  SolutionPoint(filters: ComponentSolutionPointSolutionPointFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): [ComponentSolutionPointSolutionPoint]
+}
+
+input ComponentSolutionSolutionFiltersInput {
+  title: StringFilterInput
+  SolutionPoint: ComponentSolutionPointSolutionPointFiltersInput
+  and: [ComponentSolutionSolutionFiltersInput]
+  or: [ComponentSolutionSolutionFiltersInput]
+  not: ComponentSolutionSolutionFiltersInput
+}
+
+input ComponentSolutionSolutionInput {
+  id: ID
+  icon: ID
+  title: String
+  SolutionPoint: [ComponentSolutionPointSolutionPointInput]
+}
+
+type ComponentSponsorSponsor {
+  id: ID!
+  logo: UploadFileEntityResponse
+  name: String
+  url: String
+  level: ENUM_COMPONENTSPONSORSPONSOR_LEVEL
+}
+
+input ComponentSponsorSponsorFiltersInput {
+  name: StringFilterInput
+  url: StringFilterInput
+  level: StringFilterInput
+  and: [ComponentSponsorSponsorFiltersInput]
+  or: [ComponentSponsorSponsorFiltersInput]
+  not: ComponentSponsorSponsorFiltersInput
+}
+
+input ComponentSponsorSponsorInput {
+  id: ID
+  logo: ID
+  name: String
+  url: String
+  level: ENUM_COMPONENTSPONSORSPONSOR_LEVEL
+}
+
+type ComponentStatsticsStatstics {
+  id: ID!
+  label: String
+  amount: Long
+  icon: UploadFileEntityResponse
+  color: String
+  order: Int
+}
+
+input ComponentStatsticsStatsticsFiltersInput {
+  label: StringFilterInput
+  amount: LongFilterInput
+  color: StringFilterInput
+  order: IntFilterInput
+  and: [ComponentStatsticsStatsticsFiltersInput]
+  or: [ComponentStatsticsStatsticsFiltersInput]
+  not: ComponentStatsticsStatsticsFiltersInput
+}
+
+input ComponentStatsticsStatsticsInput {
+  id: ID
+  label: String
+  amount: Long
+  icon: ID
+  color: String
+  order: Int
+}
+
+type ComponentSummitIntroSummitIntro {
+  id: ID!
+  title: String
+  shortDescription: String
+  youtubeUrl: String
+  fullDescription: String
+}
+
+input ComponentSummitIntroSummitIntroFiltersInput {
+  title: StringFilterInput
+  shortDescription: StringFilterInput
+  youtubeUrl: StringFilterInput
+  fullDescription: StringFilterInput
+  and: [ComponentSummitIntroSummitIntroFiltersInput]
+  or: [ComponentSummitIntroSummitIntroFiltersInput]
+  not: ComponentSummitIntroSummitIntroFiltersInput
+}
+
+input ComponentSummitIntroSummitIntroInput {
+  id: ID
+  title: String
+  shortDescription: String
+  youtubeUrl: String
+  fullDescription: String
+}
+
+type ComponentSummitSummit {
+  id: ID!
+  name: String
+  date: String
+  background: UploadFileEntityResponse
+  slogan: String
+  status: String
+  summitIntro: ComponentSummitIntroSummitIntro
+  openingRemark: ComponentOpeningRemarkOpeningRemark
+}
+
+type ComponentUpcomingUpcoming {
+  id: ID!
+  background: UploadFileEntityResponse
+  logo: UploadFileEntityResponse
+  menuTitle: String
+  title: String
+  intro: String
+  banner: UploadFileEntityResponse
+  organizer(filters: ComponentOrganizerOrganizerFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): [ComponentOrganizerOrganizer]
+  organizerIntro: String
+  sponsorIntro: String
+  sponsor(filters: ComponentSponsorSponsorFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): [ComponentSponsorSponsor]
+  youtubeUrl: String
+  description: String
+  shortDescription: String
+}
+
+input ComponentUpcomingUpcomingInput {
+  id: ID
+  background: ID
+  logo: ID
+  menuTitle: String
+  title: String
+  intro: String
+  banner: ID
+  organizer: [ComponentOrganizerOrganizerInput]
+  organizerIntro: String
+  sponsorIntro: String
+  sponsor: [ComponentSponsorSponsorInput]
+  youtubeUrl: String
+  description: String
+  shortDescription: String
+}
+
+type ComponentVisionMissionValueVisionMissionValue {
+  id: ID!
+  icon: UploadFileEntityResponse
+  title: String
+  description: String
+}
+
+input ComponentVisionMissionValueVisionMissionValueFiltersInput {
+  title: StringFilterInput
+  description: StringFilterInput
+  and: [ComponentVisionMissionValueVisionMissionValueFiltersInput]
+  or: [ComponentVisionMissionValueVisionMissionValueFiltersInput]
+  not: ComponentVisionMissionValueVisionMissionValueFiltersInput
+}
+
+input ComponentVisionMissionValueVisionMissionValueInput {
+  id: ID
+  icon: ID
+  title: String
+  description: String
+}
+
+type ComponentWordAnimationItemWordAnimationItem {
+  id: ID!
+  title: String
+  words: String
+}
+
+input ComponentWordAnimationItemWordAnimationItemFiltersInput {
+  title: StringFilterInput
+  words: StringFilterInput
+  and: [ComponentWordAnimationItemWordAnimationItemFiltersInput]
+  or: [ComponentWordAnimationItemWordAnimationItemFiltersInput]
+  not: ComponentWordAnimationItemWordAnimationItemFiltersInput
+}
+
+input ComponentWordAnimationItemWordAnimationItemInput {
+  id: ID
+  title: String
+  words: String
+}
+
+type ComponentWordAnimationWordAnimation {
+  id: ID!
+  title: String
+  WordAnimationItem(filters: ComponentWordAnimationItemWordAnimationItemFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): [ComponentWordAnimationItemWordAnimationItem]
+}
+
+input ComponentWordAnimationWordAnimationInput {
+  id: ID
+  title: String
+  WordAnimationItem: [ComponentWordAnimationItemWordAnimationItemInput]
+}
+
+type CrossBorderSolutions {
+  image: UploadFileEntityResponse
+  youtubeUrl: String
+  CBSPoint(filters: ComponentCbsPointCbsPointFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): [ComponentCbsPointCbsPoint]
+  CertificationPackage(filters: ComponentCertificationPackageCertificationPackageFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): [ComponentCertificationPackageCertificationPackage]
+  partners(filters: ComponentOrganizerOrganizerFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): [ComponentOrganizerOrganizer]
+  clients(filters: ComponentOrganizerOrganizerFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): [ComponentOrganizerOrganizer]
+  callToAction: String
+  description: String
+  createdAt: DateTime
+  updatedAt: DateTime
+  publishedAt: DateTime
+}
+
+type CrossBorderSolutionsEntity {
+  id: ID
+  attributes: CrossBorderSolutions
+}
+
+type CrossBorderSolutionsEntityResponse {
+  data: CrossBorderSolutionsEntity
+}
+
+input CrossBorderSolutionsInput {
+  image: ID
+  youtubeUrl: String
+  CBSPoint: [ComponentCbsPointCbsPointInput]
+  CertificationPackage: [ComponentCertificationPackageCertificationPackageInput]
+  partners: [ComponentOrganizerOrganizerInput]
+  clients: [ComponentOrganizerOrganizerInput]
+  callToAction: String
+  description: String
+  publishedAt: DateTime
+}
+
+"""
+A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the
+`date-time` format outlined in section 5.6 of the RFC 3339 profile of the ISO
+8601 standard for representation of dates and times using the Gregorian calendar.
+"""
+scalar DateTime
+
+input DateTimeFilterInput {
+  and: [DateTime]
+  or: [DateTime]
+  not: DateTimeFilterInput
+  eq: DateTime
+  eqi: DateTime
+  ne: DateTime
+  nei: DateTime
+  startsWith: DateTime
+  endsWith: DateTime
+  contains: DateTime
+  notContains: DateTime
+  containsi: DateTime
+  notContainsi: DateTime
+  gt: DateTime
+  gte: DateTime
+  lt: DateTime
+  lte: DateTime
+  null: Boolean
+  notNull: Boolean
+  in: [DateTime]
+  notIn: [DateTime]
+  between: [DateTime]
+}
+
+type Document {
+  name: String
+  category(filters: ComponentCategoryCategoryFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): [ComponentCategoryCategory]
+  type: ENUM_DOCUMENT_TYPE
+  slug: String
+  date: String
+  status: String
+  background: UploadFileEntityResponse
+  createdAt: DateTime
+  updatedAt: DateTime
+  publishedAt: DateTime
+}
+
+type DocumentEntity {
+  id: ID
+  attributes: Document
+}
+
+type DocumentEntityResponse {
+  data: DocumentEntity
+}
+
+type DocumentEntityResponseCollection {
+  data: [DocumentEntity!]!
+  meta: ResponseCollectionMeta!
+}
+
+input DocumentFiltersInput {
+  id: IDFilterInput
+  name: StringFilterInput
+  category: ComponentCategoryCategoryFiltersInput
+  type: StringFilterInput
+  slug: StringFilterInput
+  date: StringFilterInput
+  status: StringFilterInput
+  createdAt: DateTimeFilterInput
+  updatedAt: DateTimeFilterInput
+  publishedAt: DateTimeFilterInput
+  and: [DocumentFiltersInput]
+  or: [DocumentFiltersInput]
+  not: DocumentFiltersInput
+}
+
+input DocumentInput {
+  name: String
+  category: [ComponentCategoryCategoryInput]
+  type: ENUM_DOCUMENT_TYPE
+  slug: String
+  date: String
+  status: String
+  background: ID
+  publishedAt: DateTime
+}
+
+enum ENUM_COMPONENTPERSONPERSON_TYPE {
+  SPEAKER
+  MODERATOR
+}
+
+enum ENUM_COMPONENTSPONSORSPONSOR_LEVEL {
+  Platinum
+  Gold
+  Silver
+}
+
+enum ENUM_DOCUMENT_TYPE {
+  EAFS
+  EACMS
+  CHCDA
+}
+
+enum ENUM_PARTICIPANT_TYPE {
+  Organization
+  Personal
+}
+
+enum ENUM_SPONSOREXHIBITOR_TYPE {
+  Sponsorship
+  Exhibition
+}
+
+enum ENUM_SUMMIT_TYPE {
+  EAFS
+  EACMS
+  CHCDA
+}
+
+type ExposureLearningPrograms {
+  image: UploadFileEntityResponse
+  ExposureProgram(filters: ComponentExposureProgramExposureProgramFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): [ComponentExposureProgramExposureProgram]
+  createdAt: DateTime
+  updatedAt: DateTime
+  publishedAt: DateTime
+}
+
+type ExposureLearningProgramsEntity {
+  id: ID
+  attributes: ExposureLearningPrograms
+}
+
+type ExposureLearningProgramsEntityResponse {
+  data: ExposureLearningProgramsEntity
+}
+
+input ExposureLearningProgramsInput {
+  image: ID
+  ExposureProgram: [ComponentExposureProgramExposureProgramInput]
+  publishedAt: DateTime
+}
+
+input FileInfoInput {
+  name: String
+  alternativeText: String
+  caption: String
+}
+
+input FloatFilterInput {
+  and: [Float]
+  or: [Float]
+  not: FloatFilterInput
+  eq: Float
+  eqi: Float
+  ne: Float
+  nei: Float
+  startsWith: Float
+  endsWith: Float
+  contains: Float
+  notContains: Float
+  containsi: Float
+  notContainsi: Float
+  gt: Float
+  gte: Float
+  lt: Float
+  lte: Float
+  null: Boolean
+  notNull: Boolean
+  in: [Float]
+  notIn: [Float]
+  between: [Float]
+}
+
+union GenericMorph = ComponentCategoryCategory | ComponentCbsPointCbsPoint | ComponentCertificationPackageCertificationPackage | ComponentClientCounterClientCounter | ComponentEafsSessionEafsSession | ComponentEafsSettingEafsSetting | ComponentExposureProgramExposureProgram | ComponentFileFile | ComponentIntroIntro | ComponentLsBannerLsBanner | ComponentOpeningRemarkOpeningRemark | ComponentOrganizerOrganizer | ComponentOrganizerSponsor | ComponentPersonPerson | ComponentPlatformPlatform | ComponentPointPoints | ComponentPricingPricing | ComponentSessionVideoVideo | ComponentSessionSession | ComponentSlideSlide | ComponentSolutionPointSolutionPoint | ComponentSolutionSolution | ComponentSponsorSponsor | ComponentStatsticsStatstics | ComponentSummitIntroSummitIntro | ComponentSummitSummit | ComponentUpcomingUpcoming | ComponentVisionMissionValueVisionMissionValue | ComponentWordAnimationItemWordAnimationItem | ComponentWordAnimationWordAnimation | UploadFile | UploadFolder | I18NLocale | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsUser | AdvisorySolutions | ApplyEafs | Author | Blog | CrossBorderSolutions | Document | ExposureLearningPrograms | Home | KnowledgeSharing | LearningSolutions | Participant | RegistrationEacms | RegistrationEafs | Setting | SponsorExhibitor | Summit | UpcomingChcda | UpcomingEacms | UpcomingEafs | WhoWeAre
+
+type Home {
+  slogan: String
+  menu: String
+  slides(filters: ComponentSlideSlideFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): [ComponentSlideSlide]
+  createdAt: DateTime
+  updatedAt: DateTime
+  publishedAt: DateTime
+}
+
+type HomeEntity {
+  id: ID
+  attributes: Home
+}
+
+type HomeEntityResponse {
+  data: HomeEntity
+}
+
+input HomeInput {
+  slogan: String
+  menu: String
+  slides: [ComponentSlideSlideInput]
+  publishedAt: DateTime
+}
+
+type I18NLocale {
+  name: String
+  code: String
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+type I18NLocaleEntity {
+  id: ID
+  attributes: I18NLocale
+}
+
+type I18NLocaleEntityResponse {
+  data: I18NLocaleEntity
+}
+
+type I18NLocaleEntityResponseCollection {
+  data: [I18NLocaleEntity!]!
+  meta: ResponseCollectionMeta!
+}
+
+input I18NLocaleFiltersInput {
+  id: IDFilterInput
+  name: StringFilterInput
+  code: StringFilterInput
+  createdAt: DateTimeFilterInput
+  updatedAt: DateTimeFilterInput
+  and: [I18NLocaleFiltersInput]
+  or: [I18NLocaleFiltersInput]
+  not: I18NLocaleFiltersInput
+}
+
+input IDFilterInput {
+  and: [ID]
+  or: [ID]
+  not: IDFilterInput
+  eq: ID
+  eqi: ID
+  ne: ID
+  nei: ID
+  startsWith: ID
+  endsWith: ID
+  contains: ID
+  notContains: ID
+  containsi: ID
+  notContainsi: ID
+  gt: ID
+  gte: ID
+  lt: ID
+  lte: ID
+  null: Boolean
+  notNull: Boolean
+  in: [ID]
+  notIn: [ID]
+  between: [ID]
+}
+
+input IntFilterInput {
+  and: [Int]
+  or: [Int]
+  not: IntFilterInput
+  eq: Int
+  eqi: Int
+  ne: Int
+  nei: Int
+  startsWith: Int
+  endsWith: Int
+  contains: Int
+  notContains: Int
+  containsi: Int
+  notContainsi: Int
+  gt: Int
+  gte: Int
+  lt: Int
+  lte: Int
+  null: Boolean
+  notNull: Boolean
+  in: [Int]
+  notIn: [Int]
+  between: [Int]
+}
+
+"""
+The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf).
+"""
+scalar JSON
+
+input JSONFilterInput {
+  and: [JSON]
+  or: [JSON]
+  not: JSONFilterInput
+  eq: JSON
+  eqi: JSON
+  ne: JSON
+  nei: JSON
+  startsWith: JSON
+  endsWith: JSON
+  contains: JSON
+  notContains: JSON
+  containsi: JSON
+  notContainsi: JSON
+  gt: JSON
+  gte: JSON
+  lt: JSON
+  lte: JSON
+  null: Boolean
+  notNull: Boolean
+  in: [JSON]
+  notIn: [JSON]
+  between: [JSON]
+}
+
+type KnowledgeSharing {
+  intro: String
+  quote: String
+  quoteAuthor: String
+  platform(filters: ComponentPlatformPlatformFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): [ComponentPlatformPlatform]
+  createdAt: DateTime
+  updatedAt: DateTime
+  publishedAt: DateTime
+}
+
+type KnowledgeSharingEntity {
+  id: ID
+  attributes: KnowledgeSharing
+}
+
+type KnowledgeSharingEntityResponse {
+  data: KnowledgeSharingEntity
+}
+
+input KnowledgeSharingInput {
+  intro: String
+  quote: String
+  quoteAuthor: String
+  platform: [ComponentPlatformPlatformInput]
+  publishedAt: DateTime
+}
+
+type LearningSolutions {
+  image: UploadFileEntityResponse
+  youtubeUrl: String
+  solution(filters: ComponentSolutionSolutionFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): [ComponentSolutionSolution]
+  clients(filters: ComponentOrganizerOrganizerFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): [ComponentOrganizerOrganizer]
+  callToAction: String
+  description: String
+  LSBanner: ComponentLsBannerLsBanner
+  createdAt: DateTime
+  updatedAt: DateTime
+  publishedAt: DateTime
+}
+
+type LearningSolutionsEntity {
+  id: ID
+  attributes: LearningSolutions
+}
+
+type LearningSolutionsEntityResponse {
+  data: LearningSolutionsEntity
+}
+
+input LearningSolutionsInput {
+  image: ID
+  youtubeUrl: String
+  solution: [ComponentSolutionSolutionInput]
+  clients: [ComponentOrganizerOrganizerInput]
+  callToAction: String
+  description: String
+  LSBanner: ComponentLsBannerLsBannerInput
+  publishedAt: DateTime
+}
+
+"""
+The `BigInt` scalar type represents non-fractional signed whole numeric values.
+"""
+scalar Long
+
+input LongFilterInput {
+  and: [Long]
+  or: [Long]
+  not: LongFilterInput
+  eq: Long
+  eqi: Long
+  ne: Long
+  nei: Long
+  startsWith: Long
+  endsWith: Long
+  contains: Long
+  notContains: Long
+  containsi: Long
+  notContainsi: Long
+  gt: Long
+  gte: Long
+  lt: Long
+  lte: Long
+  null: Boolean
+  notNull: Boolean
+  in: [Long]
+  notIn: [Long]
+  between: [Long]
+}
+
+type Mutation {
+  createUploadFile(data: UploadFileInput!): UploadFileEntityResponse
+  updateUploadFile(id: ID!, data: UploadFileInput!): UploadFileEntityResponse
+  deleteUploadFile(id: ID!): UploadFileEntityResponse
+  createUploadFolder(data: UploadFolderInput!): UploadFolderEntityResponse
+  updateUploadFolder(id: ID!, data: UploadFolderInput!): UploadFolderEntityResponse
+  deleteUploadFolder(id: ID!): UploadFolderEntityResponse
+  updateAdvisorySolutions(data: AdvisorySolutionsInput!): AdvisorySolutionsEntityResponse
+  deleteAdvisorySolutions: AdvisorySolutionsEntityResponse
+  updateApplyEafs(data: ApplyEafsInput!): ApplyEafsEntityResponse
+  deleteApplyEafs: ApplyEafsEntityResponse
+  createAuthor(data: AuthorInput!): AuthorEntityResponse
+  updateAuthor(id: ID!, data: AuthorInput!): AuthorEntityResponse
+  deleteAuthor(id: ID!): AuthorEntityResponse
+  createBlog(data: BlogInput!): BlogEntityResponse
+  updateBlog(id: ID!, data: BlogInput!): BlogEntityResponse
+  deleteBlog(id: ID!): BlogEntityResponse
+  updateCrossBorderSolutions(data: CrossBorderSolutionsInput!): CrossBorderSolutionsEntityResponse
+  deleteCrossBorderSolutions: CrossBorderSolutionsEntityResponse
+  createDocument(data: DocumentInput!): DocumentEntityResponse
+  updateDocument(id: ID!, data: DocumentInput!): DocumentEntityResponse
+  deleteDocument(id: ID!): DocumentEntityResponse
+  updateExposureLearningPrograms(data: ExposureLearningProgramsInput!): ExposureLearningProgramsEntityResponse
+  deleteExposureLearningPrograms: ExposureLearningProgramsEntityResponse
+  updateHome(data: HomeInput!): HomeEntityResponse
+  deleteHome: HomeEntityResponse
+  updateKnowledgeSharing(data: KnowledgeSharingInput!): KnowledgeSharingEntityResponse
+  deleteKnowledgeSharing: KnowledgeSharingEntityResponse
+  updateLearningSolutions(data: LearningSolutionsInput!): LearningSolutionsEntityResponse
+  deleteLearningSolutions: LearningSolutionsEntityResponse
+  createParticipant(data: ParticipantInput!): ParticipantEntityResponse
+  updateParticipant(id: ID!, data: ParticipantInput!): ParticipantEntityResponse
+  deleteParticipant(id: ID!): ParticipantEntityResponse
+  updateRegistrationEacms(data: RegistrationEacmsInput!): RegistrationEacmsEntityResponse
+  deleteRegistrationEacms: RegistrationEacmsEntityResponse
+  updateRegistrationEafs(data: RegistrationEafsInput!): RegistrationEafsEntityResponse
+  deleteRegistrationEafs: RegistrationEafsEntityResponse
+  createSetting(data: SettingInput!): SettingEntityResponse
+  updateSetting(id: ID!, data: SettingInput!): SettingEntityResponse
+  deleteSetting(id: ID!): SettingEntityResponse
+  createSponsorExhibitor(data: SponsorExhibitorInput!): SponsorExhibitorEntityResponse
+  updateSponsorExhibitor(id: ID!, data: SponsorExhibitorInput!): SponsorExhibitorEntityResponse
+  deleteSponsorExhibitor(id: ID!): SponsorExhibitorEntityResponse
+  createSummit(data: SummitInput!): SummitEntityResponse
+  updateSummit(id: ID!, data: SummitInput!): SummitEntityResponse
+  deleteSummit(id: ID!): SummitEntityResponse
+  updateUpcomingChcda(data: UpcomingChcdaInput!): UpcomingChcdaEntityResponse
+  deleteUpcomingChcda: UpcomingChcdaEntityResponse
+  updateUpcomingEacms(data: UpcomingEacmsInput!): UpcomingEacmsEntityResponse
+  deleteUpcomingEacms: UpcomingEacmsEntityResponse
+  updateUpcomingEafs(data: UpcomingEafsInput!): UpcomingEafsEntityResponse
+  deleteUpcomingEafs: UpcomingEafsEntityResponse
+  updateWhoWeAre(data: WhoWeAreInput!): WhoWeAreEntityResponse
+  deleteWhoWeAre: WhoWeAreEntityResponse
+  upload(refId: ID, ref: String, field: String, info: FileInfoInput, file: Upload!): UploadFileEntityResponse!
+  multipleUpload(refId: ID, ref: String, field: String, files: [Upload]!): [UploadFileEntityResponse]!
+  updateFileInfo(id: ID!, info: FileInfoInput): UploadFileEntityResponse!
+  removeFile(id: ID!): UploadFileEntityResponse
+
+  """Create a new role"""
+  createUsersPermissionsRole(data: UsersPermissionsRoleInput!): UsersPermissionsCreateRolePayload
+
+  """Update an existing role"""
+  updateUsersPermissionsRole(id: ID!, data: UsersPermissionsRoleInput!): UsersPermissionsUpdateRolePayload
+
+  """Delete an existing role"""
+  deleteUsersPermissionsRole(id: ID!): UsersPermissionsDeleteRolePayload
+
+  """Create a new user"""
+  createUsersPermissionsUser(data: UsersPermissionsUserInput!): UsersPermissionsUserEntityResponse!
+
+  """Update an existing user"""
+  updateUsersPermissionsUser(id: ID!, data: UsersPermissionsUserInput!): UsersPermissionsUserEntityResponse!
+
+  """Delete an existing user"""
+  deleteUsersPermissionsUser(id: ID!): UsersPermissionsUserEntityResponse!
+  login(input: UsersPermissionsLoginInput!): UsersPermissionsLoginPayload!
+
+  """Register a user"""
+  register(input: UsersPermissionsRegisterInput!): UsersPermissionsLoginPayload!
+
+  """Request a reset password token"""
+  forgotPassword(email: String!): UsersPermissionsPasswordPayload
+
+  """
+  Reset user password. Confirm with a code (resetToken from forgotPassword)
+  """
+  resetPassword(password: String!, passwordConfirmation: String!, code: String!): UsersPermissionsLoginPayload
+
+  """Change user password. Confirm with the current password."""
+  changePassword(currentPassword: String!, password: String!, passwordConfirmation: String!): UsersPermissionsLoginPayload
+
+  """Confirm an email users email address"""
+  emailConfirmation(confirmation: String!): UsersPermissionsLoginPayload
+}
+
+type Pagination {
+  total: Int!
+  page: Int!
+  pageSize: Int!
+  pageCount: Int!
+}
+
+input PaginationArg {
+  page: Int
+  pageSize: Int
+  start: Int
+  limit: Int
+}
+
+type Participant {
+  fullName: String
+  email: String
+  phone: String
+  organization: String
+  position: String
+  reason: String
+  type: ENUM_PARTICIPANT_TYPE
+  tin: Long
+  createdAt: DateTime
+  updatedAt: DateTime
+  publishedAt: DateTime
+}
+
+type ParticipantEntity {
+  id: ID
+  attributes: Participant
+}
+
+type ParticipantEntityResponse {
+  data: ParticipantEntity
+}
+
+type ParticipantEntityResponseCollection {
+  data: [ParticipantEntity!]!
+  meta: ResponseCollectionMeta!
+}
+
+input ParticipantFiltersInput {
+  id: IDFilterInput
+  fullName: StringFilterInput
+  email: StringFilterInput
+  phone: StringFilterInput
+  organization: StringFilterInput
+  position: StringFilterInput
+  reason: StringFilterInput
+  type: StringFilterInput
+  tin: LongFilterInput
+  createdAt: DateTimeFilterInput
+  updatedAt: DateTimeFilterInput
+  publishedAt: DateTimeFilterInput
+  and: [ParticipantFiltersInput]
+  or: [ParticipantFiltersInput]
+  not: ParticipantFiltersInput
+}
+
+input ParticipantInput {
+  fullName: String
+  email: String
+  phone: String
+  organization: String
+  position: String
+  reason: String
+  type: ENUM_PARTICIPANT_TYPE
+  tin: Long
+  publishedAt: DateTime
+}
+
+enum PublicationState {
+  LIVE
+  PREVIEW
+}
+
+type Query {
+  uploadFile(id: ID): UploadFileEntityResponse
+  uploadFiles(filters: UploadFileFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): UploadFileEntityResponseCollection
+  uploadFolder(id: ID): UploadFolderEntityResponse
+  uploadFolders(filters: UploadFolderFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): UploadFolderEntityResponseCollection
+  i18NLocale(id: ID): I18NLocaleEntityResponse
+  i18NLocales(filters: I18NLocaleFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): I18NLocaleEntityResponseCollection
+  usersPermissionsRole(id: ID): UsersPermissionsRoleEntityResponse
+  usersPermissionsRoles(filters: UsersPermissionsRoleFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): UsersPermissionsRoleEntityResponseCollection
+  usersPermissionsUser(id: ID): UsersPermissionsUserEntityResponse
+  usersPermissionsUsers(filters: UsersPermissionsUserFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): UsersPermissionsUserEntityResponseCollection
+  advisorySolutions(publicationState: PublicationState = LIVE): AdvisorySolutionsEntityResponse
+  applyEafs(publicationState: PublicationState = LIVE): ApplyEafsEntityResponse
+  author(id: ID): AuthorEntityResponse
+  authors(filters: AuthorFiltersInput, pagination: PaginationArg = {}, sort: [String] = [], publicationState: PublicationState = LIVE): AuthorEntityResponseCollection
+  blog(id: ID): BlogEntityResponse
+  blogs(filters: BlogFiltersInput, pagination: PaginationArg = {}, sort: [String] = [], publicationState: PublicationState = LIVE): BlogEntityResponseCollection
+  crossBorderSolutions(publicationState: PublicationState = LIVE): CrossBorderSolutionsEntityResponse
+  document(id: ID): DocumentEntityResponse
+  documents(filters: DocumentFiltersInput, pagination: PaginationArg = {}, sort: [String] = [], publicationState: PublicationState = LIVE): DocumentEntityResponseCollection
+  exposureLearningPrograms(publicationState: PublicationState = LIVE): ExposureLearningProgramsEntityResponse
+  home(publicationState: PublicationState = LIVE): HomeEntityResponse
+  knowledgeSharing(publicationState: PublicationState = LIVE): KnowledgeSharingEntityResponse
+  learningSolutions(publicationState: PublicationState = LIVE): LearningSolutionsEntityResponse
+  participant(id: ID): ParticipantEntityResponse
+  participants(filters: ParticipantFiltersInput, pagination: PaginationArg = {}, sort: [String] = [], publicationState: PublicationState = LIVE): ParticipantEntityResponseCollection
+  registrationEacms(publicationState: PublicationState = LIVE): RegistrationEacmsEntityResponse
+  registrationEafs(publicationState: PublicationState = LIVE): RegistrationEafsEntityResponse
+  setting(id: ID): SettingEntityResponse
+  settings(filters: SettingFiltersInput, pagination: PaginationArg = {}, sort: [String] = [], publicationState: PublicationState = LIVE): SettingEntityResponseCollection
+  sponsorExhibitor(id: ID): SponsorExhibitorEntityResponse
+  sponsorsExhibitors(filters: SponsorExhibitorFiltersInput, pagination: PaginationArg = {}, sort: [String] = [], publicationState: PublicationState = LIVE): SponsorExhibitorEntityResponseCollection
+  summit(id: ID): SummitEntityResponse
+  summits(filters: SummitFiltersInput, pagination: PaginationArg = {}, sort: [String] = [], publicationState: PublicationState = LIVE): SummitEntityResponseCollection
+  upcomingChcda(publicationState: PublicationState = LIVE): UpcomingChcdaEntityResponse
+  upcomingEacms(publicationState: PublicationState = LIVE): UpcomingEacmsEntityResponse
+  upcomingEafs(publicationState: PublicationState = LIVE): UpcomingEafsEntityResponse
+  whoWeAre(publicationState: PublicationState = LIVE): WhoWeAreEntityResponse
+  me: UsersPermissionsMe
+}
+
+type RegistrationEacms {
+  title: String
+  description: String
+  name: String
+  logo: UploadFileEntityResponse
+  points(filters: ComponentPointPointsFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): [ComponentPointPoints]
+  pricing(filters: ComponentPricingPricingFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): [ComponentPricingPricing]
+  createdAt: DateTime
+  updatedAt: DateTime
+  publishedAt: DateTime
+}
+
+type RegistrationEacmsEntity {
+  id: ID
+  attributes: RegistrationEacms
+}
+
+type RegistrationEacmsEntityResponse {
+  data: RegistrationEacmsEntity
+}
+
+input RegistrationEacmsInput {
+  title: String
+  description: String
+  name: String
+  logo: ID
+  points: [ComponentPointPointsInput]
+  pricing: [ComponentPricingPricingInput]
+  publishedAt: DateTime
+}
+
+type RegistrationEafs {
+  title: String
+  description: String
+  points(filters: ComponentPointPointsFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): [ComponentPointPoints]
+  pricing(filters: ComponentPricingPricingFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): [ComponentPricingPricing]
+  logo: UploadFileEntityResponse
+  name: String
+  message: String
+  createdAt: DateTime
+  updatedAt: DateTime
+  publishedAt: DateTime
+}
+
+type RegistrationEafsEntity {
+  id: ID
+  attributes: RegistrationEafs
+}
+
+type RegistrationEafsEntityResponse {
+  data: RegistrationEafsEntity
+}
+
+input RegistrationEafsInput {
+  title: String
+  description: String
+  points: [ComponentPointPointsInput]
+  pricing: [ComponentPricingPricingInput]
+  logo: ID
+  name: String
+  message: String
+  publishedAt: DateTime
+}
+
+type ResponseCollectionMeta {
+  pagination: Pagination!
+}
+
+type Setting {
+  eafsUpcomingSummit: Boolean
+  createdAt: DateTime
+  updatedAt: DateTime
+  publishedAt: DateTime
+}
+
+type SettingEntity {
+  id: ID
+  attributes: Setting
+}
+
+type SettingEntityResponse {
+  data: SettingEntity
+}
+
+type SettingEntityResponseCollection {
+  data: [SettingEntity!]!
+  meta: ResponseCollectionMeta!
+}
+
+input SettingFiltersInput {
+  id: IDFilterInput
+  eafsUpcomingSummit: BooleanFilterInput
+  createdAt: DateTimeFilterInput
+  updatedAt: DateTimeFilterInput
+  publishedAt: DateTimeFilterInput
+  and: [SettingFiltersInput]
+  or: [SettingFiltersInput]
+  not: SettingFiltersInput
+}
+
+input SettingInput {
+  eafsUpcomingSummit: Boolean
+  publishedAt: DateTime
+}
+
+type SponsorExhibitor {
+  organizationName: String
+  email: String
+  phone: String
+  type: ENUM_SPONSOREXHIBITOR_TYPE
+  createdAt: DateTime
+  updatedAt: DateTime
+  publishedAt: DateTime
+}
+
+type SponsorExhibitorEntity {
+  id: ID
+  attributes: SponsorExhibitor
+}
+
+type SponsorExhibitorEntityResponse {
+  data: SponsorExhibitorEntity
+}
+
+type SponsorExhibitorEntityResponseCollection {
+  data: [SponsorExhibitorEntity!]!
+  meta: ResponseCollectionMeta!
+}
+
+input SponsorExhibitorFiltersInput {
+  id: IDFilterInput
+  organizationName: StringFilterInput
+  email: StringFilterInput
+  phone: StringFilterInput
+  type: StringFilterInput
+  createdAt: DateTimeFilterInput
+  updatedAt: DateTimeFilterInput
+  publishedAt: DateTimeFilterInput
+  and: [SponsorExhibitorFiltersInput]
+  or: [SponsorExhibitorFiltersInput]
+  not: SponsorExhibitorFiltersInput
+}
+
+input SponsorExhibitorInput {
+  organizationName: String
+  email: String
+  phone: String
+  type: ENUM_SPONSOREXHIBITOR_TYPE
+  publishedAt: DateTime
+}
+
+input StringFilterInput {
+  and: [String]
+  or: [String]
+  not: StringFilterInput
+  eq: String
+  eqi: String
+  ne: String
+  nei: String
+  startsWith: String
+  endsWith: String
+  contains: String
+  notContains: String
+  containsi: String
+  notContainsi: String
+  gt: String
+  gte: String
+  lt: String
+  lte: String
+  null: Boolean
+  notNull: Boolean
+  in: [String]
+  notIn: [String]
+  between: [String]
+}
+
+type Summit {
+  name: String
+  date: String
+  slogan: String
+  status: String
+  intro: ComponentSummitIntroSummitIntro
+  openingRemark: ComponentOpeningRemarkOpeningRemark
+  session(filters: ComponentSessionSessionFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): [ComponentSessionSession]
+  type: ENUM_SUMMIT_TYPE
+  background: UploadFileEntityResponse
+  slug: String
+  sponsorIntro: String
+  organizerIntro: String
+  organizer(filters: ComponentOrganizerOrganizerFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): [ComponentOrganizerOrganizer]
+  sponsor(filters: ComponentSponsorSponsorFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): [ComponentSponsorSponsor]
+  createdAt: DateTime
+  updatedAt: DateTime
+  publishedAt: DateTime
+}
+
+type SummitEntity {
+  id: ID
+  attributes: Summit
+}
+
+type SummitEntityResponse {
+  data: SummitEntity
+}
+
+type SummitEntityResponseCollection {
+  data: [SummitEntity!]!
+  meta: ResponseCollectionMeta!
+}
+
+input SummitFiltersInput {
+  id: IDFilterInput
+  name: StringFilterInput
+  date: StringFilterInput
+  slogan: StringFilterInput
+  status: StringFilterInput
+  intro: ComponentSummitIntroSummitIntroFiltersInput
+  openingRemark: ComponentOpeningRemarkOpeningRemarkFiltersInput
+  session: ComponentSessionSessionFiltersInput
+  type: StringFilterInput
+  slug: StringFilterInput
+  sponsorIntro: StringFilterInput
+  organizerIntro: StringFilterInput
+  organizer: ComponentOrganizerOrganizerFiltersInput
+  sponsor: ComponentSponsorSponsorFiltersInput
+  createdAt: DateTimeFilterInput
+  updatedAt: DateTimeFilterInput
+  publishedAt: DateTimeFilterInput
+  and: [SummitFiltersInput]
+  or: [SummitFiltersInput]
+  not: SummitFiltersInput
+}
+
+input SummitInput {
+  name: String
+  date: String
+  slogan: String
+  status: String
+  intro: ComponentSummitIntroSummitIntroInput
+  openingRemark: ComponentOpeningRemarkOpeningRemarkInput
+  session: [ComponentSessionSessionInput]
+  type: ENUM_SUMMIT_TYPE
+  background: ID
+  slug: String
+  sponsorIntro: String
+  organizerIntro: String
+  organizer: [ComponentOrganizerOrganizerInput]
+  sponsor: [ComponentSponsorSponsorInput]
+  publishedAt: DateTime
+}
+
+type UpcomingChcda {
+  content: ComponentUpcomingUpcoming
+  enabled: Boolean
+  createdAt: DateTime
+  updatedAt: DateTime
+  publishedAt: DateTime
+}
+
+type UpcomingChcdaEntity {
+  id: ID
+  attributes: UpcomingChcda
+}
+
+type UpcomingChcdaEntityResponse {
+  data: UpcomingChcdaEntity
+}
+
+input UpcomingChcdaInput {
+  content: ComponentUpcomingUpcomingInput
+  enabled: Boolean
+  publishedAt: DateTime
+}
+
+type UpcomingEacms {
+  content: ComponentUpcomingUpcoming
+  enabled: Boolean
+  createdAt: DateTime
+  updatedAt: DateTime
+  publishedAt: DateTime
+}
+
+type UpcomingEacmsEntity {
+  id: ID
+  attributes: UpcomingEacms
+}
+
+type UpcomingEacmsEntityResponse {
+  data: UpcomingEacmsEntity
+}
+
+input UpcomingEacmsInput {
+  content: ComponentUpcomingUpcomingInput
+  enabled: Boolean
+  publishedAt: DateTime
+}
+
+type UpcomingEafs {
+  content: ComponentUpcomingUpcoming
+  enabled: Boolean
+  introVideo: String
+  guests(filters: ComponentPersonPersonFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): [ComponentPersonPerson]
+  session(filters: ComponentEafsSessionEafsSessionFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): [ComponentEafsSessionEafsSession]
+  exhibitor(filters: ComponentOrganizerOrganizerFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): [ComponentOrganizerOrganizer]
+  strategicPartner(filters: ComponentOrganizerOrganizerFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): [ComponentOrganizerOrganizer]
+  introDocument: UploadFileEntityResponse
+  eafsSetting(filters: ComponentEafsSettingEafsSettingFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): [ComponentEafsSettingEafsSetting]
+  statstics(filters: ComponentStatsticsStatsticsFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): [ComponentStatsticsStatstics]
+  createdAt: DateTime
+  updatedAt: DateTime
+  publishedAt: DateTime
+}
+
+type UpcomingEafsEntity {
+  id: ID
+  attributes: UpcomingEafs
+}
+
+type UpcomingEafsEntityResponse {
+  data: UpcomingEafsEntity
+}
+
+input UpcomingEafsInput {
+  content: ComponentUpcomingUpcomingInput
+  enabled: Boolean
+  introVideo: String
+  guests: [ComponentPersonPersonInput]
+  session: [ComponentEafsSessionEafsSessionInput]
+  exhibitor: [ComponentOrganizerOrganizerInput]
+  strategicPartner: [ComponentOrganizerOrganizerInput]
+  introDocument: ID
+  eafsSetting: [ComponentEafsSettingEafsSettingInput]
+  statstics: [ComponentStatsticsStatsticsInput]
+  publishedAt: DateTime
+}
+
+"""The `Upload` scalar type represents a file upload."""
+scalar Upload
+
+type UploadFile {
+  name: String!
+  alternativeText: String
+  caption: String
+  width: Int
+  height: Int
+  formats: JSON
+  hash: String!
+  ext: String
+  mime: String!
+  size: Float!
+  url: String!
+  previewUrl: String
+  provider: String!
+  provider_metadata: JSON
+  related: [GenericMorph]
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+type UploadFileEntity {
+  id: ID
+  attributes: UploadFile
+}
+
+type UploadFileEntityResponse {
+  data: UploadFileEntity
+}
+
+type UploadFileEntityResponseCollection {
+  data: [UploadFileEntity!]!
+  meta: ResponseCollectionMeta!
+}
+
+input UploadFileFiltersInput {
+  id: IDFilterInput
+  name: StringFilterInput
+  alternativeText: StringFilterInput
+  caption: StringFilterInput
+  width: IntFilterInput
+  height: IntFilterInput
+  formats: JSONFilterInput
+  hash: StringFilterInput
+  ext: StringFilterInput
+  mime: StringFilterInput
+  size: FloatFilterInput
+  url: StringFilterInput
+  previewUrl: StringFilterInput
+  provider: StringFilterInput
+  provider_metadata: JSONFilterInput
+  folder: UploadFolderFiltersInput
+  folderPath: StringFilterInput
+  createdAt: DateTimeFilterInput
+  updatedAt: DateTimeFilterInput
+  and: [UploadFileFiltersInput]
+  or: [UploadFileFiltersInput]
+  not: UploadFileFiltersInput
+}
+
+input UploadFileInput {
+  name: String
+  alternativeText: String
+  caption: String
+  width: Int
+  height: Int
+  formats: JSON
+  hash: String
+  ext: String
+  mime: String
+  size: Float
+  url: String
+  previewUrl: String
+  provider: String
+  provider_metadata: JSON
+  folder: ID
+  folderPath: String
+}
+
+type UploadFileRelationResponseCollection {
+  data: [UploadFileEntity!]!
+}
+
+type UploadFolder {
+  name: String!
+  pathId: Int!
+  parent: UploadFolderEntityResponse
+  children(filters: UploadFolderFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): UploadFolderRelationResponseCollection
+  files(filters: UploadFileFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): UploadFileRelationResponseCollection
+  path: String!
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+type UploadFolderEntity {
+  id: ID
+  attributes: UploadFolder
+}
+
+type UploadFolderEntityResponse {
+  data: UploadFolderEntity
+}
+
+type UploadFolderEntityResponseCollection {
+  data: [UploadFolderEntity!]!
+  meta: ResponseCollectionMeta!
+}
+
+input UploadFolderFiltersInput {
+  id: IDFilterInput
+  name: StringFilterInput
+  pathId: IntFilterInput
+  parent: UploadFolderFiltersInput
+  children: UploadFolderFiltersInput
+  files: UploadFileFiltersInput
+  path: StringFilterInput
+  createdAt: DateTimeFilterInput
+  updatedAt: DateTimeFilterInput
+  and: [UploadFolderFiltersInput]
+  or: [UploadFolderFiltersInput]
+  not: UploadFolderFiltersInput
+}
+
+input UploadFolderInput {
+  name: String
+  pathId: Int
+  parent: ID
+  children: [ID]
+  files: [ID]
+  path: String
+}
+
+type UploadFolderRelationResponseCollection {
+  data: [UploadFolderEntity!]!
+}
+
+type UsersPermissionsCreateRolePayload {
+  ok: Boolean!
+}
+
+type UsersPermissionsDeleteRolePayload {
+  ok: Boolean!
+}
+
+input UsersPermissionsLoginInput {
+  identifier: String!
+  password: String!
+  provider: String! = "local"
+}
+
+type UsersPermissionsLoginPayload {
+  jwt: String
+  user: UsersPermissionsMe!
+}
+
+type UsersPermissionsMe {
+  id: ID!
+  username: String!
+  email: String
+  confirmed: Boolean
+  blocked: Boolean
+  role: UsersPermissionsMeRole
+}
+
+type UsersPermissionsMeRole {
+  id: ID!
+  name: String!
+  description: String
+  type: String
+}
+
+type UsersPermissionsPasswordPayload {
+  ok: Boolean!
+}
+
+type UsersPermissionsPermission {
+  action: String!
+  role: UsersPermissionsRoleEntityResponse
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+type UsersPermissionsPermissionEntity {
+  id: ID
+  attributes: UsersPermissionsPermission
+}
+
+input UsersPermissionsPermissionFiltersInput {
+  id: IDFilterInput
+  action: StringFilterInput
+  role: UsersPermissionsRoleFiltersInput
+  createdAt: DateTimeFilterInput
+  updatedAt: DateTimeFilterInput
+  and: [UsersPermissionsPermissionFiltersInput]
+  or: [UsersPermissionsPermissionFiltersInput]
+  not: UsersPermissionsPermissionFiltersInput
+}
+
+type UsersPermissionsPermissionRelationResponseCollection {
+  data: [UsersPermissionsPermissionEntity!]!
+}
+
+input UsersPermissionsRegisterInput {
+  username: String!
+  email: String!
+  password: String!
+}
+
+type UsersPermissionsRole {
+  name: String!
+  description: String
+  type: String
+  permissions(filters: UsersPermissionsPermissionFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): UsersPermissionsPermissionRelationResponseCollection
+  users(filters: UsersPermissionsUserFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): UsersPermissionsUserRelationResponseCollection
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+type UsersPermissionsRoleEntity {
+  id: ID
+  attributes: UsersPermissionsRole
+}
+
+type UsersPermissionsRoleEntityResponse {
+  data: UsersPermissionsRoleEntity
+}
+
+type UsersPermissionsRoleEntityResponseCollection {
+  data: [UsersPermissionsRoleEntity!]!
+  meta: ResponseCollectionMeta!
+}
+
+input UsersPermissionsRoleFiltersInput {
+  id: IDFilterInput
+  name: StringFilterInput
+  description: StringFilterInput
+  type: StringFilterInput
+  permissions: UsersPermissionsPermissionFiltersInput
+  users: UsersPermissionsUserFiltersInput
+  createdAt: DateTimeFilterInput
+  updatedAt: DateTimeFilterInput
+  and: [UsersPermissionsRoleFiltersInput]
+  or: [UsersPermissionsRoleFiltersInput]
+  not: UsersPermissionsRoleFiltersInput
+}
+
+input UsersPermissionsRoleInput {
+  name: String
+  description: String
+  type: String
+  permissions: [ID]
+  users: [ID]
+}
+
+type UsersPermissionsUpdateRolePayload {
+  ok: Boolean!
+}
+
+type UsersPermissionsUser {
+  username: String!
+  email: String!
+  provider: String
+  confirmed: Boolean
+  blocked: Boolean
+  role: UsersPermissionsRoleEntityResponse
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+type UsersPermissionsUserEntity {
+  id: ID
+  attributes: UsersPermissionsUser
+}
+
+type UsersPermissionsUserEntityResponse {
+  data: UsersPermissionsUserEntity
+}
+
+type UsersPermissionsUserEntityResponseCollection {
+  data: [UsersPermissionsUserEntity!]!
+  meta: ResponseCollectionMeta!
+}
+
+input UsersPermissionsUserFiltersInput {
+  id: IDFilterInput
+  username: StringFilterInput
+  email: StringFilterInput
+  provider: StringFilterInput
+  password: StringFilterInput
+  resetPasswordToken: StringFilterInput
+  confirmationToken: StringFilterInput
+  confirmed: BooleanFilterInput
+  blocked: BooleanFilterInput
+  role: UsersPermissionsRoleFiltersInput
+  createdAt: DateTimeFilterInput
+  updatedAt: DateTimeFilterInput
+  and: [UsersPermissionsUserFiltersInput]
+  or: [UsersPermissionsUserFiltersInput]
+  not: UsersPermissionsUserFiltersInput
+}
+
+input UsersPermissionsUserInput {
+  username: String
+  email: String
+  provider: String
+  password: String
+  resetPasswordToken: String
+  confirmationToken: String
+  confirmed: Boolean
+  blocked: Boolean
+  role: ID
+}
+
+type UsersPermissionsUserRelationResponseCollection {
+  data: [UsersPermissionsUserEntity!]!
+}
+
+type WhoWeAre {
+  banner: UploadFileEntityResponse
+  Intro: ComponentIntroIntro
+  VisionMissionValue(filters: ComponentVisionMissionValueVisionMissionValueFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): [ComponentVisionMissionValueVisionMissionValue]
+  visionMissionValueBackground: UploadFileEntityResponse
+  WordAnimation: ComponentWordAnimationWordAnimation
+  ClientCounter(filters: ComponentClientCounterClientCounterFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): [ComponentClientCounterClientCounter]
+  clientCounterTitle: String
+  createdAt: DateTime
+  updatedAt: DateTime
+  publishedAt: DateTime
+}
+
+type WhoWeAreEntity {
+  id: ID
+  attributes: WhoWeAre
+}
+
+type WhoWeAreEntityResponse {
+  data: WhoWeAreEntity
+}
+
+input WhoWeAreInput {
+  banner: ID
+  Intro: ComponentIntroIntroInput
+  VisionMissionValue: [ComponentVisionMissionValueVisionMissionValueInput]
+  visionMissionValueBackground: ID
+  WordAnimation: ComponentWordAnimationWordAnimationInput
+  ClientCounter: [ComponentClientCounterClientCounterInput]
+  clientCounterTitle: String
+  publishedAt: DateTime
+}
+

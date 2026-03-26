@@ -1,0 +1,113 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+@layer base {
+  body {
+    @apply font-sans;
+    font-family: "Century Gothic", CenturyGothic, AppleGothic, var(--font-century-gothic), sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-heading;
+    font-family: Helvetica, "Helvetica Neue", Arial, sans-serif;
+  }
+}
+
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.html * {
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+  font-family: inherit;
+}
+.html a {
+  color: #f78019;
+}
+
+.htmlTitle strong {
+  color: #f78019;
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+}
+
+.htmlTitle span {
+  font-size: 3.2rem;
+  color: #f58016;
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: #4a5568; /* Change to any color */
+  border-radius: 10px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background-color: #edf2f7;
+}
+
+/* Global CSS file or inside your Tailwind @layer components */
+
+/* Make the arrows smaller and white */
+/* Force white color and smaller size */
+.swiper-button-prev,
+.swiper-button-next {
+  color: white !important; /* Ensures arrows are white */
+  font-size: 5px !important; /* Reduces arrow size */
+}
+
+/* Adjust positioning */
+.swiper-button-prev {
+  left: 5px !important; /* Moves left arrow inward */
+}
+
+.swiper-button-next {
+  right: 5px !important; /* Moves right arrow inward */
+}
+
+.swiper-navigation-size {
+  font-size: 10px !important;
+}
+
+.swiper-button-prev::after,
+.swiper-button-next::after {
+  font-size: 20px !important;
+}
+
+@media (min-width: 768px) {
+  /* Targets screens larger than medium (md) */
+
+  .swiper-button-prev {
+    left: 30px !important; /* Moves left arrow inward */
+  }
+
+  .swiper-button-next {
+    right: 30px !important; /* Moves right arrow inward */
+  }
+
+  .swiper-button-prev::after,
+  .swiper-button-next::after {
+    font-size: 30px !important;
+  }
+}
