@@ -91,7 +91,7 @@ const Testimonials = ({ testimonialsData }: TestimonialsProps) => {
                 </div>
 
                 <p className="mb-8 flex-1 text-lg leading-relaxed text-gray-600 italic">
-                  &quot;{testimonial.testimonialText}&quot;
+                 {testimonial.testimonialText}  
                 </p>
 
                 <div className="flex items-center gap-4 pt-6 border-t border-gray-50">
