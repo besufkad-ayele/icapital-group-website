@@ -238,7 +238,7 @@ const GetInTouch = () => {
                 Prefer a Direct Approach?
               </h3>
               <p className="text-lg leading-relaxed text-gray-500">
-                Reach out to us through any of these channels. We're always happy to help.
+                Reach out to us through any of these channels. We&apos;re always happy to help.
               </p>
             </div>
 
