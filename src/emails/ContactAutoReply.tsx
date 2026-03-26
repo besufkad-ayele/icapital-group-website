@@ -67,8 +67,8 @@ export const ContactAutoReply = ({
           <Text style={{ fontSize: 16, color: "#333", marginBottom: 16 }}>
             If you have any further questions, feel free to reply to this email
             or contact us at{" "}
-            <a href="mailto:contact@icapitalafrica.org">
-              contact@icapitalafrica.org
+            <a href="mailto:info@icapitalafrica.org">
+              info@icapitalafrica.org
             </a>
             .
           </Text>

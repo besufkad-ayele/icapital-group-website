@@ -29,12 +29,12 @@ const Testimonials = ({ testimonialsData }: TestimonialsProps) => {
   const duplicatedTestimonials = [...testimonials, ...testimonials];
 
   return (
-    <section className="relative overflow-hidden bg-white py-24 md:py-32">
+    <section className="relative overflow-hidden bg-white py-16 md:py-24">
       {/* Decorative Blobs */}
       <div className="absolute -left-20 top-0 h-96 w-96 rounded-full bg-orange-500/5 blur-[120px]" />
       <div className="absolute -right-20 bottom-0 h-96 w-96 rounded-full bg-blue-500/5 blur-[120px]" />
 
-      <div className="relative mb-16 px-6 text-center">
+      <div className="relative mb-10 px-6 text-center">
         <motion.div
            initial={{ opacity: 0, y: 20 }}
            whileInView={{ opacity: 1, y: 0 }}

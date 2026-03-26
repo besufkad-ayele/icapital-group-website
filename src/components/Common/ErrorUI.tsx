@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import Header from "@/components/Home/Header";
+import Footer from "../Home/Footer";
 
 interface ErrorUIProps {
   errorCode: string;
@@ -41,10 +42,9 @@ const ErrorUI = ({
   };
 
   const companyDetails = [
-    { label: "Call Us", value: "+251 1108080", icon: "📞" },
-    { label: "Email", value: "contact@icapitalafrica.org", icon: "📧" },
-    { label: "Visit", value: "The i-Capital Africa Institute", icon: "📍" },
-  ];
+    { label: "Call Us", value: "+251911629011", icon: "📞" },
+    { label: "Email", value: "info@icapitalafrica.org", icon: "📧" },
+  ]; 
 
   return (
     <div className="relative min-h-screen w-full overflow-hidden bg-[#253E5E] text-white">
@@ -131,7 +131,7 @@ const ErrorUI = ({
           </div>
         </motion.div>
       </main>
-
+ <Footer />
       {/* Decorative Bottom Curve */}
       <div className="absolute bottom-0 left-0 h-24 w-full rounded-tr-[100px] bg-orange-500/5 lg:h-32" />
     </div>

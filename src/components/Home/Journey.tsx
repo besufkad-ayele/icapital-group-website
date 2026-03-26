@@ -239,9 +239,9 @@ const Journey = ({ journeyData }: JourneyProps) => {
                   <span className="text-sm font-bold uppercase tracking-widest text-orange-500">
                     {milestone.year}
                   </span>
-                  <h3 className="mt-2 text-2xl font-extrabold text-[#061C3D]">
+                  {/* <h3 className="mt-2 text-2xl font-extrabold text-[#061C3D]">
                     {milestone.text.split(':')[0]}
-                  </h3>
+                  </h3> */}
                   <p className="mt-3 text-lg leading-relaxed text-gray-500">
                     {milestone.text.includes(':') ? milestone.text.split(':')[1] : milestone.text}
                   </p>

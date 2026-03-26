@@ -8,6 +8,7 @@ import {
   FaTwitter,
   FaInstagram,
   FaTelegram,
+  FaYoutube,
 } from "react-icons/fa";
 import { MdEmail, MdPhone } from "react-icons/md";
 import { IoIosArrowUp } from "react-icons/io";
@@ -24,11 +25,10 @@ interface QuickLink {
 }
 
 const socialLinks: SocialLink[] = [
-  { icon: <FaLinkedin size={18} />, href: "#" },
-  { icon: <FaFacebook size={18} />, href: "#" },
-  { icon: <FaTwitter size={18} />, href: "#" },
-  { icon: <FaInstagram size={18} />, href: "#" },
-  { icon: <FaTelegram size={18} />, href: "#" },
+  { icon: <FaLinkedin size={18} />, href: "https://www.linkedin.com/company/icapitalafrica/" },
+  { icon: <FaFacebook size={18} />, href: "https://web.facebook.com/icapitalafrica/" },
+  { icon: <FaTwitter size={18} />, href: "https://twitter.com/icapitalafrica?lang=en" },
+  { icon: <FaYoutube size={18} />, href: "https://www.youtube.com/@thei-capitalafricainstitut9549" },
 ];
 
 const quickLinks: QuickLink[] = [
@@ -70,6 +70,8 @@ const Footer: React.FC = () => {
                 <Link
                   key={index}
                   href={link.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="group flex h-10 w-10 items-center justify-center rounded-full bg-white/5 border border-white/10 transition-all duration-300 hover:bg-orange-500 hover:border-orange-500 hover:-translate-y-1 hover:shadow-[0_10px_20px_-5px_rgba(249,115,22,0.4)]"
                 >
                   <span className="transition-transform group-hover:scale-110">{link.icon}</span>
@@ -118,7 +120,7 @@ const Footer: React.FC = () => {
                 </div>
                 <div className="flex flex-col">
                   <span className="text-xs uppercase tracking-widest text-white/40">Phone</span>
-                  <span className="font-bold">+251 1108080</span>
+                  <span className="font-bold">+251911629011</span>
                 </div>
               </li>
               <li className="flex items-start gap-4 text-blue-100/60 hover:text-white transition-colors">
@@ -127,7 +129,7 @@ const Footer: React.FC = () => {
                 </div>
                 <div className="flex flex-col">
                   <span className="text-xs uppercase tracking-widest text-white/40">Email</span>
-                  <span className="font-bold break-all">contact@icapitalafrica.org</span>
+                  <span className="font-bold break-all">info@icapitalafrica.org</span>
                 </div>
               </li>
             </ul>

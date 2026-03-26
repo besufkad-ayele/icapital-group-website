@@ -69,7 +69,7 @@ const Slider: React.FC<SliderProps> = ({ sliderData }) => {
   };
 
   return (
-    <section className="relative overflow-hidden bg-white py-24 md:py-32">
+    <section className="relative overflow-hidden bg-white py-16 md:py-24">
       {/* Decorative Background Elements */}
       <div className="absolute -left-20 top-0 h-64 w-64 rounded-full bg-blue-500/5 blur-[100px]" />
       <div className="absolute -right-20 bottom-0 h-64 w-64 rounded-full bg-orange-500/5 blur-[100px]" />
@@ -80,7 +80,7 @@ const Slider: React.FC<SliderProps> = ({ sliderData }) => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: false }}
           transition={{ duration: 0.6, ease: "easeOut" }}
-          className="mb-16 text-center text-3xl font-extrabold tracking-tight text-[#061C3D] md:text-5xl lg:text-6xl"
+          className="mb-10 text-center text-3xl font-extrabold tracking-tight text-[#061C3D] md:text-5xl lg:text-6xl"
         >
           {sectionTitle}
         </motion.h2>

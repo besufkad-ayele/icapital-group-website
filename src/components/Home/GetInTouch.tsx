@@ -250,7 +250,7 @@ const GetInTouch = () => {
                   </svg>
                 </div>
                 <p className="font-bold text-[#061C3D]">Give us a call</p>
-                <p className="mt-1 text-gray-600">+251 1108080</p>
+                <p className="mt-1 text-gray-600">+251911629011</p>
               </div>
 
               <div className="rounded-3xl border border-gray-100 bg-white p-6 shadow-sm transition-all hover:border-orange-100 hover:shadow-md">
@@ -260,7 +260,7 @@ const GetInTouch = () => {
                   </svg>
                 </div>
                 <p className="font-bold text-[#061C3D]">Send an email</p>
-                <p className="mt-1 text-gray-600 text-sm md:text-base">contact@icapitalafrica.org</p>
+                <p className="mt-1 text-gray-600 text-sm md:text-base">info@icapitalafrica.org</p>
               </div>
             </div>
           </motion.div>

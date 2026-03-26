@@ -65,7 +65,7 @@ const GetStarted = ({ getStartedData }: GetStartedProps) => {
       },
     }),
   };  return (
-    <section className="relative overflow-hidden bg-white py-24 md:py-32">
+    <section className="relative overflow-hidden bg-white py-16 md:py-24">
       {/* Background Decorative Elements */}
       <div className="absolute -left-20 top-0 h-[500px] w-[500px] rounded-full bg-orange-500/10 blur-[150px]" />
       <div className="absolute -right-20 bottom-0 h-[500px] w-[500px] rounded-full bg-blue-500/10 blur-[150px]" />
@@ -75,9 +75,9 @@ const GetStarted = ({ getStartedData }: GetStartedProps) => {
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true }}
-        className="relative mx-auto max-w-screen-2xl px-4 text-center"
+        className="relative mx-auto max-w-6xl px-6 text-center"
       >
-        <div className="relative overflow-hidden rounded-[4rem] bg-gradient-to-br from-[#061C3D] via-[#082B5B] to-[#061C3D] p-10 md:px-12 md:py-20 shadow-[0_50px_100px_-20px_rgba(6,28,61,0.3)]">
+        <div className="relative overflow-hidden rounded-[3rem] bg-gradient-to-br from-[#061C3D] via-[#082B5B] to-[#061C3D] p-12 md:p-20 shadow-[0_50px_100px_-20px_rgba(6,28,61,0.3)]">
           {/* Internal Decorative Blobs */}
           <div className="absolute -right-20 -top-20 h-64 w-64 rounded-full bg-orange-500/20 blur-[80px]" />
           <div className="absolute -left-20 -bottom-20 h-64 w-64 rounded-full bg-blue-400/20 blur-[80px]" />
@@ -99,7 +99,7 @@ const GetStarted = ({ getStartedData }: GetStartedProps) => {
             {/* Description */}
             <motion.p
               variants={itemVariants}
-              className="mx-auto mt-10 max-w-2xl text-lg leading-relaxed text-blue-100/70 md:text-2xl"
+              className="mx-auto mt-8 max-w-2xl text-lg leading-relaxed text-blue-100/70 md:text-xl"
             >
               {description}
             </motion.p>
@@ -107,7 +107,7 @@ const GetStarted = ({ getStartedData }: GetStartedProps) => {
             {/* Services List - Premium Glass Badges */}
             <motion.div
               variants={containerVariants}
-              className="mt-16 flex flex-wrap justify-center gap-4"
+              className="mt-12 flex flex-wrap justify-center gap-4"
             >
               {services.map((service: any, index: number) => {
                 const content = (
@@ -158,7 +158,7 @@ const GetStarted = ({ getStartedData }: GetStartedProps) => {
             </motion.div>
     
             {/* CTA Button - High Contrast */}
-            <motion.div variants={itemVariants} className="mt-20 flex justify-center">
+            <motion.div variants={itemVariants} className="mt-16 flex justify-center">
               {buttonLink.startsWith("/") ? (
                 <Link
                   href={buttonLink}

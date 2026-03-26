@@ -115,7 +115,7 @@ const Sectors = ({ sectorsData }: SectorsProps) => {
   const sectorsSection = sectorsData.home.SectorsSection;
 
   return (
-    <section key={pathname} className="relative overflow-hidden bg-[#F8FAFC] px-6 py-24 md:px-12 md:py-32">
+    <section key={pathname} className="relative overflow-hidden bg-[#F8FAFC] px-6 py-16 md:px-12 md:py-24">
       {/* Decorative Background Blobs */}
       <div className="absolute -left-20 top-40 h-80 w-80 rounded-full bg-blue-500/5 blur-[120px]" />
       <div className="absolute -right-20 bottom-40 h-80 w-80 rounded-full bg-orange-500/5 blur-[120px]" />
@@ -127,7 +127,7 @@ const Sectors = ({ sectorsData }: SectorsProps) => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: false }}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          className="mb-20 text-center max-w-4xl mx-auto"
+          className="mb-12 text-center max-w-4xl mx-auto"
         >
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}

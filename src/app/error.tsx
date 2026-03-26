@@ -3,6 +3,7 @@
 import { useEffect } from "react";
 import ErrorUI from "@/components/Common/ErrorUI";
 import { motion } from "framer-motion";
+import Footer from "@/components/Home/Footer";
 
 const ErrorPage = ({
   error,
@@ -53,7 +54,9 @@ const ErrorPage = ({
           Try Again
         </button>
       </motion.div>
+      <Footer />
     </div>
+    
   );
 };
 

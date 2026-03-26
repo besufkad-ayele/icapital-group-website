@@ -98,7 +98,7 @@ const Features = ({ featuresData }: FeaturesProps) => {
   };
 
   return (
-    <section className="relative overflow-hidden bg-white py-24 md:py-32">
+    <section className="relative overflow-hidden bg-white py-16 md:py-24">
       {/* Background patterns */}
       <div className="absolute inset-0 z-0 opacity-[0.03]" style={{ backgroundImage: 'radial-gradient(#F78019 1px, transparent 1px)', backgroundSize: '40px 40px' }} />
       <div className="absolute -left-24 top-0 h-96 w-96 rounded-full bg-orange-100/20 blur-3xl" />
@@ -141,7 +141,7 @@ const Features = ({ featuresData }: FeaturesProps) => {
           animate={controls}
           whileInView="visible"
           viewport={{ once: false }}
-          className="mt-12 grid grid-cols-1 gap-8 md:grid-cols-4 md:gap-10"
+          className="mt-8 grid grid-cols-1 gap-6 md:grid-cols-4 md:gap-8"
         >
           {(features || []).map((feature: any, index: number) => (
             <motion.div
@@ -150,7 +150,7 @@ const Features = ({ featuresData }: FeaturesProps) => {
               className="group relative flex flex-col rounded-[2.5rem] bg-white p-8 border border-gray-100 transition-all duration-500 hover:border-orange-200 hover:shadow-[0_30px_60px_-12px_rgba(247,128,25,0.12)]"
             >
               
-              <div className="mb-8 flex h-20 w-20 items-center justify-center rounded-2xl bg-orange-50 transition-colors duration-500 group-hover:bg-orange-100">
+              <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-orange-50 transition-colors duration-500 group-hover:bg-orange-100">
                 <div className="flex h-12 w-12 items-center justify-center text-orange-500">
                   {feature.icon?.url && (
                     <Image
