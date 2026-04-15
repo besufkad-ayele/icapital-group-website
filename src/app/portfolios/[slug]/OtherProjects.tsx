@@ -41,15 +41,31 @@ export default function OtherProjects({ projects }: { projects: any[] }) {
       transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
       className="mt-16"
     >
-      <motion.h2
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.2 }}
-        transition={{ duration: 0.5, delay: 0.1 }}
-        className="text-center text-xl font-bold"
-      >
-        Other Projects
-      </motion.h2>
+      <div className="flex flex-col items-center justify-between gap-6 sm:flex-row">
+        <motion.h2
+          initial={{ opacity: 0, x: -20 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.5, delay: 0.1 }}
+          className="text-center text-3xl font-black tracking-tight text-slate-900 sm:text-left"
+        >
+          Other Projects
+        </motion.h2>
+        <motion.div
+          initial={{ opacity: 0, x: 20 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+        >
+          <Link
+            href="/portfolios"
+            className="group flex items-center justify-center gap-2 rounded-full border-2 border-orange-500/20 bg-orange-500/5 px-6 py-2.5 text-sm font-bold text-orange-600 transition-all duration-300 hover:border-orange-500 hover:bg-orange-500 hover:text-white hover:shadow-lg hover:shadow-orange-500/20"
+          >
+            See all portfolios
+            <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
+          </Link>
+        </motion.div>
+      </div>
       <motion.div
         variants={containerVariants}
         initial="hidden"

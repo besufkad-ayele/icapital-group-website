@@ -107,46 +107,62 @@ const PortfolioDetail = async ({ params }: PortfolioDetailProps) => {
     .slice(0, 3);
 
   return (
-    <>
-      <Header iconColor="text-black" />
-      <div className="container mx-auto px-6 py-24 lg:px-16">
-        {/* Client Section - Modernized with Animation and Project Title */}
-        <ClientCard
-          client={{
-            name: portfolio.clientName,
-            description: portfolio.clientDescription,
-            website: portfolio.clientWebsite,
-          }}
-          logoImg={
-            portfolio.logoImage && getStrapiMedia(portfolio.logoImage.url)
-          }
-          projectTitle={portfolio.title}
-        />
-
-        {/* Challenge & Solution Section */}
-        <ChallengeSolutionAnimated
-          problem={portfolio.problem}
-          problemPoints={portfolio.problemPoint?.map((p: any) => p.point) || []}
-          solution={portfolio.solution}
-          solutionPoints={
-            portfolio.solutionPoint?.map((p: any) => p.point) || []
-          }
-        />
+    <main className="relative min-h-screen bg-[#fafafa] selection:bg-[#F78019] selection:text-white">
+      {/* Decorative Premium Background */}
+      <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
+        {/* Top Gradient */}
+        <div className="absolute left-0 top-0 h-[70vh] w-full bg-gradient-to-b from-orange-100/40 via-[#fafafa] to-[#fafafa]" />
+        {/* Abstract Blobs */}
+        <div className="absolute -right-40 -top-40 h-[800px] w-[800px] rounded-full bg-[#F78019]/5 blur-[120px]" />
+        <div className="absolute -left-40 top-[20%] h-[600px] w-[600px] rounded-full bg-blue-500/5 blur-[120px]" />
+        {/* Grid pattern overlay */}
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:40px_40px] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_0%,#000_70%,transparent_100%)]" />
       </div>
 
-      {/* Testimonials Section */}
-      {portfolio.testimonials && portfolio.testimonials.length > 0 && (
-        <Testimonials testimonials={portfolio.testimonials} />
-      )}
+      <div className="relative z-10 flex min-h-screen flex-col">
+        <Header iconColor="text-black" />
 
-      <div className="container mx-auto px-6 lg:px-16">
-        {/* Other Projects Section - Now dynamic */}
-        <OtherProjects projects={otherProjects} />
+        {/* Content Container */}
+        <div className="container mx-auto flex-1 px-6 pb-24 pt-32 lg:px-16">
+          {/* Client Section - Modernized with Animation and Project Title */}
+          <ClientCard
+            client={{
+              name: portfolio.clientName,
+              description: portfolio.clientDescription,
+              website: portfolio.clientWebsite,
+            }}
+            logoImg={
+              portfolio.logoImage && getStrapiMedia(portfolio.logoImage.url)
+            }
+            projectTitle={portfolio.title}
+          />
+
+          {/* Challenge & Solution Section */}
+          <div className="mt-20 lg:mt-32">
+            <ChallengeSolutionAnimated
+              problem={portfolio.problem}
+              problemPoints={
+                portfolio.problemPoint?.map((p: any) => p.point) || []
+              }
+              solution={portfolio.solution}
+              solutionPoints={
+                portfolio.solutionPoint?.map((p: any) => p.point) || []
+              }
+            />
+          </div>
+        </div>
+        <div className="relative z-10 bg-[#fafafa] py-16">
+          <div className="container mx-auto px-6 lg:px-16">
+            {/* Other Projects Section - Now dynamic */}
+            <OtherProjects projects={otherProjects} />
+          </div>
+        </div>
+
+        <div className="relative z-20">
+          <Footer />
+        </div>
       </div>
-
-      <GetStarted getStartedData={getStartedData} />
-      <Footer />
-    </>
+    </main>
   );
 };
 

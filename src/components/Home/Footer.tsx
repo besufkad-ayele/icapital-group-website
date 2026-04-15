@@ -149,7 +149,7 @@ const Footer: React.FC = () => {
 
           <div className="flex items-center gap-6">
             <p className="text-xs text-blue-100/40">
-              Powered by <span className="text-white">Frontier Technologies</span>
+              Powered by <span className="text-white">The i-Capital Africa Digital and Ai solutions</span>
             </p>
             <button
               onClick={scrollToTop}

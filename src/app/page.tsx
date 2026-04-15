@@ -57,11 +57,11 @@ const HomePage = async () => {
           <Portfolio portfolioData={data.portfolio} />
         </div>
         <Subscribe subscribeData={data.subscribe} />
-        <Testimonials testimonialsData={data.testimonials} />
+        <Testimonials testimonialsData={data.testimonials} /> 
+        <GetStarted getStartedData={data.getStarted} />
         <div id="contact">
           <GetInTouch />
         </div>
-        <GetStarted getStartedData={data.getStarted} />
         <Footer />
       </div>
     </ScrollSpyWrapper>

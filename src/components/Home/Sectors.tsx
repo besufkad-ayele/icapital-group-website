@@ -104,7 +104,7 @@ const Sectors = ({ sectorsData }: SectorsProps) => {
   // Handle case where sectorsData is not available
   if (!sectorsData?.home?.SectorsSection) {
     return (
-      <section className="bg-[#F8F8F8] px-6 py-16 md:px-12">
+      <section className="bg-slate-50 px-4 py-16 sm:px-6 md:px-12">
         <div className="text-center text-red-500">
           Sectors data not available
         </div>
@@ -115,26 +115,31 @@ const Sectors = ({ sectorsData }: SectorsProps) => {
   const sectorsSection = sectorsData.home.SectorsSection;
 
   return (
-    <section key={pathname} className="relative overflow-hidden bg-[#F8FAFC] px-6 py-16 md:px-12 md:py-24">
-      {/* Decorative Background Blobs */}
-      <div className="absolute -left-20 top-40 h-80 w-80 rounded-full bg-blue-500/5 blur-[120px]" />
-      <div className="absolute -right-20 bottom-40 h-80 w-80 rounded-full bg-orange-500/5 blur-[120px]" />
+    <section
+      key={pathname}
+      className="relative overflow-hidden bg-gradient-to-b from-slate-50 via-blue-50/30 to-slate-50 px-4 py-16 sm:px-6 md:px-8 lg:px-12 md:py-20 lg:py-28"
+    >
+      {/* Animated Decorative Background Blobs */}
+      <div className="absolute -left-32 top-20 h-96 w-96 rounded-full bg-blue-400/8 blur-[130px] animate-pulse" />
+      <div className="absolute -right-32 top-1/2 h-96 w-96 rounded-full bg-orange-400/8 blur-[130px] animate-pulse" />
+      <div className="absolute left-1/2 -bottom-32 h-96 w-96 rounded-full bg-purple-400/8 blur-[130px] animate-pulse" />
 
-      <div className="container relative z-10 mx-auto">
+      <div className="container relative z-10 mx-auto max-w-7xl">
         {/* Header Section */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: false }}
+          viewport={{ once: false, margin: "-100px" }}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          className="mb-12 text-center max-w-4xl mx-auto"
+          className="mb-12 text-center sm:mb-16 md:mb-20"
         >
+          {/* Tag */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
+            initial={{ opacity: 0, scale: 0.85 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: false }}
-            transition={{ duration: 0.5 }}
-            className="flex justify-center"
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="flex justify-center mb-6 sm:mb-8"
           >
             <Tag
               title={sectorsSection.tagTitle}
@@ -142,143 +147,139 @@ const Sectors = ({ sectorsData }: SectorsProps) => {
               bgColor="bg-orange-500/10"
             />
           </motion.div>
+
+          {/* Main Heading */}
           <motion.h1
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 25 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: false }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="my-6 text-4xl font-extrabold tracking-tight text-[#061C3D] md:text-6xl"
+            transition={{ duration: 0.6, delay: 0.15 }}
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black tracking-tight text-slate-900 mb-4 sm:mb-6 leading-tight"
           >
-            {sectorsSection.heading}
+            <span className="bg-gradient-to-r from-slate-900 via-blue-800 to-slate-900 bg-clip-text text-transparent">
+              {sectorsSection.heading}
+            </span>
           </motion.h1>
+
+          {/* Description */}
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: false }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="text-lg text-slate-600 md:text-xl leading-relaxed font-medium"
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="text-base sm:text-lg md:text-xl text-slate-600 leading-relaxed font-medium max-w-3xl mx-auto px-4"
           >
             {sectorsSection.description}
           </motion.p>
         </motion.div>
 
-      {/* Cards Grid */}
+        {/* Cards Grid */}
         <motion.div
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: false }}
-          className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3"
+          viewport={{ once: false, margin: "-50px" }}
+          className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3"
         >
-          {(sectorsSection.cards || []).map((card: Card, index: number) => (
-            <motion.div
-              key={`sector-card-${index}`}
-              variants={cardVariants}
-              whileHover={{
-                y: -10,
-                transition: { duration: 0.3 },
-              }}
-              className="group relative cursor-pointer overflow-hidden rounded-[2.5rem] bg-white border border-slate-100 shadow-[0_20px_50px_rgba(0,0,0,0.04)] transition-all duration-500 hover:shadow-[0_40px_80px_rgba(0,0,0,0.08)]"
-              onClick={() => {
-                if ([1, 2, 3, 5].includes(index)) {
-                  window.open(card.link, "_blank");
-                } else {
-                  window.location.href = card.link;
-                }
-              }}
-            >
-              {/* Image Section */}
-              <div className="relative aspect-[4/3] w-full overflow-hidden bg-slate-50 md:aspect-video">
-                <Image
-                  src={getStrapiMedia(card.image.url)}
-                  alt={card.title}
-                  fill
-                  className="object-cover transition-transform duration-700 group-hover:scale-110"
-                />
-                
-                {/* Subtle Glow behind image */}
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-100/50 to-transparent" />
-              </div>
-
-              {/* Title & Arrow */}
-              <div className="flex items-center justify-between p-8 pb-10">
-                <h3 className="text-2xl font-black tracking-tight text-[#061C3D] leading-tight group-hover:text-orange-500 transition-colors">
-                  {card.title}
-                </h3>
-                <div className="flex h-12 w-12 items-center justify-center rounded-full bg-slate-50 border border-slate-100 group-hover:bg-orange-500 group-hover:border-orange-500 transition-all duration-300">
-                  <span className="text-2xl text-[#061C3D] group-hover:text-white group-hover:translate-x-1 transition-all">
-                    →
-                  </span>
-                </div>
-              </div>
-
-              {/* Advanced Glass Hover Overlay */}
+          {(sectorsSection.cards || []).map((card: Card, index: number) => {
+            const cardColor = card.originalWebsiteBgColor || "#0f172a";
+            return (
               <motion.div
-                initial={{ opacity: 0, backdropFilter: "blur(0px)" }}
-                whileHover={{ opacity: 1, backdropFilter: "blur(12px)" }}
-                transition={{ duration: 0.4 }}
-                className="absolute inset-0 z-30 flex flex-col items-center justify-center p-10 text-center opacity-0 group-hover:opacity-100"
-                style={{
-                  background: (() => {
-                    const color = card.originalWebsiteBgColor;
-                    if (!color || !color.startsWith("#")) return color;
-                    let hex = color.replace("#", "");
-                    if (hex.length === 3) hex = hex.split("").map((c) => c + c).join("");
-                    return `#${hex}EE`; // 93% opacity for rich color
-                  })(),
+                key={`sector-card-${index}`}
+                variants={cardVariants}
+                whileHover={{ y: -8 }}
+                onClick={() => {
+                  if ([1, 2, 3, 5].includes(index)) {
+                    window.open(card.link, "_blank");
+                  } else {
+                    window.location.href = card.link;
+                  }
                 }}
+                className="group flex cursor-pointer flex-col overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm transition-all duration-300 hover:shadow-xl"
               >
-                <div className="space-y-6">
-                  <motion.div
-                    className="flex flex-col items-center gap-4"
-                    whileHover={{ scale: 1.05 }}
-                  >
-                    <div className="relative h-20 w-20 overflow-hidden rounded-2xl bg-white p-3 shadow-xl ring-4 ring-white/20 transition-transform duration-500 group-hover:rotate-6">
-                      <Image
-                        src={getStrapiMedia(card.logo.url)}
-                        alt={`${card.title} Logo`}
-                        fill
-                        className="object-contain"
-                      />
+                {/* Image Section - No cropping */}
+                <div className="relative flex aspect-[16/9] w-full items-center justify-center bg-white overflow-hidden border-b border-slate-100">
+                  <div
+                    className="absolute inset-x-0 top-0 h-1 opacity-80 z-10"
+                    style={{ backgroundColor: cardColor }}
+                  />
+                  {card.image?.url ? (
+                    <Image
+                      src={getStrapiMedia(card.image.url)}
+                      alt={card.title}
+                      fill
+                      className="object-contain transition-transform duration-500 ease-out group-hover:scale-105"
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    />
+                  ) : (
+                    <div className="flex h-full w-full items-center justify-center text-slate-300 text-sm">
+                      No Image Provided
                     </div>
-                    <h2
-                      className="text-3xl font-black tracking-tight"
-                      style={{
-                        color: isColorDark(card.originalWebsiteBgColor) ? "white" : "#061C3D",
-                      }}
-                    >
-                      {card.title}
-                    </h2>
-                  </motion.div>
-                  <p
-                    className="text-lg leading-relaxed font-medium"
-                    style={{
-                      color: isColorDark(card.originalWebsiteBgColor)
-                        ? "rgba(255, 255, 255, 0.9)"
-                        : "rgba(0, 0, 0, 0.75)",
-                    }}
-                  >
+                  )}
+                </div>
+
+                {/* Content Section */}
+                <div className="relative flex flex-1 flex-col p-6 sm:p-8">
+                  {/* Floating Logo */}
+                  <div className="absolute -top-10 right-6 flex h-16 w-16 items-center justify-center rounded-lg bg-white p-2 shadow-md border border-slate-100">
+                    {card.logo?.url ? (
+                      <div className="relative h-full w-full">
+                        <Image
+                          src={getStrapiMedia(card.logo.url)}
+                          alt={`${card.title} Logo`}
+                          fill
+                          className="object-contain"
+                          sizes="64px"
+                        />
+                      </div>
+                    ) : (
+                      <span className="text-xl font-bold text-slate-300">
+                        {card.title.charAt(0)}
+                      </span>
+                    )}
+                  </div>
+
+                  <h3 className="mb-3 text-xl font-bold tracking-tight text-slate-900 group-hover:text-blue-600 transition-colors pr-14">
+                    {card.title}
+                  </h3>
+
+                  <p className="mb-6 flex-1 text-sm font-medium leading-relaxed text-slate-600 line-clamp-3 group-hover:line-clamp-none transition-all duration-300">
                     {card.description}
                   </p>
-                  
-                  <motion.div
-                    className="pt-4 flex justify-center"
-                    initial={{ y: 20, opacity: 0 }}
-                    whileHover={{ y: 0, opacity: 1 }}
-                  >
-                    <div className="flex h-14 w-14 items-center justify-center rounded-full bg-white shadow-2xl ring-4 ring-white/10">
-                      <span
-                        className="text-3xl font-bold"
-                        style={{ color: getElementColor(card) }}
-                      >
+
+                  {/* Footer / CTA */}
+                  {/* <div className="mt-auto flex items-center justify-between border-t border-slate-100 pt-5">
+                    <span className="text-sm font-semibold text-slate-500 group-hover:text-slate-900 transition-colors">
+                      Learn More
+                    </span>
+                    <div
+                      className="flex h-8 w-8 items-center justify-center rounded-full bg-slate-50 text-slate-400 opacity-80 transition-all duration-300 group-hover:bg-slate-900 group-hover:text-white group-hover:opacity-100"
+                      style={{
+                        backgroundColor: card.isGradient ? undefined : cardColor,
+                      }}
+                    >
+                      <span className="text-lg font-bold leading-none -translate-y-[1px]">
                         →
                       </span>
                     </div>
-                  </motion.div>
+                  </div> */}
                 </div>
               </motion.div>
-            </motion.div>
-          ))}
+            );
+          })}
+        </motion.div>
+
+        {/* Bottom CTA Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: false }}
+          transition={{ duration: 0.8, delay: 0.3 }}
+          className="mt-16 sm:mt-20 md:mt-24 text-center"
+        >
+          {/* <p className="text-sm sm:text-base text-slate-600 font-medium">
+            Explore more sectors and discover opportunities that fit your business needs
+          </p> */}
         </motion.div>
       </div>
     </section>

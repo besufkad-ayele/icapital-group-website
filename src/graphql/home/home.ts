@@ -24,7 +24,7 @@ export const GET_TRUSTED_COMPANIES_SLIDER = gql`
     home {
       trustedCompaniesSlider {
         sectionTitle
-        logos {
+        logos(pagination: { limit: 100 }) {
           logo {
             url
             width

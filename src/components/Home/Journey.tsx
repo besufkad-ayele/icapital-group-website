@@ -1,256 +1,155 @@
 "use client";
 
 import Image from "next/image";
-import JourneyImg from "@/assets/journey-img.jpeg";
-import Step1 from "@/assets/step1.png";
-import Step2 from "@/assets/step2.png";
-import Step3 from "@/assets/step3.png";
-import Step4 from "@/assets/step4.png";
 import Tag from "@/ui/Tag";
-import { motion } from "framer-motion";
-import { useEffect, useRef } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { motion, useScroll, useSpring } from "framer-motion";
+import { useRef } from "react";
 
-gsap.registerPlugin(ScrollTrigger);
+const staticImages = [
+  "/opengraph-image.png", 
+  "/twitter-image.png", 
+  "/test.png"
+];
 
-const staticIcons = [Step1, Step2, Step3, Step4];
-
-// Define the props interface for Journey component
 interface JourneyProps {
   journeyData: any;
 }
 
 const Journey = ({ journeyData }: JourneyProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const lineRef = useRef<HTMLDivElement>(null);
-  const milestonesRef = useRef<(HTMLDivElement | null)[]>([]);
+  
+  // Progress tracking for the vertical line
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start center", "end center"]
+  });
 
-  useEffect(() => {
-    if (!containerRef.current || !lineRef.current) return;
+  const scaleY = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001
+  });
 
-    // Line drawing animation
-    gsap.fromTo(
-      lineRef.current,
-      { scaleY: 0 },
-      {
-        scaleY: 1,
-        ease: "none",
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: "top 70%",
-          end: "bottom 70%",
-          scrub: 0.5,
-        },
-      }
-    );
-
-    // Milestones reveal
-    milestonesRef.current.forEach((milestone, index) => {
-      if (milestone) {
-        gsap.fromTo(
-          milestone,
-          { opacity: 0, x: 50, filter: "blur(10px)" },
-          {
-            opacity: 1,
-            x: 0,
-            filter: "blur(0px)",
-            duration: 0.8,
-            ease: "power2.out",
-            scrollTrigger: {
-              trigger: milestone,
-              start: "top 85%",
-              toggleActions: "play none none reverse",
-            },
-          }
-        );
-      }
-    });
-
-    return () => {
-      ScrollTrigger.getAll().forEach((t) => t.kill());
-    };
-  }, [journeyData]);
-
-  // Handle case where journeyData is not available
-  if (!journeyData?.home?.journeySection) {
-    return (
-      <section className="flex flex-col items-center px-6 py-16">
-        <div className="text-center text-red-500">
-          Journey data not available
-        </div>
-      </section>
-    );
-  }
+  if (!journeyData?.home?.journeySection) return null;
 
   const journey = journeyData.home.journeySection;
-  const tagTitle = journey.tagTitle || "Our Journey";
-  const heading = journey.heading || "Moving Through Years with Success";
-  const image = journey.image?.url
-    ? journey.image.url.startsWith("http")
-      ? journey.image.url
-      : (process.env.NEXT_PUBLIC_DATA || "http://localhost:1337") +
-        journey.image.url
-    : JourneyImg;
   const milestones = journey.milestones || [];
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2,
-        delayChildren: 0.1,
-        duration: 0.6,
-        ease: [0.16, 1, 0.3, 1],
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: {
-      opacity: 0,
-      x: -30,
-      filter: "blur(8px)",
-    },
-    visible: {
-      opacity: 1,
-      x: 0,
-      filter: "blur(0px)",
-      transition: {
-        duration: 0.6,
-        ease: [0.16, 1, 0.3, 1],
-      },
-    },
-  };
-
-  const imageVariants = {
-    hidden: {
-      opacity: 0,
-      scale: 0.9,
-      x: -50,
-    },
-    visible: {
-      opacity: 1,
-      scale: 1,
-      x: 0,
-      transition: {
-        duration: 1,
-        ease: [0.16, 1, 0.3, 1],
-      },
-    },
-  };
-
   return (
-    <section className="flex flex-col items-center px-6 py-16">
-      {/* Header */}
-      <motion.div
-        initial={{ opacity: 0, y: 20, filter: "blur(8px)" }}
-        whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-        viewport={{ once: false }}
-        transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-        className="text-center"
-      >
+    <section ref={containerRef} className="relative bg-white px-6 py-24 lg:py-40 overflow-hidden">
+      {/* --- BACKGROUND DECOR --- */}
+      <div className="absolute inset-0 -z-10 overflow-hidden pointer-events-none">
+        <div className="absolute top-[10%] -left-[10%] h-[600px] w-[600px] rounded-full bg-orange-50/50 blur-[120px]" />
+        <div className="absolute bottom-[10%] -right-[10%] h-[600px] w-[600px] rounded-full bg-blue-50/50 blur-[120px]" />
+      </div>
+
+      {/* --- HEADER --- */}
+      <div className="mb-32 flex flex-col items-center text-center">
         <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: false }}
-          transition={{ duration: 0.4 }}
-        >
-          <Tag
-            title={tagTitle}
-            titleColor="text-[#F78019]"
-            bgColor="bg-[#F7801926]"
-          />
-        </motion.div>
-        <motion.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: false }}
-          transition={{ duration: 0.5, delay: 0.1 }}
-          className="mt-4 text-center text-3xl font-bold text-gray-900"
+          viewport={{ once: true }}
         >
-          {heading}
-        </motion.h2>
-      </motion.div>
-
-      {/* Content Wrapper */}
-      <motion.div
-        ref={containerRef}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: "-100px" }}
-        className="mt-16 flex w-full max-w-7xl flex-col items-center gap-16 md:flex-row md:items-start md:gap-24"
-      >
-        {/* Image - Styled for more depth */}
-        <motion.div
-          variants={imageVariants}
-          className="relative w-full md:w-[45%]"
-        >
-          <div className="absolute -inset-4 rounded-[4rem] border-2 border-orange-100/50 blur-sm" />
-          <div className="relative aspect-[4/5] w-full overflow-hidden rounded-[3rem] shadow-[0_30px_60px_-15px_rgba(0,0,0,0.3)] md:aspect-[3/4]">
-            <Image
-              src={image}
-              alt="Our Journey"
-              fill
-              className="object-cover transition-transform duration-1000 hover:scale-110"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
-          </div>
-          {/* Floating decorative elements for depth */}
-          <div className="absolute -bottom-10 -right-10 h-32 w-32 rounded-3xl bg-orange-500/10 blur-2xl" />
+          <Tag title={journey.tagTitle} titleColor="text-[#F78019]" bgColor="bg-[#F7801915]" />
+          <h2 className="mt-8 max-w-4xl text-5xl font-black tracking-tight text-[#061C3D] md:text-7xl">
+            {journey.heading}
+          </h2>
         </motion.div>
+      </div>
 
-        {/* Timeline Content */}
-        <div className="relative flex w-full flex-col gap-12 md:w-[55%] pt-10">
-          {/* Background Line (Static) */}
-          <div className="absolute left-6 top-0 h-full w-[2px] bg-gray-100 md:left-10" />
-          
-          {/* Animated Line (GSAP) */}
-          <div 
-            ref={lineRef}
-            className="absolute left-6 top-0 h-full w-[2px] bg-gradient-to-b from-orange-400 to-orange-600 origin-top md:left-10"
-          />
+      <div className="relative mx-auto max-w-7xl">
+        {/* --- CENTRAL LINE SYSTEM --- */}
+        {/* Static Track */}
+        <div className="absolute left-6 top-0 h-full w-[2px] bg-slate-100 md:left-1/2 md:-translate-x-1/2" />
+        
+        {/* Animated Glowing Progress Line */}
+        <motion.div 
+          style={{ scaleY }}
+          className="absolute left-6 top-0 z-10 h-full w-[3px] origin-top bg-gradient-to-b from-orange-400 via-orange-600 to-orange-400 shadow-[0_0_15px_rgba(249,115,22,0.5)] md:left-1/2 md:-translate-x-1/2"
+        />
 
+        {/* --- MILESTONES --- */}
+        <div className="flex flex-col gap-32 md:gap-56">
           {milestones.map((milestone: any, index: number) => {
-            const size = 60; // Consistent, larger icon container
+            const isEven = index % 2 === 0;
+            const displayImage = staticImages[index % staticImages.length];
+
             return (
-              <div
-                key={index}
-                ref={(el) => {
-                  milestonesRef.current[index] = el;
-                }}
-                className="relative flex items-center pl-16 md:pl-24"
-              >
-                {/* Timeline Marker */}
-                <div className="absolute left-0 flex h-12 w-12 items-center justify-center rounded-2xl bg-white shadow-xl md:h-20 md:w-20 md:rounded-[2rem] border border-gray-50">
-                  <div className="relative h-6 w-6 md:h-10 md:w-10">
-                    <Image
-                      src={staticIcons[index % staticIcons.length]}
-                      alt={milestone.year}
-                      fill
-                      className="object-contain"
-                    />
-                  </div>
+              <div key={index} className="relative flex flex-col items-center md:flex-row">
+                
+                {/* Marker Node (Central Hub) */}
+                <div className="absolute left-6 z-20 flex h-6 w-6 -translate-x-1/2 items-center justify-center rounded-full border-4 border-white bg-[#061C3D] shadow-xl md:left-1/2 md:h-8 md:w-8 transition-transform duration-300 group-hover:scale-125">
+                  <div className="h-2 w-2 rounded-full bg-orange-500 animate-pulse" />
                 </div>
 
-                {/* Milestone Detail Card */}
-                <div className="group relative rounded-3xl bg-white p-6 shadow-lg border border-gray-50 transition-all duration-300 hover:shadow-2xl hover:border-orange-100 md:p-8">
-                  <span className="text-sm font-bold uppercase tracking-widest text-orange-500">
-                    {milestone.year}
-                  </span>
-                  {/* <h3 className="mt-2 text-2xl font-extrabold text-[#061C3D]">
-                    {milestone.text.split(':')[0]}
-                  </h3> */}
-                  <p className="mt-3 text-lg leading-relaxed text-gray-500">
-                    {milestone.text.includes(':') ? milestone.text.split(':')[1] : milestone.text}
-                  </p>
+                {/* Grid Wrapper */}
+                <div className={`flex w-full flex-col md:flex-row md:items-center ${isEven ? 'md:flex-row' : 'md:flex-row-reverse'}`}>
+                  
+                  {/* IMAGE SIDE: Opens to the outside */}
+                  <motion.div
+                    initial={{ opacity: 0, x: isEven ? -120 : 120, filter: "blur(15px)" }}
+                    whileInView={{ opacity: 1, x: 0, filter: "blur(0px)" }}
+                    exit={{ opacity: 0, x: isEven ? -120 : 120, filter: "blur(15px)" }}
+                    viewport={{ once: false, amount: 0.4 }}
+                    transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+                    className="w-full pl-16 md:w-1/2 md:px-12 lg:px-20"
+                  >
+                    <div className="group relative aspect-[4/3] overflow-hidden rounded-[3rem] shadow-2xl ring-1 ring-black/5">
+                      <Image
+                        src={displayImage}
+                        alt={`Journey ${milestone.year}`}
+                        fill
+                        className="object-cover transition-transform duration-1000 group-hover:scale-110"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-[#061C3D]/60 via-transparent to-transparent opacity-60" />
+                      
+                      {/* Floating Step Number */}
+                      <div className="absolute bottom-8 left-8 text-6xl font-black text-white/20">
+                        0{index + 1}
+                      </div>
+                    </div>
+                  </motion.div>
+
+                  {/* SPACER (Occupied by the line) */}
+                  <div className="hidden md:block md:w-0" />
+
+                  {/* TEXT CARD SIDE: Opens to the opposite outside */}
+                  <motion.div
+                    initial={{ opacity: 0, x: isEven ? 120 : -120, filter: "blur(15px)" }}
+                    whileInView={{ opacity: 1, x: 0, filter: "blur(0px)" }}
+                    exit={{ opacity: 0, x: isEven ? 120 : -120, filter: "blur(15px)" }}
+                    viewport={{ once: false, amount: 0.4 }}
+                    transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+                    className="mt-10 w-full pl-16 md:mt-0 md:w-1/2 md:px-12 lg:px-20"
+                  >
+                    <div className="group relative rounded-[3rem] bg-white p-10 shadow-[0_20px_50px_rgba(0,0,0,0.05)] border border-slate-50 transition-all duration-500 hover:shadow-[0_40px_80px_rgba(0,0,0,0.1)] hover:border-orange-100 lg:p-14">
+                      {/* Animated accent bar */}
+                      <div className="absolute top-0 left-1/2 -translate-x-1/2 h-1.5 w-0 bg-orange-500 transition-all duration-500 group-hover:w-1/2 rounded-b-full" />
+                      
+                      <span className="text-sm font-black uppercase tracking-[0.3em] text-orange-500">
+                        Progress Report
+                      </span>
+                      
+                      <h3 className="mt-4 text-3xl font-black text-[#061C3D] lg:text-4xl leading-tight">
+                        {milestone.text.includes(':') ? milestone.text.split(':')[0] : "Strategic Milestone"}
+                      </h3>
+                      
+                      <p className="mt-6 text-lg leading-relaxed text-slate-500 lg:text-xl">
+                        {milestone.text.includes(':') ? milestone.text.split(':')[1] : milestone.text}
+                      </p>
+
+                      <div className="mt-10 flex items-center gap-4">
+                        <div className="h-[2px] w-12 bg-slate-100 group-hover:bg-orange-200 transition-colors" />
+                        <span className="text-xs font-bold text-slate-400 uppercase tracking-widest">Est. {milestone.year}</span>
+                      </div>
+                    </div>
+                  </motion.div>
                 </div>
               </div>
             );
           })}
         </div>
-      </motion.div>
+      </div>
     </section>
   );
 };

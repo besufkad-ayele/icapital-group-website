@@ -36,11 +36,11 @@ const AboutUs = ({ aboutUsData }: AboutUsProps) => {
     if (Array.isArray(desc)) {
       return desc.map((block: any, idx: number) =>
         block.children
-          ? `<p class="mb-4">${block.children.map((child: any) => child.text).join("")}</p>`
+          ? `<p class="mb-4 text-justify">${block.children.map((child: any) => child.text).join("")}</p>`
           : "",
       );
     }
-    return desc.split(/\n+/).map((p) => `<p class="mb-4">${p}</p>`);
+    return desc.split(/\n+/).map((p) => `<p class="mb-4 text-justify">${p}</p>`);
   };
 
   const paragraphs = getParagraphs(description);
@@ -173,7 +173,7 @@ const AboutUs = ({ aboutUsData }: AboutUsProps) => {
         {/* Text Content */}
         <motion.div
           variants={itemVariants}
-          className="w-full text-left lg:w-1/2"
+          className="w-full text-justify lg:w-1/2"
         >
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
@@ -197,7 +197,7 @@ const AboutUs = ({ aboutUsData }: AboutUsProps) => {
 
           <motion.div
             variants={itemVariants}
-            className="mt-4 text-xs leading-loose text-gray-300 md:text-lg md:leading-relaxed"
+            className="mt-4 text-justify text-xs leading-loose text-gray-300 md:text-lg md:leading-relaxed"
           >
             {parse(firstParagraph)}
             {/* Animated expandable content */}
