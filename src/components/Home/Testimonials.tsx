@@ -206,7 +206,7 @@ const Testimonials = ({ testimonialsData }: TestimonialsProps) => {
                     </div>
 
                     <p className="mb-10 flex-1 text-xl leading-relaxed text-gray-700 font-medium line-clamp-6">
-                      "{testimonial.testimonialText}"
+                      {testimonial.testimonialText}
                     </p>
 
                     <div className="flex items-center gap-5 pt-8 border-t border-gray-100">
