@@ -169,11 +169,11 @@ const Features = ({ featuresData }: FeaturesProps) => {
                 </div>
               </div>
 
-              <h3 className="mb-4 text-2xl font-bold tracking-tight text-[#061C3D] transition-colors duration-300 group-hover:text-[#F78019]">
+              <h3 className="mb-4 text-2xl font-bold tracking-tight text-[#061C3D] transition-colors duration-300 group-hover:text-[#F78019] text-center">
                 {feature.title}
               </h3>
               
-              <div className="leading-relaxed text-gray-500 text-base md:text-lg">
+              <div className="leading-relaxed text-gray-500 text-base md:text-lg text-center">
                 {renderDescription(feature.description)}
               </div>
             </motion.div>

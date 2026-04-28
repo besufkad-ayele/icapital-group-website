@@ -162,7 +162,7 @@ const UpcomingEvents = ({ upcomingEventsData }: UpcomingEventsProps) => {
           >
             <div className="group relative">
               <div className="absolute -inset-4 rounded-[3rem] border-2 border-white/20 transition-all duration-500 group-hover:-inset-2" />
-              <div className="relative aspect-[4/5] w-full overflow-hidden rounded-[2.5rem] shadow-2xl md:aspect-square lg:aspect-[4/5]">
+              <div className="relative aspect-[16/9] w-full overflow-hidden rounded-[2.5rem] shadow-2xl sm:aspect-[4/3] lg:aspect-[16/9]">
                 <Image
                   src={
                     eventData.image.url.startsWith("http")
@@ -171,7 +171,7 @@ const UpcomingEvents = ({ upcomingEventsData }: UpcomingEventsProps) => {
                   }
                   alt={eventData.title}
                   fill
-                  className="object-cover transition-transform duration-700 group-hover:scale-105"
+                  className="object-contain"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent opacity-60" />
               </div>

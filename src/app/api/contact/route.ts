@@ -13,36 +13,66 @@ const contactSchema = z.object({
 
 export async function POST(req: NextRequest) {
   try {
-    const resend = new Resend(process.env.RESEND_API_KEY);
     const body = await req.json();
     const parsed = contactSchema.safeParse(body);
+    
     if (!parsed.success) {
+      console.error("Validation error:", parsed.error.errors);
       return NextResponse.json(
         { error: "Invalid input", details: parsed.error.errors },
         { status: 400 },
       );
     }
 
-    // Send email using Resend and React Email
     const { name, email, subject, message } = parsed.data;
+    
+    // Check if Resend API key is configured
+    if (!process.env.RESEND_API_KEY || process.env.RESEND_API_KEY === "") {
+      console.log("RESEND_API_KEY not configured - logging contact form submission");
+      console.log("Contact Form Submission:", { name, email, subject, message });
+      
+      // Return success for testing without email sending
+      return NextResponse.json({ 
+        success: true, 
+        message: "Message received! We'll get back to you soon. (Email service in testing mode)" 
+      });
+    }
+
     try {
-      // Main notification email to your team
-      await resend.emails.send({
-        from: "Acme <onboarding@resend.dev>", // Change to your verified sender
-        to: ["ayebesufkad@gmail.com"], // Change to your recipient(s)
-        subject: `Contact Form: ${subject}`,
+      const resend = new Resend(process.env.RESEND_API_KEY);
+      
+      // Send email using Resend and React Email
+      const emailResult = await resend.emails.send({
+        from: "onboarding@resend.dev", // Use Resend's verified test domain
+        to: ["ayebesufkad@gmail.com"], // Recipient email
+        subject: `i-Capital Contact: ${subject}`,
         react: ContactEmail({ name, email, subject, message }),
       });
-      // Auto-reply logic removed for now
-    } catch (emailError) {
+      
+      console.log("Email sent successfully:", emailResult);
+      
+      return NextResponse.json({ 
+        success: true, 
+        message: "Message received! We'll get back to you soon." 
+      });
+      
+    } catch (emailError: any) {
+      console.error("Email sending error:", emailError);
+      
+      // Log detailed error information
+      if (emailError.response) {
+        console.error("Error response:", emailError.response.data);
+      }
+      
       return NextResponse.json(
-        { error: "Failed to send email." },
+        { error: "Failed to send email. Please try again later." },
         { status: 500 },
       );
     }
-
-    return NextResponse.json({ success: true, message: "Message received!" });
   } catch (error) {
-    return NextResponse.json({ error: "Server error" }, { status: 500 });
+    console.error("Server error:", error);
+    return NextResponse.json({ 
+      error: "Server error. Please try again." 
+    }, { status: 500 });
   }
 }

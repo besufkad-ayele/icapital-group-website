@@ -26,6 +26,7 @@ const sectionIds = [
   "sectors",
   "about",
   "features",
+  "news",
   "journey",
   "portfolio",
   "contact",
@@ -49,7 +50,9 @@ const HomePage = async () => {
         <div id="features">
           <Features featuresData={data.features} />
         </div>
-        <UpcomingEvents upcomingEventsData={data.upcomingEvents} />
+        <div id="news">
+          <UpcomingEvents upcomingEventsData={data.upcomingEvents} />
+        </div>
         <div id="journey">
           <Journey journeyData={data.journey} />
         </div>

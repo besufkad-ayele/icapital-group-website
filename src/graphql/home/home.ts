@@ -202,7 +202,7 @@ export const GET_HOME_PORTFOLIO_SECTION = gql`
       PortfolioSection {
         sectionTitle
         sectionHeading
-        portfolios {
+        portfolios(sort: "updatedAt:desc") {
           title
           slug
           cardImage {
