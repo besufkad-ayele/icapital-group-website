@@ -16,8 +16,7 @@ import Footer from "@/components/Home/Footer";
 import ScrollSpyWrapper from "@/components/ScrollSpyWrapper";
 import { getHomePageData } from "@/lib/getHomePageData";
 
-export const revalidate = 10;
-//test 
+export const revalidate = 1800; // Revalidate every 30 minutes 
 export const metadata: Metadata = {
   title: "The i-Capital Africa Institute",
 };

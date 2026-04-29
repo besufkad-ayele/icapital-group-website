@@ -3,7 +3,7 @@ import { compressImage } from "./compress.image";
 
 export const upload = async (data: File) => {
   let file;
-  console.log(data);
+  // console.log(data);
   if (data.type.toString().search("image") !== -1) {
     file = await compressImage(data);
   } else {

@@ -6,9 +6,9 @@ import { motion, useScroll, useSpring } from "framer-motion";
 import { useRef } from "react";
 
 const staticImages = [
-  "/opengraph-image.png", 
-  "/twitter-image.png", 
-  "/test.png"
+  "/images/opengraph-image.png", 
+  "/images/opengraph-image.png", 
+  "/images/opengraph-image.png", 
 ];
 
 interface JourneyProps {
@@ -122,25 +122,20 @@ const Journey = ({ journeyData }: JourneyProps) => {
                     transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
                     className="mt-10 w-full pl-16 md:mt-0 md:w-1/2 md:px-12 lg:px-20"
                   >
-                    <div className="group relative rounded-[3rem] bg-white p-10 shadow-[0_20px_50px_rgba(0,0,0,0.05)] border border-slate-50 transition-all duration-500 hover:shadow-[0_40px_80px_rgba(0,0,0,0.1)] hover:border-orange-100 lg:p-14">
+                    <div className="group relative flex h-full flex-col justify-between rounded-[3rem] bg-white p-10 shadow-[0_20px_50px_rgba(0,0,0,0.05)] border border-slate-50 transition-all duration-500 hover:shadow-[0_40px_80px_rgba(0,0,0,0.1)] hover:border-orange-100 lg:p-14">
                       {/* Animated accent bar */}
                       <div className="absolute top-0 left-1/2 -translate-x-1/2 h-1.5 w-0 bg-orange-500 transition-all duration-500 group-hover:w-1/2 rounded-b-full" />
                       
-                      <span className="text-sm font-black uppercase tracking-[0.3em] text-orange-500">
-                        Progress Report
-                      </span>
-                      
-                      <h3 className="mt-4 text-3xl font-black text-[#061C3D] lg:text-4xl leading-tight">
-                        {milestone.text.includes(':') ? milestone.text.split(':')[0] : "Strategic Milestone"}
+                      {/* Top content - Justified text */}
+                      <div className="flex-1">
+                          {/* Bottom content - Strategic Milestone */}
+                      <h3 className="mt-6 text-3xl font-black text-[#061C3D] lg:text-4xl leading-tight">
+                        {milestone.year.includes(':') ? milestone.year : "Strategic Milestone"}
                       </h3>
-                      
-                      <p className="mt-6 text-lg leading-relaxed text-slate-500 lg:text-xl">
-                        {milestone.text.includes(':') ? milestone.text.split(':')[1] : milestone.text}
-                      </p>
-
-                      <div className="mt-10 flex items-center gap-4">
-                        <div className="h-[2px] w-12 bg-slate-100 group-hover:bg-orange-200 transition-colors" />
-                        <span className="text-xs font-bold text-slate-400 uppercase tracking-widest">Est. {milestone.year}</span>
+                        
+                        <p className="mt-6 text-lg leading-relaxed text-slate-500 lg:text-xl text-justify   ">
+                          {milestone.text.includes(':') ? milestone.text.split(':')[1] : milestone.text}
+                        </p>
                       </div>
                     </div>
                   </motion.div>

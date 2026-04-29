@@ -1,6 +1,4 @@
 {
-  "$schema": "https://json.schemastore.org/web-manifest-combined.json",
-
   "name": "i-Capital Africa Group",
   "short_name": "iCapital",
   "description": "i-Capital Africa Group helps institutions grow, transform, and compete through a connected set of services that bridge people, strategy, capital markets, and technology with a strong focus on measurable execution.",
@@ -53,7 +51,7 @@
       "purpose": "any"
     },
     {
-      "src": "/images/white.logo.png",
+      "src": "/images/i-logo.png",
       "sizes": "any",
       "type": "image/png",
       "purpose": "any"

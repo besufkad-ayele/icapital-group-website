@@ -62,18 +62,12 @@ importers:
       graphql-ws:
         specifier: ^5.14.2
         version: 5.16.2(graphql@16.11.0)
-      gsap:
-        specifier: latest
-        version: 3.13.0
       html-react-parser:
         specifier: ^5.2.5
         version: 5.2.5(@types/react@18.3.23)(react@18.3.1)
       iconsax-react:
         specifier: ^0.0.8
         version: 0.0.8(react@18.3.1)
-      interweave:
-        specifier: ^13.1.0
-        version: 13.1.1(react@18.3.1)
       leaflet:
         specifier: ^1.9.4
         version: 1.9.4
@@ -137,9 +131,6 @@ importers:
       react-toastify:
         specifier: latest
         version: 11.0.5(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      react-visibility-sensor:
-        specifier: ^5.1.1
-        version: 5.1.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       resend:
         specifier: ^4.5.2
         version: 4.5.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -204,9 +195,6 @@ importers:
       autoprefixer:
         specifier: ^10.4.16
         version: 10.4.21(postcss@8.5.5)
-      interweave-ssr:
-        specifier: ^2.0.0
-        version: 2.0.0
       postcss:
         specifier: ^8.4.31
         version: 8.5.5
@@ -2357,8 +2345,8 @@ packages:
   camelize@1.0.1:
     resolution: {integrity: sha512-dU+Tx2fsypxTgtLoE36npi3UqcjSSMNYfkqgmoEhtZrraP5VWq0K7FkWVTYa8eMPtnU/G2txVsfdCJTn9uzpuQ==}
 
-  caniuse-lite@1.0.30001723:
-    resolution: {integrity: sha512-1R/elMjtehrFejxwmexeXAtae5UO9iSyFn6G/I806CYC/BLyyBk1EPhrKBkWhy6wM6Xnm47dSJQec+tLJ39WHw==}
+  caniuse-lite@1.0.30001791:
+    resolution: {integrity: sha512-yk0l/YSrOnFZk3UROpDLQD9+kC1l4meK/wed583AXrzoarMGJcbRi2Q4RaUYbKxYAsZ8sWmaSa/DsLmdBeI1vQ==}
 
   capital-case@1.0.4:
     resolution: {integrity: sha512-ds37W8CytHgwnhGGTi88pcPyR15qoNkOpYwmMMfnWqqWgESapLqvDx6huFjQ5vqWSn2Z06173XNA7LtMOeUh1A==}
@@ -2726,9 +2714,6 @@ packages:
   escalade@3.2.0:
     resolution: {integrity: sha512-WUj2qlxaQtO4g6Pq5c29GTcWGDyd8itL8zTlipgECz3JesAiiOKotd8JU6otB3PACgG6xkJUyVhboMS+bje/jA==}
     engines: {node: '>=6'}
-
-  escape-html@1.0.3:
-    resolution: {integrity: sha512-NiSupZ4OeuGwr68lGIeym/ksIZMJodUGOSCZ/FSnTxcrekbvqrgdUxlJOMpijaKZVjAJrWrGs/6Jy8OMuyj9ow==}
 
   escape-string-regexp@1.0.5:
     resolution: {integrity: sha512-vbRorB5FUQWvla16U8R/qgaFIya2qGzwDrNmCZuYKrbdSUMG6I1ZCGQRefkRVhuOkIGVne7BQ35DSfo1qvJqFg==}
@@ -3116,9 +3101,6 @@ packages:
   grid-index@1.1.0:
     resolution: {integrity: sha512-HZRwumpOGUrHyxO5bqKZL0B0GlUpwtCAzZ42sgxUPniu33R1LSFH5yrIcBCHjkctCAh3mtWKcKd9J4vDDdeVHA==}
 
-  gsap@3.13.0:
-    resolution: {integrity: sha512-QL7MJ2WMjm1PHWsoFrAQH/J8wUeqZvMtHO58qdekHpCfhvhSL4gSiz6vJf5EeMP0LOn3ZCprL2ki/gjED8ghVw==}
-
   has-bigints@1.1.0:
     resolution: {integrity: sha512-R3pbpkcIqv2Pm3dUwgjclDRVmWpTJW2DcMzcIhEXEx1oh/CEMObMm3KLmRJOdvhM7o4uQBnwr8pzRK2sJWIqfg==}
     engines: {node: '>= 0.4'}
@@ -3250,15 +3232,6 @@ packages:
   internal-slot@1.1.0:
     resolution: {integrity: sha512-4gd7VpWNQNB4UKKCFFVcp1AVv+FMOgs9NKzjHKusc8jTMhd5eL1NqQqOpE0KzMds804/yHlglp3uxgluOqAPLw==}
     engines: {node: '>= 0.4'}
-
-  interweave-ssr@2.0.0:
-    resolution: {integrity: sha512-vxWOJzQsm4neGGOksKEOovOP3d6elGJ3bKnssreDIWK+luveNUvV69enU28UtX5KFx8ft1wXDa2Dk/G87DEf+A==}
-    engines: {node: '>=12.17.0', npm: '>=6.13.0'}
-
-  interweave@13.1.1:
-    resolution: {integrity: sha512-5GdAavzK1i2BeeLTPzj0o6/zJMfLqQZq/2Q4c3ALT8ByEWf1syzl2MlQMTUoWzETy1x1/cAkZjiqOlulaoDRxw==}
-    peerDependencies:
-      react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
 
   invariant@2.2.4:
     resolution: {integrity: sha512-phJfQVBuaJM5raOpJjSfkiD6BpbCE4Ns//LaXl6wGYtUBY83nWS6Rf9tXm2e8VaK60JEjYldbPif/A2B1C2gNA==}
@@ -3855,14 +3828,8 @@ packages:
     resolution: {integrity: sha512-ayCKvm/phCGxOkYRSCM82iDwct8/EonSEgCSxWxD7ve6jHggsFl4fZVQBPRNgQoKiuV/odhFrGzQXZwbifC8Rg==}
     engines: {node: '>=8'}
 
-  parse5@6.0.1:
-    resolution: {integrity: sha512-Ofn/CTFzRGTTxwpNEs9PP93gXShHcTq255nzRYSKe8AkVpZY7e1fpmTfOyoIvjP5HG7Z2ZM7VS9PPhQGW2pOpw==}
-
   parseley@0.12.1:
     resolution: {integrity: sha512-e6qHKe3a9HWr0oMRVDTRhKce+bRO8VGQR3NyVwcjwrbhMmFCX9KszEV35+rn4AdilFAq9VPxP/Fe1wC9Qjd2lw==}
-
-  parsimmon@0.7.2:
-    resolution: {integrity: sha512-vKcCxdVqkWH5vDUlPGKBhNJrsmP5EBXAFEDal4Qe1cNlBRPwOedAQ8Fj8BGyddHCGI+Zw58dztJc15VXHfwYRg==}
 
   pascal-case@3.1.2:
     resolution: {integrity: sha512-uWlGT3YSnK9x3BQJaOdcZwrnV6hPpd8jFH1/ucpiLRPh/2zCVJKS19E4GvYHvaCcACn3foXZ0cLB9Wrx1KGe5g==}
@@ -4162,12 +4129,6 @@ packages:
     peerDependencies:
       react: ^18 || ^19
       react-dom: ^18 || ^19
-
-  react-visibility-sensor@5.1.1:
-    resolution: {integrity: sha512-cTUHqIK+zDYpeK19rzW6zF9YfT4486TIgizZW53wEZ+/GPBbK7cNS0EHyJVyHYacwFEvvHLEKfgJndbemWhB/w==}
-    peerDependencies:
-      react: '>=16.0.0'
-      react-dom: '>=16.0.0'
 
   react@18.3.1:
     resolution: {integrity: sha512-wS+hAgJShR0KhEvPJArfuPVN1+Hz1t0Y6n5jLrGQbkb4urgPE/0Rve+1kMB1v/oWgHgm4WIcV+i7F2pTVj+2iQ==}
@@ -4506,9 +4467,6 @@ packages:
   strip-json-comments@3.1.1:
     resolution: {integrity: sha512-6fPc+R4ihwqP6N/aIv2f1gMH8lOVtWQHoqC4yK6oSDVVocumAsfCqjkXnqiYMhmMwS/mEHLp7Vehlt3ql6lEig==}
     engines: {node: '>=8'}
-
-  style-parser@1.1.1:
-    resolution: {integrity: sha512-a2B7DBdEe52VwmbIhPK2XoEqMo4MIpZON5tr5q/Ca8MZf/T+TczfQr5knhoYBPNmQpaocjKwtNyOiRWrxT+wxg==}
 
   style-to-js@1.1.16:
     resolution: {integrity: sha512-/Q6ld50hKYPH3d/r6nr117TZkHR0w0kGGIVfpG9N6D8NymRPM9RqCUv4pRpJ62E5DqOYx2AFpbZMyCPnjQCnOw==}
@@ -7212,7 +7170,7 @@ snapshots:
   autoprefixer@10.4.21(postcss@8.5.5):
     dependencies:
       browserslist: 4.25.0
-      caniuse-lite: 1.0.30001723
+      caniuse-lite: 1.0.30001791
       fraction.js: 4.3.7
       normalize-range: 0.1.2
       picocolors: 1.1.1
@@ -7298,7 +7256,7 @@ snapshots:
 
   browserslist@4.25.0:
     dependencies:
-      caniuse-lite: 1.0.30001723
+      caniuse-lite: 1.0.30001791
       electron-to-chromium: 1.5.167
       node-releases: 2.0.19
       update-browserslist-db: 1.1.3(browserslist@4.25.0)
@@ -7346,7 +7304,7 @@ snapshots:
 
   camelize@1.0.1: {}
 
-  caniuse-lite@1.0.30001723: {}
+  caniuse-lite@1.0.30001791: {}
 
   capital-case@1.0.4:
     dependencies:
@@ -7787,8 +7745,6 @@ snapshots:
       is-symbol: 1.1.1
 
   escalade@3.2.0: {}
-
-  escape-html@1.0.3: {}
 
   escape-string-regexp@1.0.5: {}
 
@@ -8280,8 +8236,6 @@ snapshots:
 
   grid-index@1.1.0: {}
 
-  gsap@3.13.0: {}
-
   has-bigints@1.1.0: {}
 
   has-flag@4.0.0: {}
@@ -8431,16 +8385,6 @@ snapshots:
       es-errors: 1.3.0
       hasown: 2.0.2
       side-channel: 1.1.0
-
-  interweave-ssr@2.0.0:
-    dependencies:
-      parse5: 6.0.1
-      style-parser: 1.1.1
-
-  interweave@13.1.1(react@18.3.1):
-    dependencies:
-      escape-html: 1.0.3
-      react: 18.3.1
 
   invariant@2.2.4:
     dependencies:
@@ -8861,7 +8805,7 @@ snapshots:
       '@swc/counter': 0.1.3
       '@swc/helpers': 0.5.15
       busboy: 1.6.0
-      caniuse-lite: 1.0.30001723
+      caniuse-lite: 1.0.30001791
       postcss: 8.4.31
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
@@ -9049,14 +8993,10 @@ snapshots:
       json-parse-even-better-errors: 2.3.1
       lines-and-columns: 1.2.4
 
-  parse5@6.0.1: {}
-
   parseley@0.12.1:
     dependencies:
       leac: 0.6.0
       peberminta: 0.9.0
-
-  parsimmon@0.7.2: {}
 
   pascal-case@3.1.2:
     dependencies:
@@ -9284,12 +9224,6 @@ snapshots:
   react-toastify@11.0.5(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
     dependencies:
       clsx: 2.1.1
-      react: 18.3.1
-      react-dom: 18.3.1(react@18.3.1)
-
-  react-visibility-sensor@5.1.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
-    dependencies:
-      prop-types: 15.8.1
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
 
@@ -9729,10 +9663,6 @@ snapshots:
   strip-bom@3.0.0: {}
 
   strip-json-comments@3.1.1: {}
-
-  style-parser@1.1.1:
-    dependencies:
-      parsimmon: 0.7.2
 
   style-to-js@1.1.16:
     dependencies:

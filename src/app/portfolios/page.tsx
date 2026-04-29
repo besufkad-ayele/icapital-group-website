@@ -8,6 +8,9 @@ import { executeServerQuery } from "@/lib/serverApolloClient";
 import Image from "next/image";
 import Link from "next/link";
 
+// Enable static generation with revalidation
+export const revalidate = 1800; // Revalidate every 30 minutes
+
 export const metadata: Metadata = {
   title: "Portfolios | i-Capital Africa Institute",
   description: "Explore our successful projects and partnerships.",

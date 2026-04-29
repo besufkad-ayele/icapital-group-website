@@ -109,13 +109,13 @@ const UpcomingEvents = ({ upcomingEventsData }: UpcomingEventsProps) => {
               {eventData.title}
             </motion.h2>
 
-            {/* Description */}
+            {/* Description - Justified text */}
             <motion.p
               variants={descriptionVariants}
               initial="hidden"
               whileInView="visible"
               viewport={{ once: false, amount: 0.2 }}
-              className="mt-6 text-lg leading-relaxed text-white/90 md:text-xl lg:max-w-2xl"
+              className="mt-6 text-lg leading-relaxed text-white/90 md:text-xl lg:max-w-2xl text-justify"
             >
               {eventData.description}
             </motion.p>
@@ -153,16 +153,16 @@ const UpcomingEvents = ({ upcomingEventsData }: UpcomingEventsProps) => {
             </motion.div>
           </div>
 
-          {/* Image Section */}
+          {/* Image Section - Fit inside card */}
           <motion.div 
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
             className="w-full lg:w-2/5"
           >
-            <div className="group relative">
+            <div className="group relative aspect-[16/9] w-full overflow-hidden rounded-[2.5rem] shadow-2xl sm:aspect-[4/3] lg:aspect-[16/9]">
               <div className="absolute -inset-4 rounded-[3rem] border-2 border-white/20 transition-all duration-500 group-hover:-inset-2" />
-              <div className="relative aspect-[16/9] w-full overflow-hidden rounded-[2.5rem] shadow-2xl sm:aspect-[4/3] lg:aspect-[16/9]">
+              <div className="relative h-full w-full overflow-hidden">
                 <Image
                   src={
                     eventData.image.url.startsWith("http")
@@ -171,7 +171,7 @@ const UpcomingEvents = ({ upcomingEventsData }: UpcomingEventsProps) => {
                   }
                   alt={eventData.title}
                   fill
-                  className="object-contain"
+                  className="object-cover"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent opacity-60" />
               </div>

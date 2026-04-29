@@ -18,7 +18,7 @@ import PlatiniumSponsors from "@/components/eafs/PreviousSummitDetail/PlatiniumS
 const PreviousSummitDetail = () => {
   const params = useParams();
   const summitSlug = params.id as string;
-  console.log(summitSlug);
+  // console.log(summitSlug);
   const { data, loading, error } = useQuery(GET_SUMMIT_DETAIL_BY_SLUG, {
     variables: { slug: summitSlug },
   });

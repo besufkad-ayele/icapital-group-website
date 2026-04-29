@@ -12,6 +12,9 @@ import { executeServerQuery } from "@/lib/serverApolloClient";
 import React from "react";
 import NewsDetailClient from "./NewsDetailClient";
 
+// Enable static generation with revalidation
+export const revalidate = 900; // Revalidate every 15 minutes
+
 const STRAPI_URL = process.env.NEXT_PUBLIC_DATA || "http://localhost:1337";
 const getImageUrl = (url?: string) => {
   if (!url) return "/fallback-image.png";

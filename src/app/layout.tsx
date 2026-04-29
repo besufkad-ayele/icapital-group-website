@@ -1,15 +1,12 @@
 import "@/styles/globals.css";
 
-import { polyfill } from "interweave-ssr";
-import { Mulish, Nunito, Urbanist, Questrial } from "next/font/google";
-
-import { Theme } from "@/styles/theme";
+import { Mulish, Urbanist, Questrial } from "next/font/google";
 import { Metadata } from "next";
 import { ReactNode } from "react";
 import ApolloClientProvider from "@/components/providers/ApolloProvider";
 import { Toaster } from "react-hot-toast";
 
-export const dynamic = "force-dynamic";
+// Removed force-dynamic to enable static generation and caching
 const mulish = Mulish({
   subsets: ["latin"],
   display: "swap",

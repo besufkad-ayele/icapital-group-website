@@ -3,16 +3,52 @@ import { z } from "zod";
 import { Resend } from "resend";
 import ContactEmail from "@/emails/ContactEmail";
 
+// Disable caching for this API route since it handles form submissions
+export const dynamic = "force-dynamic";
+
+// Rate limiting store (in production, use Redis)
+const rateLimit = new Map<string, { count: number; resetTime: number }>();
+
 // Zod schema for backend validation
 const contactSchema = z.object({
-  name: z.string().min(2).max(50),
+  name: z.string().min(2).max(50).regex(/^[a-zA-Z\s]+$/, "Name can only contain letters and spaces"),
   email: z.string().email(),
   subject: z.string().min(5).max(100),
   message: z.string().min(10).max(1000),
 });
 
+// Simple rate limiting function
+function checkRateLimit(ip: string): boolean {
+  const now = Date.now();
+  const windowMs = 15 * 60 * 1000; // 15 minutes
+  const maxRequests = 5; // 5 requests per window
+
+  const record = rateLimit.get(ip);
+  
+  if (!record || now > record.resetTime) {
+    rateLimit.set(ip, { count: 1, resetTime: now + windowMs });
+    return true;
+  }
+  
+  if (record.count >= maxRequests) {
+    return false;
+  }
+  
+  record.count++;
+  return true;
+}
+
 export async function POST(req: NextRequest) {
   try {
+    // Rate limiting
+    const ip = req.headers.get('x-forwarded-for') || req.headers.get('x-real-ip') || 'unknown';
+    if (!checkRateLimit(ip)) {
+      return NextResponse.json(
+        { error: "Too many requests. Please try again later." },
+        { status: 429 }
+      );
+    }
+
     const body = await req.json();
     const parsed = contactSchema.safeParse(body);
     
@@ -26,30 +62,39 @@ export async function POST(req: NextRequest) {
 
     const { name, email, subject, message } = parsed.data;
     
+    // Sanitize input (basic HTML escape)
+    const sanitizedData = {
+      name: name.replace(/[<>]/g, ''),
+      email: email.toLowerCase().trim(),
+      subject: subject.replace(/[<>]/g, ''),
+      message: message.replace(/[<>]/g, '')
+    };
+    
     // Check if Resend API key is configured
     if (!process.env.RESEND_API_KEY || process.env.RESEND_API_KEY === "") {
-      console.log("RESEND_API_KEY not configured - logging contact form submission");
-      console.log("Contact Form Submission:", { name, email, subject, message });
+    //  console.log ("RESEND_API_KEY not configured - logging contact form submission");
+    //   console.log("Contact Form Submission:", sanitizedData);
       
-      // Return success for testing without email sending
       return NextResponse.json({ 
         success: true, 
         message: "Message received! We'll get back to you soon. (Email service in testing mode)" 
       });
     }
 
+    // Use environment variable for recipient email
+    const recipientEmail = process.env.CONTACT_EMAIL || process.env.NEXT_PUBLIC_CONTACT_EMAIL || "contact@icapital.com";
+
     try {
       const resend = new Resend(process.env.RESEND_API_KEY);
       
-      // Send email using Resend and React Email
       const emailResult = await resend.emails.send({
-        from: "onboarding@resend.dev", // Use Resend's verified test domain
-        to: ["ayebesufkad@gmail.com"], // Recipient email
-        subject: `i-Capital Contact: ${subject}`,
-        react: ContactEmail({ name, email, subject, message }),
+        from: "contact@icapital.com", // Use your verified domain
+        to: [recipientEmail],
+        subject: `i-Capital Contact: ${sanitizedData.subject}`,
+        react: ContactEmail(sanitizedData),
       });
       
-      console.log("Email sent successfully:", emailResult);
+      // console.log("Email sent successfully:", emailResult.data?.id);
       
       return NextResponse.json({ 
         success: true, 
@@ -57,22 +102,18 @@ export async function POST(req: NextRequest) {
       });
       
     } catch (emailError: any) {
-      console.error("Email sending error:", emailError);
-      
-      // Log detailed error information
-      if (emailError.response) {
-        console.error("Error response:", emailError.response.data);
-      }
+      console.error("Email sending error:", emailError.message);
       
       return NextResponse.json(
         { error: "Failed to send email. Please try again later." },
         { status: 500 },
       );
     }
-  } catch (error) {
-    console.error("Server error:", error);
-    return NextResponse.json({ 
-      error: "Server error. Please try again." 
-    }, { status: 500 });
+  } catch (error: any) {
+    console.error("Contact API error:", error.message);
+    return NextResponse.json(
+      { error: "Internal server error" },
+      { status: 500 },
+    );
   }
 }

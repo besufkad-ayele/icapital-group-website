@@ -15,6 +15,9 @@ import Testimonials from "./Testimonials";
 import React from "react";
 import { executeServerQuery } from "@/lib/serverApolloClient";
 
+// Enable static generation with revalidation
+export const revalidate = 3600; // Revalidate every hour
+
 // Helper to get full Strapi media URL
 const getStrapiMedia = (url: string) => {
   if (!url) return "";
@@ -88,17 +91,17 @@ const PortfolioDetail = async ({ params }: PortfolioDetailProps) => {
       executeServerQuery(GET_GET_STARTED_SECTION),
     ]);
 
-  console.log("Portfolio Data:", portfolioData);
-  console.log("Slug:", slug);
+  // console.log("Portfolio Data:", portfolioData);
+  // console.log("Slug:", slug);
 
   // Check if portfolio exists
   if (!portfolioData?.portfolios?.length) {
-    console.log("No portfolio found for slug:", slug);
+    // console.log("No portfolio found for slug:", slug);
     notFound();
   }
 
   const portfolio = portfolioData.portfolios[0];
-  console.log("Portfolio loaded:", portfolio.title);
+  // console.log("Portfolio loaded:", portfolio.title);
 
   // Get up to 3 other projects, excluding the current one
   const allPortfolios = allPortfoliosData?.portfolios || [];

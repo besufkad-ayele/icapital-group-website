@@ -186,7 +186,7 @@ const Hero = ({ heroData }: HeroProps) => {
                 {/* Content Wrapper */}
                 <div className="w-full max-w-4xl space-y-6 md:space-y-8">
                   {/* Event Badge */}
-                  {slide.bagde && (
+                  {/* {slide.bagde && (
                     <MotionSpan
                       variants={badgeVariants}
                       initial="hidden"
@@ -196,7 +196,7 @@ const Hero = ({ heroData }: HeroProps) => {
                     >
                       {slide.bagde}
                     </MotionSpan>
-                  )}
+                  )} */}
 
                   {/* Title */}
                   <motion.h1

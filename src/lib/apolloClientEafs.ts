@@ -7,22 +7,53 @@ const httpLink = new HttpLink({
   },
 });
 
+// Configure cache with type policies for EAFS
+const cache = new InMemoryCache({
+  typePolicies: {
+    Query: {
+      fields: {
+        summits: {
+          keyArgs: false,
+          merge(existing = [], incoming) {
+            return incoming;
+          },
+        },
+        testimonials: {
+          keyArgs: false,
+          merge(existing = [], incoming) {
+            return incoming;
+          },
+        },
+      },
+    },
+    Summit: {
+      keyFields: ["id"],
+    },
+    Testimonial: {
+      keyFields: ["id"],
+    },
+  },
+  resultCaching: true,
+});
+
 const apolloClientEafs = new ApolloClient({
   link: httpLink,
-  cache: new InMemoryCache(),
+  cache,
   defaultOptions: {
     watchQuery: {
-      fetchPolicy: "cache-and-network",
+      fetchPolicy: "cache-first", // Changed to cache-first for better performance
       errorPolicy: "all",
+      nextFetchPolicy: "cache-first",
     },
     query: {
-      fetchPolicy: "network-only",
+      fetchPolicy: "cache-first", // Changed to cache-first for better performance
       errorPolicy: "all",
     },
     mutate: {
       errorPolicy: "all",
     },
   },
+  queryDeduplication: true,
 });
 
 export default apolloClientEafs;

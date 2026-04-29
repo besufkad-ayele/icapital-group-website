@@ -8,16 +8,63 @@ const httpLink = new HttpLink({
   },
 });
 
+// Configure Apollo cache with proper type policies
+const cache = new InMemoryCache({
+  typePolicies: {
+    Query: {
+      fields: {
+        // Cache portfolios with merge strategy
+        portfolios: {
+          keyArgs: false,
+          merge(existing = [], incoming) {
+            return incoming;
+          },
+        },
+        // Cache news articles
+        newsArticles: {
+          keyArgs: false,
+          merge(existing = [], incoming) {
+            return incoming;
+          },
+        },
+        // Cache events
+        events: {
+          keyArgs: false,
+          merge(existing = [], incoming) {
+            return incoming;
+          },
+        },
+      },
+    },
+    Portfolio: {
+      keyFields: ["id"],
+    },
+    NewsArticle: {
+      keyFields: ["id"],
+    },
+    Event: {
+      keyFields: ["id"],
+    },
+  },
+  // Enable result caching
+  resultCaching: true,
+  // Add cache persistence options
+  possibleTypes: {},
+});
+
 const apolloClient = new ApolloClient({
   link: httpLink,
-  cache: new InMemoryCache(),
+  cache,
+  // Enable query deduplication
+  queryDeduplication: true,
   defaultOptions: {
     watchQuery: {
-      fetchPolicy: "cache-and-network",
+      fetchPolicy: "cache-first", // Changed to cache-first for better performance
       errorPolicy: "all",
+      nextFetchPolicy: "cache-first",
     },
     query: {
-      fetchPolicy: "network-only",
+      fetchPolicy: "cache-first", // Changed to cache-first for better performance
       errorPolicy: "all",
     },
     mutate: {

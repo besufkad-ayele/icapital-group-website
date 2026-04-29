@@ -12,7 +12,9 @@ import {
 } from "react-icons/fa";
 import { MdEmail, MdPhone } from "react-icons/md";
 import { IoIosArrowUp } from "react-icons/io";
-import IcapitalLogo from "@/assets/icapital-logo-img.png";
+import IcapitalLogo from "@/assets/i-logo.png";
+
+
 
 interface SocialLink {
   icon: React.ReactNode;
