@@ -1,12 +1,18 @@
 "use client";
 import { ApolloProvider, ApolloClient, InMemoryCache, HttpLink } from "@apollo/client";
-import { useMemo } from "react";
+import { useMemo, useState, useEffect } from "react";
 
 export default function ApolloEafsProvider({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   const client = useMemo(() => {
     const httpLink = new HttpLink({
       uri: "http://localhost:1337/graphql",
@@ -63,6 +69,11 @@ export default function ApolloEafsProvider({
       },
     });
   }, []);
+
+  // Only render ApolloProvider on the client side
+  if (!mounted) {
+    return <>{children}</>;
+  }
 
   return <ApolloProvider client={client}>{children}</ApolloProvider>;
 }

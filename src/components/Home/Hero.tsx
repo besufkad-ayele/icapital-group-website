@@ -165,8 +165,8 @@ const Hero = ({ heroData }: HeroProps) => {
               <Image
                 src={`${strapiBaseUrl}${slide.backgroundImage.url}`}
                 alt={slide.title}
-                layout="fill"
-                objectFit="cover"
+                fill
+                style={{ objectFit: "cover" }}
                 className="absolute inset-0 z-0"
               />
 

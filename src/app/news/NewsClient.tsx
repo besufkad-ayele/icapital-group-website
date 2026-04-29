@@ -168,7 +168,7 @@ export default function NewsClient({ articles }: NewsClientProps) {
   // Dynamically generate categories from articles
   const categoriesSet = new Set<string>();
   articles.forEach((article: any) => {
-    if (article.category && article.category.name) {
+    if (article && article.category && article.category.name) {
       categoriesSet.add(article.category.name);
     }
   });

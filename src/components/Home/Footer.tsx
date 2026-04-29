@@ -62,8 +62,8 @@ const Footer: React.FC = () => {
               <Image
                 src={IcapitalLogo}
                 alt="iCapital Logo"
-                width={140}
-                height={70}
+                width={180}
+                height={90}
                 className="brightness-0 invert object-contain transition-transform hover:scale-105"
               />
             </Link>

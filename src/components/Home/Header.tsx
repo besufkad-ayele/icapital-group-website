@@ -123,7 +123,7 @@ const Header = ({ iconColor = "text-white" }: HeaderProps) => {
       >
         <div className="flex w-full items-center justify-between">
           {/* Logo */}
-          <div className="relative h-14 w-40 flex-shrink-0">
+          <div className="relative h-16 w-48 flex-shrink-0 md:h-20 md:w-56">
             <Link href="/">
               <Image
                 src={IcapitalLogo}
@@ -247,7 +247,7 @@ const Header = ({ iconColor = "text-white" }: HeaderProps) => {
             <div className="relative flex h-full flex-col px-6 py-6 md:px-12">
               {/* Header row */}
               <div className="flex items-center justify-between mb-16">
-                <div className="relative h-12 w-40">
+                <div className="relative h-14 w-44 md:h-16 md:w-48">
                   <Image
                     src={IcapitalLogo}
                     alt="Logo"

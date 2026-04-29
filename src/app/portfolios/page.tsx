@@ -9,6 +9,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 // Enable static generation with revalidation
+export const dynamic = 'force-dynamic';
 export const revalidate = 1800; // Revalidate every 30 minutes
 
 export const metadata: Metadata = {

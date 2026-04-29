@@ -16,6 +16,7 @@ import React from "react";
 import { executeServerQuery } from "@/lib/serverApolloClient";
 
 // Enable static generation with revalidation
+export const dynamic = 'force-dynamic';
 export const revalidate = 3600; // Revalidate every hour
 
 // Helper to get full Strapi media URL

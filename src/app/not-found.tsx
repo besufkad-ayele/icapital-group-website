@@ -3,6 +3,8 @@
 import ErrorUI from "@/components/Common/ErrorUI";
 import Footer from "@/components/Home/Footer";
 
+export const dynamic = 'force-dynamic';
+
 const NotFound = () => {
   return (
     <>
