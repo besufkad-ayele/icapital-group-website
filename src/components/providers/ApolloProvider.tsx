@@ -8,6 +8,11 @@ export default function ApolloClientProvider({
   children: React.ReactNode;
 }) {
   const client = useMemo(() => {
+    // Only create client on the client side
+    if (typeof window === 'undefined') {
+      return null;
+    }
+
     const httpLink = new HttpLink({
       uri: process.env.NEXT_PUBLIC_API,
       fetchOptions: {
@@ -73,6 +78,11 @@ export default function ApolloClientProvider({
       },
     });
   }, []);
+
+  // During SSR, render children without Apollo Provider
+  if (!client) {
+    return <>{children}</>;
+  }
 
   return <ApolloProvider client={client}>{children}</ApolloProvider>;
 }
