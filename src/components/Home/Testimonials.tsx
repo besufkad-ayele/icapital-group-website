@@ -6,6 +6,7 @@ import Tag from "@/ui/Tag";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination } from "swiper/modules";
 import { useRef } from "react";
+import { getStrapiImageUrl } from "@/utils/getStrapiImageUrl";
 
 // Import Swiper styles
 import "swiper/css";
@@ -93,10 +94,7 @@ const Testimonials = ({ testimonialsData }: TestimonialsProps) => {
             className="!pb-16"
           >
             {testimonials.map((testimonial: any, index: number) => {
-              const imageUrl = testimonial.image?.url?.startsWith("http")
-                ? testimonial.image.url
-                : (process.env.NEXT_PUBLIC_DATA || "http://localhost:1337") +
-                  (testimonial.image?.url || "");
+              const imageUrl = getStrapiImageUrl(testimonial.image?.url || "");
 
               return (
                 <SwiperSlide key={index} className="h-auto">

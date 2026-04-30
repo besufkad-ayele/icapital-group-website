@@ -6,13 +6,7 @@ import { FaChevronDown, FaChevronUp } from "react-icons/fa";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import Tag from "@/ui/Tag";
-
-// Helper to get full Strapi media URL
-const getStrapiMedia = (url: string) => {
-  if (!url) return "";
-  if (url.startsWith("http")) return url;
-  return `${process.env.NEXT_PUBLIC_DATA || "http://localhost:1337"}${url}`;
-};
+import { getStrapiImageUrl } from "@/utils/getStrapiImageUrl";
 
 // Define the props interface for Portfolio component
 interface PortfolioProps {
@@ -87,7 +81,7 @@ const Portfolio = ({ portfolioData }: PortfolioProps) => {
                   <div className="aspect-[16/10] overflow-hidden bg-gray-50/50 p-8 flex items-center justify-center transition-colors duration-500 group-hover:bg-orange-50/30">
                     <div className="relative h-full w-full">
                       <Image
-                        src={getStrapiMedia(item.cardImage?.url)}
+                        src={getStrapiImageUrl(item.cardImage?.url || "")}
                         alt={item.title}
                         fill
                         className="object-contain transition-transform duration-700 group-hover:scale-110"

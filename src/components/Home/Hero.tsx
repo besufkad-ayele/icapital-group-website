@@ -10,17 +10,9 @@ import Header from "./Header";
 import { twMerge } from "tailwind-merge";
 import { useState } from "react";
 import Link from "next/link";
-import { motion, AnimatePresence, HTMLMotionProps } from "framer-motion";
+import { motion, HTMLMotionProps } from "framer-motion";
+import { getStrapiImageUrl } from "@/utils/getStrapiImageUrl";
 
-const MotionSpan = motion.span as React.ComponentType<
-  React.ComponentPropsWithoutRef<"span"> & HTMLMotionProps<"span">
->;
-const MotionH1 = motion.h1 as React.ComponentType<
-  React.ComponentPropsWithoutRef<"h1"> & HTMLMotionProps<"h1">
->;
-const MotionP = motion.p as React.ComponentType<
-  React.ComponentPropsWithoutRef<"p"> & HTMLMotionProps<"p">
->;
 const MotionDiv = motion.div as React.ComponentType<
   React.ComponentPropsWithoutRef<"div"> & HTMLMotionProps<"div">
 >;
@@ -39,84 +31,28 @@ interface HeroProps {
 const Hero = ({ heroData }: HeroProps) => {
   const [active, setActive] = useState(0);
 
-  const strapiBaseUrl = process.env.NEXT_PUBLIC_DATA || "http://localhost:1337";
-
   const titleVariants = {
-    hidden: {
-      opacity: 0,
-      y: 30,
-    },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.5,
-        ease: [0.6, -0.05, 0.01, 0.99],
-      },
-    },
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
   };
 
   const wordVariants = {
-    hidden: {
-      opacity: 0,
-      y: 20,
-    },
+    hidden: { opacity: 0, y: 15 },
     visible: (i: number) => ({
       opacity: 1,
       y: 0,
-      transition: {
-        delay: i * 0.1,
-        duration: 0.5,
-        ease: [0.6, -0.05, 0.01, 0.99],
-      },
+      transition: { delay: i * 0.08, duration: 0.4, ease: "easeOut" },
     }),
   };
 
   const descriptionVariants = {
-    hidden: {
-      opacity: 0,
-      y: 20,
-    },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.6,
-        delay: 0.2,
-        ease: [0.6, -0.05, 0.01, 0.99],
-      },
-    },
+    hidden: { opacity: 0, y: 15 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.5, delay: 0.2, ease: "easeOut" } },
   };
 
   const buttonVariants = {
-    hidden: {
-      opacity: 0,
-      y: 20,
-    },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.6,
-        delay: 0.4,
-        ease: [0.6, -0.05, 0.01, 0.99],
-      },
-    },
-  };
-
-  const badgeVariants = {
-    hidden: {
-      opacity: 0,
-      scale: 0.8,
-    },
-    visible: {
-      opacity: 1,
-      scale: 1,
-      transition: {
-        duration: 0.5,
-        ease: [0.6, -0.05, 0.01, 0.99],
-      },
-    },
+    hidden: { opacity: 0, y: 15 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.5, delay: 0.35, ease: "easeOut" } },
   };
 
   // Helper to extract plain text from Strapi rich text blocks
@@ -161,11 +97,14 @@ const Hero = ({ heroData }: HeroProps) => {
         {slides.map((slide: any, index: number) => (
           <SwiperSlide key={index}>
             <div className="relative h-full w-full">
-              {/* Background Image */}
+              {/* Background Image — LCP optimization */}
               <Image
-                src={`${strapiBaseUrl}${slide.backgroundImage.url}`}
+                src={getStrapiImageUrl(slide.backgroundImage.url)}
                 alt={slide.title}
                 fill
+                priority={index === 0}
+                quality={85}
+                sizes="100vw"
                 style={{ objectFit: "cover" }}
                 className="absolute inset-0 z-0"
               />

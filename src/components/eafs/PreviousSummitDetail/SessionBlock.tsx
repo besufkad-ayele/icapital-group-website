@@ -1,4 +1,4 @@
-import { BlocksRenderer } from "@strapi/blocks-react-renderer";
+import { BlocksRenderer } from "@/lib/blocks-renderer";
 import { extractYouTubeId } from "@/utils/youtube";
 
 interface SessionBlockProps {

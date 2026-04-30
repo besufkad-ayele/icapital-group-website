@@ -4,13 +4,7 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { usePathname } from "next/navigation";
 import Tag from "@/ui/Tag";
-
-// Helper to get full Strapi media URL
-const getStrapiMedia = (url: string) => {
-  if (!url) return "";
-  if (url.startsWith("http")) return url;
-  return `${process.env.NEXT_PUBLIC_DATA}${url}`;
-};
+import { getStrapiImageUrl } from "@/utils/getStrapiImageUrl";
 
 // Define types for our data
 interface ImageData {
@@ -205,7 +199,7 @@ const Sectors = ({ sectorsData }: SectorsProps) => {
                   />
                   {card.image?.url ? (
                     <Image
-                      src={getStrapiMedia(card.image.url)}
+                      src={getStrapiImageUrl(card.image.url)}
                       alt={card.title}
                       fill
                       className="object-contain transition-transform duration-500 ease-out group-hover:scale-105"
@@ -225,7 +219,7 @@ const Sectors = ({ sectorsData }: SectorsProps) => {
                     {card.logo?.url ? (
                       <div className="relative h-full w-full">
                         <Image
-                          src={getStrapiMedia(card.logo.url)}
+                          src={getStrapiImageUrl(card.logo.url)}
                           alt={`${card.title} Logo`}
                           fill
                           className="object-contain"

@@ -6,7 +6,7 @@ import { FaYoutube, FaDownload } from "react-icons/fa";
 import Image from "next/image";
 import Link from "next/link";
 import { extractYouTubeId } from "@/utils/youtube";
-import { BlocksRenderer } from "@strapi/blocks-react-renderer";
+import { BlocksRenderer } from "@/lib/blocks-renderer";
 
 interface OpeningRemarkProps {
   summit: any;

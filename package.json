@@ -2,6 +2,9 @@
   "name": "icapital-website",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": ">=22.22.2"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -11,53 +14,25 @@
   },
   "dependencies": {
     "@apollo/client": "^3.13.8",
-    "@emotion/react": "latest",
-    "@emotion/styled": "latest",
     "@hookform/resolvers": "^5.1.1",
-    "@react-email/components": "^0.0.41",
-    "@strapi/blocks-react-renderer": "^1.0.2",
+    "react-email": "^6.1.1",
     "@tailwindcss/typography": "^0.5.12",
-    "@types/mapbox-gl": "^3.4.1",
-    "@types/node": "latest",
-    "@types/react-file-icon": "^1.0.1",
-    "axios": "^1.4.0",
-    "browser-image-compression": "latest",
-    "eslint": "^7.23.0 || ^8.0.0",
-    "eslint-config-next": "latest",
     "framer-motion": "^10.18.0",
     "graphql": "^16.6.0",
-    "graphql-subscriptions": "^2.0.0",
-    "graphql-ws": "^5.14.2",
     "html-react-parser": "^5.2.5",
-    "iconsax-react": "^0.0.8",
-    "leaflet": "^1.9.4",
-    "lodash": "latest",
     "mapbox-gl": "^3.12.0",
-    "moment": "latest",
     "next": "15.3.8",
-    "nextjs-toploader": "^1.6.4",
-    "nprogress": "latest",
-    "react": "^18.2.0",
+    "react": "18.3.1",
     "react-countup": "^6.5.3",
-    "react-dom": "^18.2.0",
-    "react-dropzone": "^14.2.3",
-    "react-file-icon": "^1.3.0",
+    "react-dom": "18.3.1",
     "react-hook-form": "^7.57.0",
     "react-hot-toast": "^2.5.2",
     "react-icons": "^5.5.0",
     "react-intersection-observer": "^9.15.1",
-    "react-medium-image-zoom": "^5.1.8",
-    "react-phone-number-input": "^3.3.7",
-    "react-player": "^2.12.0",
-    "react-text-transition": "^3.1.0",
-    "react-toastify": "latest",
     "resend": "^4.5.2",
     "sharp": "latest",
-    "sonner": "^1.2.4",
-    "styled-components": "^6.1.1",
     "swiper": "^11.2.4",
     "tailwind-merge": "^2.6.0",
-    "uuid": "latest",
     "zod": "^3.25.56"
   },
   "devDependencies": {
@@ -67,30 +42,16 @@
     "@graphql-codegen/typescript": "latest",
     "@graphql-codegen/typescript-resolvers": "latest",
     "@svgr/webpack": "latest",
-    "@types/js-cookie": "latest",
-    "@types/leaflet": "^1",
-    "@types/lodash": "latest",
     "@types/node": "latest",
-    "@types/nprogress": "latest",
     "@types/react": "^18.2.0",
     "@types/react-dom": "^18.2.0",
     "autoprefixer": "^10.4.16",
+    "eslint": "^9.0.0",
+    "eslint-config-next": "latest",
     "postcss": "^8.4.31",
     "prettier": "^3.1.0",
     "prettier-plugin-tailwindcss": "^0.5.14",
     "tailwindcss": "^3.3.5",
     "typescript": "^5.8.3"
-  },
-  "pnpm": {
-    "overrides": {
-      "react": "18.3.1",
-      "react-dom": "18.3.1"
-    },
-    "peerDependencyRules": {
-      "allowedVersions": {
-        "react": "18.3.1",
-        "react-dom": "18.3.1"
-      }
-    }
   }
 }

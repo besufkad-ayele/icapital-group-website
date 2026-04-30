@@ -78,41 +78,20 @@ export async function executeServerQuery<T>(
   variables?: any,
 ): Promise<T> {
   try {
-    // console.log(
-    //   "Executing query:",
-    //   query.definitions[0]?.name?.value || "Unknown",
-    // );
-    // console.log(
-    //   "GraphQL URI:",
-    //   process.env.NEXT_PUBLIC_API || "http://localhost:1337/graphql",
-    // );
-
     const { data } = await serverApolloClient.query({
       query,
       variables,
       fetchPolicy: "no-cache",
     });
-
-    // console.log("Query result:", data);
     return data;
   } catch (error: any) {
-    console.error("Server-side GraphQL query error:", error);
-    console.error("Error details:", error);
-    
-    // Log GraphQL errors if they exist
-    if (error.graphQLErrors && error.graphQLErrors.length > 0) {
-      console.error("GraphQL Errors:", JSON.stringify(error.graphQLErrors, null, 2));
+    console.error("GraphQL query error:", error?.message ?? error);
+    if (error.graphQLErrors?.length) {
+      console.error("GraphQL Errors:", JSON.stringify(error.graphQLErrors));
     }
-    
-    // Log network error details if they exist
     if (error.networkError) {
-      console.error("Network Error:", error.networkError);
-      if (error.networkError.result) {
-        console.error("Network Error Result:", JSON.stringify(error.networkError.result, null, 2));
-      }
+      console.error("Network Error:", error.networkError?.message ?? error.networkError);
     }
-    
-    // Return null instead of throwing to prevent crashes
     return null as T;
   }
 }

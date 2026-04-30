@@ -7,6 +7,7 @@ import { GET_GET_STARTED_SECTION } from "@/graphql/home/home";
 import { executeServerQuery } from "@/lib/serverApolloClient";
 import Image from "next/image";
 import Link from "next/link";
+import { getStrapiImageUrl } from "@/utils/getStrapiImageUrl";
 
 // Enable static generation with revalidation
 export const dynamic = 'force-dynamic';
@@ -15,12 +16,6 @@ export const revalidate = 1800; // Revalidate every 30 minutes
 export const metadata: Metadata = {
   title: "Portfolios | i-Capital Africa Institute",
   description: "Explore our successful projects and partnerships.",
-};
-
-const getStrapiMedia = (url: string) => {
-  if (!url) return "";
-  if (url.startsWith("http")) return url;
-  return `${process.env.NEXT_PUBLIC_DATA || "http://localhost:1337"}${url}`;
 };
 
 export default async function PortfoliosPage() {
@@ -66,7 +61,7 @@ export default async function PortfoliosPage() {
                     {/* Shine Effect */}
                     <div className="absolute inset-0 z-10 bg-gradient-to-r from-transparent via-white/40 to-transparent translate-x-[-150%] transition-transform duration-700 ease-out group-hover:translate-x-[150%]" />
                     <Image
-                      src={getStrapiMedia(project.cardImage?.url)}
+                      src={getStrapiImageUrl(project.cardImage?.url)}
                       alt={project.title}
                       width={280}
                       height={160}

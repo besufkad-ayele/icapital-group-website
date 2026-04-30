@@ -122,14 +122,16 @@ const Header = ({ iconColor = "text-white" }: HeaderProps) => {
         )}
       >
         <div className="flex w-full items-center justify-between">
-          {/* Logo */}
-          <div className="relative h-16 w-48 flex-shrink-0 md:h-20 md:w-56">
-            <Link href="/">
+          {/* Logo — 500×500 square asset, larger on mobile for visibility */}
+          <div className="relative h-14 w-14 flex-shrink-0 sm:h-16 sm:w-16 xl:h-16 xl:w-16">
+            <Link href="/" aria-label="Home">
               <Image
                 src={IcapitalLogo}
-                alt="Capital Institute Logo"
+                alt="i-Capital Africa Institute"
                 fill
+                sizes="(max-width: 640px) 56px, (max-width: 1280px) 64px, 64px"
                 style={{ objectFit: "contain" }}
+                className={iconColor === "text-black" ? "" : "brightness-0 invert"}
                 priority
               />
             </Link>
@@ -247,11 +249,12 @@ const Header = ({ iconColor = "text-white" }: HeaderProps) => {
             <div className="relative flex h-full flex-col px-6 py-6 md:px-12">
               {/* Header row */}
               <div className="flex items-center justify-between mb-16">
-                <div className="relative h-14 w-44 md:h-16 md:w-48">
+                <div className="relative h-14 w-14 sm:h-16 sm:w-16">
                   <Image
                     src={IcapitalLogo}
-                    alt="Logo"
+                    alt="i-Capital Africa Institute"
                     fill
+                    sizes="64px"
                     style={{ objectFit: "contain" }}
                     className="brightness-0 invert"
                   />

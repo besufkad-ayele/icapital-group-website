@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
+import { getStrapiImageUrl } from "@/utils/getStrapiImageUrl";
 interface Button {
   buttonText: string;
   buttonLink: string;
@@ -164,11 +165,7 @@ const UpcomingEvents = ({ upcomingEventsData }: UpcomingEventsProps) => {
               <div className="absolute -inset-4 rounded-[3rem] border-2 border-white/20 transition-all duration-500 group-hover:-inset-2" />
               <div className="relative h-full w-full overflow-hidden">
                 <Image
-                  src={
-                    eventData.image.url.startsWith("http")
-                      ? eventData.image.url
-                      : (process.env.NEXT_PUBLIC_DATA || "http://localhost:1337") + eventData.image.url
-                  }
+                  src={getStrapiImageUrl(eventData.image.url)}
                   alt={eventData.title}
                   fill
                   className="object-cover"

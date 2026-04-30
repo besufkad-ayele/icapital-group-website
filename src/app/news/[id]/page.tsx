@@ -9,16 +9,14 @@ import {
   GET_GET_STARTED_SECTION,
 } from "@/graphql/home/home";
 import { executeServerQuery } from "@/lib/serverApolloClient";
-import React from "react";
 import NewsDetailClient from "./NewsDetailClient";
+import { getStrapiImageUrl } from "@/utils/getStrapiImageUrl";
 
-// Enable static generation with revalidation
-export const revalidate = 900; // Revalidate every 15 minutes
+export const revalidate = 900;
 
-const STRAPI_URL = process.env.NEXT_PUBLIC_DATA || "http://localhost:1337";
 const getImageUrl = (url?: string) => {
   if (!url) return "/fallback-image.png";
-  return url.startsWith("http") ? url : `${STRAPI_URL}${url}`;
+  return getStrapiImageUrl(url);
 };
 
 interface NewsDetailProps {

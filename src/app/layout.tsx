@@ -94,6 +94,12 @@ const RootLayout = ({ children }: { children: ReactNode }) => {
       lang="en"
       className={`custom-scrollbar ${mulish.variable} ${questrial.variable} ${urbanist.variable}`}
     >
+      <head>
+        {/* Preconnect to CMS and image origins to reduce LCP latency */}
+        <link rel="preconnect" href="https://icms.frontiertech.org" />
+        <link rel="preconnect" href="https://icapital.s3.us-east-2.amazonaws.com" />
+        <link rel="dns-prefetch" href="https://icms.frontiertech.org" />
+      </head>
       <body>
         <Toaster position="top-right" />
         <ApolloClientProvider>{children}</ApolloClientProvider>

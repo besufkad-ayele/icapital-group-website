@@ -6,7 +6,9 @@ import { GET_ALL_PORTFOLIOS } from '@/graphql/portfolio/portfolio'
 export const revalidate = 3600 // Revalidate every hour
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = 'https://icapital.com'
+  const baseUrl = process.env.NEXT_PUBLIC_DOMAIN
+    ? `https://${process.env.NEXT_PUBLIC_DOMAIN}`
+    : 'https://icapital.com'
   
   // Static pages
   const staticPages = [

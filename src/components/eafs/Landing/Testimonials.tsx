@@ -6,7 +6,7 @@ import { FiUser } from "react-icons/fi";
 import { motion, useInView } from "framer-motion";
 import { useQuery } from "@apollo/client";
 import { GET_EAFS_SUMMIT_TESTIMONIAL } from "@/graphql/eafs/eafsHome";
-import { BlocksRenderer } from "@strapi/blocks-react-renderer";
+import { BlocksRenderer } from "@/lib/blocks-renderer";
 import { getStrapiImageUrl } from "@/utils/getStrapiImageUrl";
 
 interface TestimonialProps {

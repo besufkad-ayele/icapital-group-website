@@ -2,12 +2,7 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
-
-const getStrapiMedia = (url: string) => {
-  if (!url) return "";
-  if (url.startsWith("http")) return url;
-  return `${process.env.NEXT_PUBLIC_DATA || "http://localhost:1337"}${url}`;
-};
+import { getStrapiImageUrl } from "@/utils/getStrapiImageUrl";
 
 export default function OtherProjects({ projects }: { projects: any[] }) {
   const containerVariants = {
@@ -87,7 +82,7 @@ export default function OtherProjects({ projects }: { projects: any[] }) {
               <div className="group mx-auto flex h-full max-w-[480px] cursor-pointer flex-col overflow-hidden rounded-2xl bg-white shadow-lg transition-all duration-300 hover:-translate-y-2 hover:scale-[1.03] hover:shadow-2xl">
                 <div className="flex h-[200px] items-center justify-center overflow-hidden bg-[rgba(247,128,25,0.1)] p-6">
                   <Image
-                    src={getStrapiMedia(project.cardImage?.url)}
+                    src={getStrapiImageUrl(project.cardImage?.url || "")}
                     alt={project.title}
                     width={220}
                     height={120}

@@ -5,7 +5,7 @@ import Tag from "@/ui/Tag";
 import { motion, useAnimation } from "framer-motion";
 import { useEffect } from "react";
 import parse from "html-react-parser";
-import React from "react";
+import { getStrapiImageUrl } from "@/utils/getStrapiImageUrl";
 
 function renderDescription(description: any) {
   if (typeof description === "string") {
@@ -82,21 +82,6 @@ const Features = ({ featuresData }: FeaturesProps) => {
     },
   };
 
-  const iconVariants = {
-    hidden: {
-      scale: 0.8,
-      opacity: 0,
-    },
-    visible: {
-      scale: 1,
-      opacity: 1,
-      transition: {
-        duration: 0.4,
-        ease: [0.16, 1, 0.3, 1],
-      },
-    },
-  };
-
   return (
     <section className="relative overflow-hidden bg-white py-16 md:py-24">
       {/* Background patterns */}
@@ -160,12 +145,7 @@ const Features = ({ featuresData }: FeaturesProps) => {
                 <div className="flex h-12 w-12 items-center justify-center">
                   {feature.icon?.url && (
                     <Image
-                      src={
-                        feature.icon.url.startsWith("http")
-                          ? feature.icon.url
-                          : (process.env.NEXT_PUBLIC_DATA ||
-                              "http://localhost:1337") + feature.icon.url
-                      }
+                      src={getStrapiImageUrl(feature.icon.url)}
                       alt={feature.title}
                       width={48}
                       height={48}

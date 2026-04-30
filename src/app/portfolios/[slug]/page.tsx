@@ -11,20 +11,11 @@ import { GET_GET_STARTED_SECTION } from "@/graphql/home/home";
 import ChallengeSolutionAnimated from "./ChallengeSolutionAnimated";
 import ClientCard from "./ClientCard";
 import OtherProjects from "./OtherProjects";
-import Testimonials from "./Testimonials";
-import React from "react";
 import { executeServerQuery } from "@/lib/serverApolloClient";
+import { getStrapiImageUrl } from "@/utils/getStrapiImageUrl";
 
-// Enable static generation with revalidation
 export const dynamic = 'force-dynamic';
-export const revalidate = 3600; // Revalidate every hour
-
-// Helper to get full Strapi media URL
-const getStrapiMedia = (url: string) => {
-  if (!url) return "";
-  if (url.startsWith("http")) return url;
-  return `${process.env.NEXT_PUBLIC_DATA || "http://localhost:1337"}${url}`;
-};
+export const revalidate = 3600;
 
 interface PortfolioDetailProps {
   params: {
@@ -74,7 +65,7 @@ export async function generateMetadata({
       title: portfolio.title,
       description: portfolio.clientDescription,
       images: portfolio.cardImage?.url
-        ? [getStrapiMedia(portfolio.cardImage.url)]
+        ? [getStrapiImageUrl(portfolio.cardImage.url)]
         : [],
     },
   };
@@ -92,17 +83,12 @@ const PortfolioDetail = async ({ params }: PortfolioDetailProps) => {
       executeServerQuery(GET_GET_STARTED_SECTION),
     ]);
 
-  // console.log("Portfolio Data:", portfolioData);
-  // console.log("Slug:", slug);
-
   // Check if portfolio exists
   if (!portfolioData?.portfolios?.length) {
-    // console.log("No portfolio found for slug:", slug);
     notFound();
   }
 
   const portfolio = portfolioData.portfolios[0];
-  // console.log("Portfolio loaded:", portfolio.title);
 
   // Get up to 3 other projects, excluding the current one
   const allPortfolios = allPortfoliosData?.portfolios || [];
@@ -136,7 +122,7 @@ const PortfolioDetail = async ({ params }: PortfolioDetailProps) => {
               website: portfolio.clientWebsite,
             }}
             logoImg={
-              portfolio.logoImage && getStrapiMedia(portfolio.logoImage.url)
+              portfolio.logoImage && getStrapiImageUrl(portfolio.logoImage.url)
             }
             projectTitle={portfolio.title}
           />

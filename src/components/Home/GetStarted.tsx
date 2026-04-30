@@ -1,6 +1,5 @@
 "use client";
 
-import React from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
 
@@ -10,10 +9,6 @@ interface GetStartedProps {
 
 const GetStarted = ({ getStartedData }: GetStartedProps) => {
   if (!getStartedData?.home?.getStartedSection) {
-    return null;
-  }
-  console.log
-  if (!getStartedData.home?.getStartedSection) {
     return null;
   }
   const section = getStartedData.home.getStartedSection;

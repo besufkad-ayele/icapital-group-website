@@ -70,31 +70,24 @@ export async function POST(req: NextRequest) {
       message: message.replace(/[<>]/g, '')
     };
     
-    // Check if Resend API key is configured
     if (!process.env.RESEND_API_KEY || process.env.RESEND_API_KEY === "") {
-    //  console.log ("RESEND_API_KEY not configured - logging contact form submission");
-    //   console.log("Contact Form Submission:", sanitizedData);
-      
       return NextResponse.json({ 
         success: true, 
         message: "Message received! We'll get back to you soon. (Email service in testing mode)" 
       });
     }
 
-    // Use environment variable for recipient email
     const recipientEmail = process.env.CONTACT_EMAIL || process.env.NEXT_PUBLIC_CONTACT_EMAIL || "contact@icapital.com";
 
     try {
       const resend = new Resend(process.env.RESEND_API_KEY);
       
-      const emailResult = await resend.emails.send({
-        from: "contact@icapital.com", // Use your verified domain
+      await resend.emails.send({
+        from: process.env.CONTACT_FROM_EMAIL || "contact@icapital.com",
         to: [recipientEmail],
         subject: `i-Capital Contact: ${sanitizedData.subject}`,
         react: ContactEmail(sanitizedData),
       });
-      
-      // console.log("Email sent successfully:", emailResult.data?.id);
       
       return NextResponse.json({ 
         success: true, 
