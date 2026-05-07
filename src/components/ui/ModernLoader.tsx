@@ -1,5 +1,3 @@
-import React from "react";
-
 const ModernLoader = () => (
   <div className="flex min-h-[200px] flex-col items-center justify-center">
     <div className="flex space-x-2">

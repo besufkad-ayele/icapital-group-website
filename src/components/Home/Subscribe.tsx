@@ -352,10 +352,7 @@ const Subscribe = ({ subscribeData }: SubscribeProps) => {
               </div>
 
               <div className="space-y-3 pt-2">
-                <div className="flex items-start gap-3 group cursor-pointer" onClick={() => {
-                  const el = document.getElementById("consent") as HTMLInputElement;
-                  if(el) el.click();
-                }}>
+                <div className="flex items-start gap-3">
                   <div className="relative flex h-6 items-center">
                     <input
                       type="checkbox"

@@ -15,9 +15,6 @@ import GetStarted from "@/components/Home/GetStarted";
 import Footer from "@/components/Home/Footer";
 import ScrollSpyWrapper from "@/components/ScrollSpyWrapper";
 import { getHomePageData } from "@/lib/getHomePageData";
-
-export const revalidate = 10;
-//test 
 export const metadata: Metadata = {
   title: "The i-Capital Africa Institute",
 };
@@ -26,6 +23,7 @@ const sectionIds = [
   "sectors",
   "about",
   "features",
+  "news",
   "journey",
   "portfolio",
   "contact",
@@ -49,7 +47,9 @@ const HomePage = async () => {
         <div id="features">
           <Features featuresData={data.features} />
         </div>
-        <UpcomingEvents upcomingEventsData={data.upcomingEvents} />
+        <div id="news">
+          <UpcomingEvents upcomingEventsData={data.upcomingEvents} />
+        </div>
         <div id="journey">
           <Journey journeyData={data.journey} />
         </div>

@@ -1,17 +1,5 @@
 import { executeServerQuery } from "./serverApolloClient";
-import {
-  GET_HOME,
-  GET_TRUSTED_COMPANIES_SLIDER,
-  GET_ABOUT_US_SECTION,
-  GET_FEATURES_SECTION,
-  GET_UPCOMING_EVENTS,
-  GET_JOURNEY_SECTION,
-  GET_SUBSCRIBE_SECTION,
-  GET_GET_STARTED_SECTION,
-  GET_SECTORS_SECTION,
-  GET_HOME_PORTFOLIO_SECTION,
-  GET_TESTIMONIALS_SECTION,
-} from "@/graphql/home/home";
+import { GET_HOME_PAGE_DATA } from "@/graphql/home/home";
 
 // Define the types for our data structure
 export interface HomePageData {
@@ -28,70 +16,59 @@ export interface HomePageData {
   testimonials: any;
 }
 
-// Main function to fetch all home page data
+// Main function to fetch all home page data using a single optimized query
 export async function getHomePageData(): Promise<HomePageData> {
   try {
-    console.log("Starting server-side data fetching...");
+    // Execute single optimized query instead of 11 parallel queries
+    const data = await executeServerQuery(GET_HOME_PAGE_DATA);
 
-    // Execute all queries in parallel for better performance
-    const [
-      heroData,
-      sliderData,
-      aboutUsData,
-      featuresData,
-      upcomingEventsData,
-      journeyData,
-      subscribeData,
-      getStartedData,
-      sectorsData,
-      portfolioData,
-      testimonialsData,
-    ] = await Promise.all([
-      executeServerQuery(GET_HOME),
-      executeServerQuery(GET_TRUSTED_COMPANIES_SLIDER),
-      executeServerQuery(GET_ABOUT_US_SECTION),
-      executeServerQuery(GET_FEATURES_SECTION),
-      executeServerQuery(GET_UPCOMING_EVENTS),
-      executeServerQuery(GET_JOURNEY_SECTION),
-      executeServerQuery(GET_SUBSCRIBE_SECTION),
-      executeServerQuery(GET_GET_STARTED_SECTION),
-      executeServerQuery(GET_SECTORS_SECTION),
-      executeServerQuery(GET_HOME_PORTFOLIO_SECTION),
-      executeServerQuery(GET_TESTIMONIALS_SECTION),
-    ]);
+    if (!data?.home) {
+      console.warn("No home data returned from GraphQL");
+      return {
+        hero: { home: null },
+        slider: { home: null },
+        aboutUs: { home: null },
+        features: { home: null },
+        upcomingEvents: { home: null },
+        journey: { home: null },
+        subscribe: { home: null },
+        getStarted: { home: null },
+        sectors: { home: null },
+        portfolio: { home: null },
+        testimonials: { home: null },
+      };
+    }
 
-    console.log("Sectors data:", sectorsData);
+    const homeData = data.home;
 
     return {
-      hero: heroData,
-      slider: sliderData,
-      aboutUs: aboutUsData,
-      features: featuresData,
-      upcomingEvents: upcomingEventsData,
-      journey: journeyData,
-      subscribe: subscribeData,
-      getStarted: getStartedData,
-      sectors: sectorsData,
-      portfolio: portfolioData,
-      testimonials: testimonialsData,
+      hero: { home: homeData },
+      slider: { home: homeData },
+      aboutUs: { home: homeData },
+      features: { home: homeData },
+      upcomingEvents: { home: homeData },
+      journey: { home: homeData },
+      subscribe: { home: homeData },
+      getStarted: { home: homeData },
+      sectors: { home: homeData },
+      portfolio: { home: homeData },
+      testimonials: { home: homeData },
     };
   } catch (error) {
     console.error("Error fetching home page data:", error);
-    console.error("Error details:", error);
 
-    // Return empty data structure to prevent crashes
     return {
-      hero: null,
-      slider: null,
-      aboutUs: null,
-      features: null,
-      upcomingEvents: null,
-      journey: null,
-      subscribe: null,
-      getStarted: null,
-      sectors: null,
-      portfolio: null,
-      testimonials: null,
+      hero: { home: null },
+      slider: { home: null },
+      aboutUs: { home: null },
+      features: { home: null },
+      upcomingEvents: { home: null },
+      journey: { home: null },
+      subscribe: { home: null },
+      getStarted: { home: null },
+      sectors: { home: null },
+      portfolio: { home: null },
+      testimonials: { home: null },
     };
   }
 }

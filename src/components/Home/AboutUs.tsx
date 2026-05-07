@@ -6,6 +6,7 @@ import { useState, useRef, useEffect } from "react";
 import Tag from "@/ui/Tag";
 import { motion, useAnimation } from "framer-motion";
 import parse from "html-react-parser";
+import { getStrapiImageUrl } from "@/utils/getStrapiImageUrl";
 
 // Define the props interface for AboutUs component
 interface AboutUsProps {
@@ -21,9 +22,7 @@ const AboutUs = ({ aboutUsData }: AboutUsProps) => {
 
   const aboutus = aboutUsData?.home?.aboutus;
   const image = aboutus?.image?.url
-    ? aboutus.image.url.startsWith("http")
-      ? aboutus.image.url
-      : process.env.NEXT_PUBLIC_DATA + aboutus.image.url
+    ? getStrapiImageUrl(aboutus.image.url)
     : AboutUsImg;
   const tagTitle = aboutus?.tagTitle || "About Group";
   const heading =

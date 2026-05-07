@@ -5,7 +5,7 @@ import { motion, useInView } from "framer-motion";
 import { FaYoutube } from "react-icons/fa";
 import Image from "next/image";
 import { extractYouTubeId } from "@/utils/youtube";
-import { BlocksRenderer } from "@strapi/blocks-react-renderer";
+import { BlocksRenderer } from "@/lib/blocks-renderer";
 
 interface OpeningSessionProps {
   summit: any;

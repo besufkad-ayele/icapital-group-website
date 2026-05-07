@@ -1,11 +1,12 @@
 "use client";
-import { ApolloProvider } from "@apollo/client";
-import apolloClientEafs from "@/lib/apolloClientEafs";
+import dynamic from "next/dynamic";
+import { ReactNode } from "react";
 
-export default function ApolloEafsProvider({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
-  return <ApolloProvider client={apolloClientEafs}>{children}</ApolloProvider>;
+const ApolloEafsProviderInner = dynamic(
+  () => import("./ApolloEafsProviderInner"),
+  { ssr: false }
+);
+
+export default function ApolloEafsProvider({ children }: { children: ReactNode }) {
+  return <ApolloEafsProviderInner>{children}</ApolloEafsProviderInner>;
 }

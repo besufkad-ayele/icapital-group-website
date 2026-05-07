@@ -12,7 +12,9 @@ import {
 } from "react-icons/fa";
 import { MdEmail, MdPhone } from "react-icons/md";
 import { IoIosArrowUp } from "react-icons/io";
-import IcapitalLogo from "@/assets/icapital-logo-img.png";
+import IcapitalLogo from "@/assets/i-logo.png";
+
+
 
 interface SocialLink {
   icon: React.ReactNode;
@@ -32,10 +34,13 @@ const socialLinks: SocialLink[] = [
 ];
 
 const quickLinks: QuickLink[] = [
-  { label: "About Us", href: "#" },
-  { label: "Services", href: "#" },
-  { label: "Careers", href: "#" },
-  { label: "Contact Us", href: "#" },
+  { label: "Group Sectors", href: "/#sectors" },
+  { label: "About Group", href: "/#about" },
+  { label: "Features", href: "/#features" },
+  { label: "News and Updates", href: "/news" },
+  { label: "Our Journey", href: "/#journey" },
+  { label: "Portfolio", href: "/#portfolio" },
+  { label: "Contact Us", href: "/#contact" },
 ];
 
 const Footer: React.FC = () => {
@@ -57,8 +62,8 @@ const Footer: React.FC = () => {
               <Image
                 src={IcapitalLogo}
                 alt="iCapital Logo"
-                width={140}
-                height={70}
+                width={180}
+                height={90}
                 className="brightness-0 invert object-contain transition-transform hover:scale-105"
               />
             </Link>
@@ -101,12 +106,43 @@ const Footer: React.FC = () => {
           {/* Expert Column */}
           <div>
             <h3 className="mb-8 text-xl font-bold tracking-tight">Expertise</h3>
-            <ul className="space-y-4 text-blue-100/60 font-medium">
-              {["Corporate Training", "HR Solutions", "Strategic Advisory", "Digital Transformation"].map((item) => (
-                <li key={item} className="cursor-default hover:text-white transition-colors">
-                  {item}
-                </li>
-              ))}
+            <ul className="space-y-4">
+              <li>
+                <Link 
+                  href="/#features" 
+                  className="group flex items-center text-blue-100/60 font-medium transition-colors hover:text-white"
+                >
+                  <span className="mr-0 h-[1px] w-0 bg-orange-500 transition-all duration-300 group-hover:mr-3 group-hover:w-4" />
+                  Corporate Training
+                </Link>
+              </li>
+              <li>
+                <Link 
+                  href="/#sectors" 
+                  className="group flex items-center text-blue-100/60 font-medium transition-colors hover:text-white"
+                >
+                  <span className="mr-0 h-[1px] w-0 bg-orange-500 transition-all duration-300 group-hover:mr-3 group-hover:w-4" />
+                  HR Solutions
+                </Link>
+              </li>
+              <li>
+                <Link 
+                  href="/#about" 
+                  className="group flex items-center text-blue-100/60 font-medium transition-colors hover:text-white"
+                >
+                  <span className="mr-0 h-[1px] w-0 bg-orange-500 transition-all duration-300 group-hover:mr-3 group-hover:w-4" />
+                  Strategic Advisory
+                </Link>
+              </li>
+              <li>
+                <Link 
+                  href="/#contact" 
+                  className="group flex items-center text-blue-100/60 font-medium transition-colors hover:text-white"
+                >
+                  <span className="mr-0 h-[1px] w-0 bg-orange-500 transition-all duration-300 group-hover:mr-3 group-hover:w-4" />
+                  Digital Transformation
+                </Link>
+              </li>
             </ul>
           </div>
 

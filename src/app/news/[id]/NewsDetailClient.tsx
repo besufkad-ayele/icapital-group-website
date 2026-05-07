@@ -2,14 +2,13 @@
 import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import React from "react";
-import { BlocksRenderer } from "@strapi/blocks-react-renderer";
+import { BlocksRenderer } from "@/lib/blocks-renderer";
 import { FiArrowLeft } from "react-icons/fi";
+import { getStrapiImageUrl } from "@/utils/getStrapiImageUrl";
 
-const STRAPI_URL = process.env.NEXT_PUBLIC_DATA || "http://localhost:1337";
 const getImageUrl = (url?: string) => {
   if (!url) return "/fallback-image.png";
-  return url.startsWith("http") ? url : `${STRAPI_URL}${url}`;
+  return getStrapiImageUrl(url);
 };
 
 interface NewsDetailClientProps {

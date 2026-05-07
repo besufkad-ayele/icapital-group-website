@@ -1,14 +1,13 @@
 "use client";
-import React, { useState } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
-
-const STRAPI_URL = process.env.NEXT_PUBLIC_DATA;
+import { getStrapiImageUrl } from "@/utils/getStrapiImageUrl";
 
 const getImageUrl = (url?: string) => {
   if (!url) return "/fallback-image.png";
-  return url.startsWith("http") ? url : `${STRAPI_URL}${url}`;
+  return getStrapiImageUrl(url);
 };
 
 const FeaturedNews = ({ article }: { article: any }) => (
@@ -168,7 +167,7 @@ export default function NewsClient({ articles }: NewsClientProps) {
   // Dynamically generate categories from articles
   const categoriesSet = new Set<string>();
   articles.forEach((article: any) => {
-    if (article.category && article.category.name) {
+    if (article && article.category && article.category.name) {
       categoriesSet.add(article.category.name);
     }
   });

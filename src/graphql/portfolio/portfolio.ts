@@ -42,7 +42,7 @@ export const GET_PORTFOLIO_BY_SLUG = gql`
 
 export const GET_ALL_PORTFOLIOS = gql`
   query GetAllPortfolios {
-    portfolios {
+    portfolios(sort: "updatedAt:desc") {
       title
       slug
       cardImage {

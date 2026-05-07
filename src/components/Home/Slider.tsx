@@ -1,8 +1,9 @@
 "use client";
 
-import { motion, useAnimation, useInView } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 import Image from "next/image";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
+import { getStrapiImageUrl } from "@/utils/getStrapiImageUrl";
 
 interface Logo {
   logo: Array<{
@@ -35,11 +36,7 @@ const Slider: React.FC<SliderProps> = ({ sliderData }) => {
   // Adjust duration based on number of logos (more logos = more time to keep speed consistent)
   const duration = logos.length * 3; 
 
-  const getImageUrl = (url: string): string => {
-    return url.startsWith("http")
-      ? url
-      : `${process.env.NEXT_PUBLIC_DATA || "http://localhost:1337"}${url}`;
-  };
+  const getImageUrl = (url: string): string => getStrapiImageUrl(url);
 
   return (
     <section 
@@ -91,7 +88,7 @@ const Slider: React.FC<SliderProps> = ({ sliderData }) => {
                   {item.logo?.[0]?.url && (
                     <div className="relative h-12 w-28 transition-all duration-300 group-hover:scale-105 md:h-16 md:w-40">
                       <Image
-                        src={getImageUrl(item.logo[0].url)}
+                        src={getStrapiImageUrl(item.logo[0].url)}
                         alt={item.altText || "Company Logo"}
                         fill
                         sizes="(max-width: 768px) 120px, 200px"

@@ -8,7 +8,7 @@ import { motion, useInView } from "framer-motion";
 import { useQuery } from "@apollo/client";
 import { GET_EAFS_ABOUT_SECTION } from "@/graphql/eafs/eafsHome";
 import { getStrapiImageUrl } from "@/utils/getStrapiImageUrl";
-import { BlocksRenderer } from "@strapi/blocks-react-renderer";
+import { BlocksRenderer } from "@/lib/blocks-renderer";
 
 const About = () => {
   const ref = useRef(null);

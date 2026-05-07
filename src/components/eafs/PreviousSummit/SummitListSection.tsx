@@ -1,10 +1,11 @@
-import React from "react";
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import { useQuery } from "@apollo/client";
 import { GET_PREVIOUS_SUMMIT_PAGE } from "@/graphql/eafs/previousSummit";
 import ModernLoader from "@/components/ui/ModernLoader";
-import { BlocksRenderer } from "@strapi/blocks-react-renderer";
+import { BlocksRenderer } from "@/lib/blocks-renderer";
 import { getStrapiImageUrl } from "@/utils/getStrapiImageUrl";
 import { motion } from "framer-motion";
 

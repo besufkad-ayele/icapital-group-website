@@ -1,4 +1,3 @@
-import React from "react";
 import { Metadata } from "next";
 import Footer from "@/components/Home/Footer";
 import Subscribe from "@/components/Home/Subscribe";
@@ -11,6 +10,10 @@ import {
 import { executeServerQuery } from "@/lib/serverApolloClient";
 import NewsHero from "./NewsHero";
 import NewsClient from "./NewsClient";
+
+// Enable static generation with revalidation
+export const dynamic = 'force-dynamic';
+export const revalidate = 900; // Revalidate every 15 minutes (news updates more frequently)
 
 export const metadata: Metadata = {
   title: "News & Updates | i-Capital Africa Institute",

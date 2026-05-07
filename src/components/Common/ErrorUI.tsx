@@ -67,8 +67,8 @@ const ErrorUI = ({
             <Image
               src={imageSrc}
               alt={title}
-              layout="fill"
-              objectFit="contain"
+              fill
+              style={{ objectFit: "contain" }}
               className="drop-shadow-2xl"
               priority
             />
