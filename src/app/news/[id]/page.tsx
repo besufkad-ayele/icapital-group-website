@@ -20,9 +20,9 @@ const getImageUrl = (url?: string) => {
 };
 
 interface NewsDetailProps {
-  params: {
+  params: Promise<{
     id: string;
-  };
+  }>;
 }
 
 // Generate static params for all articles at build time
@@ -31,9 +31,11 @@ export async function generateStaticParams() {
     const data: any = await executeServerQuery(GET_ARTICLES);
     const articles = data?.articles || [];
 
-    return articles.map((article: any) => ({
-      id: article.slug,
-    }));
+    return articles
+      .filter((article: any) => article && article.slug)
+      .map((article: any) => ({
+        id: article.slug,
+      }));
   } catch (error) {
     console.error("Error generating static params:", error);
     return [];
@@ -44,7 +46,7 @@ export async function generateStaticParams() {
 export async function generateMetadata({
   params,
 }: NewsDetailProps): Promise<Metadata> {
-  const { id: slug } = params;
+  const { id: slug } = await params;
 
   const data: any = await executeServerQuery(GET_ARTICLE_BY_SLUG, { slug });
   const article = data?.articles?.[0];
@@ -69,7 +71,7 @@ export async function generateMetadata({
 }
 
 const NewsDetail = async ({ params }: NewsDetailProps) => {
-  const { id: slug } = params;
+  const { id: slug } = await params;
 
   // Fetch all data server-side in parallel
   const [articleData, allArticlesData, subscribeData, getStartedData]: any[] =
@@ -89,14 +91,14 @@ const NewsDetail = async ({ params }: NewsDetailProps) => {
   // Get latest 3 articles excluding the current one for sidebar
   const allArticles = allArticlesData?.articles || [];
   const relatedArticles = allArticles
-    .filter((a: any) => a.slug !== slug)
+    .filter((a: any) => a && a.slug && a.slug !== slug)
     .slice(0, 3);
 
   return (
     <main className="min-h-screen bg-gray-50">
       <NewsDetailClient article={article} relatedArticles={relatedArticles} />
       <Subscribe subscribeData={subscribeData} />
-      <GetStarted getStartedData={getStartedData} />
+      {/* <GetStarted getStartedData={getStartedData} /> */}
       <Footer />
     </main>
   );

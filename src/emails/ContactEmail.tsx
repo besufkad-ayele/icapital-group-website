@@ -6,7 +6,7 @@ import {
   Text,
   Img,
   Container,
-} from "react-email";
+} from "@react-email/components";
 import * as React from "react";
 
 interface ContactEmailProps {

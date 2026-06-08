@@ -3,12 +3,22 @@ import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { BlocksRenderer } from "@/lib/blocks-renderer";
-import { FiArrowLeft } from "react-icons/fi";
+import { FiArrowLeft, FiClock, FiCalendar, FiTag, FiUser } from "react-icons/fi";
 import { getStrapiImageUrl } from "@/utils/getStrapiImageUrl";
+import BackToTop from "@/components/BackToTop";
 
 const getImageUrl = (url?: string) => {
   if (!url) return "/fallback-image.png";
   return getStrapiImageUrl(url);
+};
+
+// Helper to calculate reading time
+const getReadingTime = (content: any) => {
+  const text = typeof content === 'string' ? content : JSON.stringify(content);
+  const wordsPerMinute = 200;
+  const noOfWords = text.split(/\s/g).length;
+  const minutes = noOfWords / wordsPerMinute;
+  return Math.ceil(minutes);
 };
 
 interface NewsDetailClientProps {
@@ -20,6 +30,8 @@ export default function NewsDetailClient({
   article,
   relatedArticles = [],
 }: NewsDetailClientProps) {
+  const readingTime = getReadingTime(article.content);
+
   return (
     <div className="bg-gray-50">
       {/* Back Button */}
@@ -43,13 +55,13 @@ export default function NewsDetailClient({
             transition={{ duration: 0.5 }}
             className="lg:col-span-2"
           >
-            <div className="relative h-[300px] overflow-hidden rounded-2xl md:h-[400px]">
+            <div className="relative aspect-video overflow-hidden rounded-2xl bg-gray-100">
               {article.featuredImage?.url && (
                 <Image
                   src={getImageUrl(article.featuredImage.url)}
                   alt={article.title}
                   fill
-                  className="object-cover"
+                  className="object-contain"
                   priority
                 />
               )}
@@ -95,36 +107,22 @@ export default function NewsDetailClient({
                   >
                     <div className="flex gap-4">
                       {/* Thumbnail */}
-                      <div className="relative h-24 w-32 flex-shrink-0 overflow-hidden rounded-lg md:h-28 md:w-36">
+                      <div className="relative aspect-video w-32 flex-shrink-0 overflow-hidden rounded-lg bg-gray-100 md:w-36">
                         {relatedArticle.featuredImage?.url && (
                           <Image
                             src={getImageUrl(relatedArticle.featuredImage.url)}
                             alt={relatedArticle.title}
                             fill
-                            className="object-cover transition-transform duration-300 group-hover:scale-105"
-                            sizes="144px"
+                            className="object-contain transition-transform group-hover:scale-105"
                           />
                         )}
                       </div>
-                      {/* Content */}
-                      <div className="flex flex-1 flex-col">
-                        {relatedArticle.publicationDate && (
-                          <p className="mb-1 text-xs text-gray-500">
-                            {new Date(
-                              relatedArticle.publicationDate
-                            ).toLocaleDateString("en-US", {
-                              month: "short",
-                              day: "numeric",
-                              year: "numeric",
-                            })}
-                          </p>
-                        )}
-                        {relatedArticle.category?.name && (
-                          <span className="mb-2 inline-block w-fit rounded-full bg-orange-100 px-2.5 py-1 text-xs font-semibold text-orange-600">
-                            {relatedArticle.category.name}
-                          </span>
-                        )}
-                        <h4 className="line-clamp-2 text-sm font-semibold leading-snug text-[#061C3D] transition-colors group-hover:text-orange-500 md:text-base">
+                      {/* Info */}
+                      <div className="flex flex-col justify-center overflow-hidden">
+                        <span className="mb-1 text-[10px] font-bold uppercase tracking-wider text-orange-500">
+                          {relatedArticle.category?.name || "Updates"}
+                        </span>
+                        <h4 className="line-clamp-2 text-sm font-bold text-[#061C3D] group-hover:text-orange-500">
                           {relatedArticle.title}
                         </h4>
                       </div>
@@ -151,40 +149,119 @@ export default function NewsDetailClient({
               {article.title}
             </h1>
 
-            {/* Publication Info */}
-            <div className="mb-8 flex items-center gap-4 border-b border-gray-200 pb-6">
-              <span className="text-sm text-gray-600">
-                Published on{" "}
-                {article.publicationDate
-                  ? new Date(article.publicationDate).toLocaleDateString(
-                      "en-US",
-                      {
-                        month: "long",
-                        day: "numeric",
-                        year: "numeric",
-                      }
-                    )
-                  : ""}
-              </span>
+            {/* Article Meta */}
+            <div className="mb-10 flex flex-wrap items-center gap-6 border-b border-gray-100 pb-10">
+              {article.author && (
+                <div className="flex items-center gap-4">
+                  {article.author.avatar?.url ? (
+                    <div className="relative h-12 w-12 overflow-hidden rounded-full border-2 border-white bg-gray-200 shadow-sm">
+                      <Image
+                        src={getImageUrl(article.author.avatar.url)}
+                        alt={article.author.name || "Author"}
+                        fill
+                        className="object-cover"
+                      />
+                    </div>
+                  ) : (
+                    <div className="flex h-12 w-12 items-center justify-center rounded-full bg-orange-100 text-orange-500 font-bold border-2 border-white shadow-sm">
+                      <FiUser className="text-xl" />
+                    </div>
+                  )}
+                  <div className="flex flex-col">
+                    <span className="text-[10px] font-bold uppercase tracking-widest text-gray-400">
+                      Author
+                    </span>
+                    <span className="text-sm font-bold text-[#061C3D]">
+                      {article.author.name}
+                    </span>
+                  </div>
+                </div>
+              )}
+
+              <div className="hidden h-8 w-[1px] bg-gray-200 md:block"></div>
+
+              <div className="flex flex-col">
+                <span className="text-[10px] font-bold uppercase tracking-widest text-gray-400">
+                  Published on
+                </span>
+                <span className="flex items-center gap-2 text-sm font-semibold text-gray-700">
+                  <FiCalendar className="text-orange-500" />
+                  {article.publicationDate
+                    ? new Date(article.publicationDate).toLocaleDateString(
+                        "en-US",
+                        {
+                          month: "long",
+                          day: "numeric",
+                          year: "numeric",
+                        }
+                      )
+                    : ""}
+                </span>
+              </div>
+
+              <div className="hidden h-8 w-[1px] bg-gray-200 md:block"></div>
+
+              <div className="flex flex-col">
+                <span className="text-[10px] font-bold uppercase tracking-widest text-gray-400">
+                  Reading Time
+                </span>
+                <span className="flex items-center gap-2 text-sm font-semibold text-gray-700">
+                  <FiClock className="text-orange-500" />
+                  {readingTime} min read
+                </span>
+              </div>
+
               {article.category?.name && (
                 <>
-                  <span className="text-gray-300">|</span>
-                  <span className="rounded-full bg-orange-100 px-3 py-1 text-xs font-semibold text-orange-600">
-                    {article.category.name}
-                  </span>
+                  <div className="hidden h-8 w-[1px] bg-gray-200 md:block"></div>
+                  <div className="flex flex-col">
+                    <span className="text-[10px] font-bold uppercase tracking-widest text-gray-400">
+                      Category
+                    </span>
+                    <span className="mt-1 flex items-center gap-2 w-fit rounded-full bg-orange-50 px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-orange-600 border border-orange-100">
+                      <FiTag />
+                      {article.category.name}
+                    </span>
+                  </div>
                 </>
               )}
             </div>
 
             {/* Article Content */}
             <div className="prose prose-lg max-w-none prose-headings:text-[#061C3D] prose-p:text-gray-700 prose-a:text-orange-500 hover:prose-a:text-orange-600">
-              {Array.isArray(article.content) && (
-                <BlocksRenderer content={article.content} />
+              {article.content && (
+                <BlocksRenderer
+                  content={
+                    typeof article.content === "string"
+                      ? JSON.parse(article.content)
+                      : article.content
+                  }
+                />
               )}
             </div>
+
+            {/* Tags */}
+            {article.tags && article.tags.length > 0 && (
+              <div className="mt-12 border-t border-gray-100 pt-8">
+                <h4 className="mb-4 text-sm font-bold uppercase tracking-wider text-gray-400">
+                  Related Tags
+                </h4>
+                <div className="flex flex-wrap gap-2">
+                  {article.tags.map((tag: any) => (
+                    <span
+                      key={tag.slug}
+                      className="rounded-lg bg-gray-100 px-3 py-1.5 text-sm font-medium text-gray-600 transition-colors hover:bg-orange-50 hover:text-orange-600"
+                    >
+                      #{tag.name}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            )}
           </motion.div>
         </div>
       </section>
+      <BackToTop />
     </div>
   );
 }

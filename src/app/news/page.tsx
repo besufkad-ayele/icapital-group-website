@@ -30,7 +30,7 @@ export default async function NewsPage() {
       executeServerQuery(GET_GET_STARTED_SECTION),
     ]);
 
-  // Extract articles from response (flat array)
+  // Extract articles from response (flattened array)
   const articles = articlesData?.articles || [];
 
   return (
@@ -38,7 +38,7 @@ export default async function NewsPage() {
       <NewsHero />
       <NewsClient articles={articles} />
       <Subscribe subscribeData={subscribeData} />
-      <GetStarted getStartedData={getStartedData} />
+      {/* <GetStarted getStartedData={getStartedData} /> */}
       <Footer />
     </main>
   );

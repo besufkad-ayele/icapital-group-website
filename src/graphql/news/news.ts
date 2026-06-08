@@ -1,9 +1,10 @@
 import { gql } from "@apollo/client";
 
-// 1. Get all articles (flat structure, no pagination or filters)
+// 1. Get all articles (flattened structure)
 export const GET_ARTICLES = gql`
   query GetArticles {
     articles {
+      documentId
       title
       slug
       summary
@@ -26,26 +27,23 @@ export const GET_ARTICLES = gql`
         name
         avatar {
           url
-          width
-          height
         }
       }
       tags {
         name
         slug
       }
-      relatedArticles {
-        title
-        slug
-      }
+      createdAt
+      updatedAt
     }
   }
 `;
 
-// 2. Get a single article by slug (flat structure)
+// 2. Get a single article by slug
 export const GET_ARTICLE_BY_SLUG = gql`
   query GetArticleBySlug($slug: String!) {
     articles(filters: { slug: { eq: $slug } }) {
+      documentId
       title
       slug
       summary
@@ -68,8 +66,6 @@ export const GET_ARTICLE_BY_SLUG = gql`
         name
         avatar {
           url
-          width
-          height
         }
       }
       tags {
@@ -84,18 +80,13 @@ export const GET_ARTICLE_BY_SLUG = gql`
   }
 `;
 
-// 3. Get all categories (flat structure)
+// 3. Get all categories
 export const GET_CATEGORIES = gql`
   query GetCategories {
     categories {
+      documentId
       name
       slug
-      description
-      image {
-        url
-        width
-        height
-      }
     }
   }
 `;

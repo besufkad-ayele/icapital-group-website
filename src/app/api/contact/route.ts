@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
-import { Resend } from "resend";
 import ContactEmail from "@/emails/ContactEmail";
 
 // Disable caching for this API route since it handles form submissions
