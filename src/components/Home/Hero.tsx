@@ -96,17 +96,17 @@ const Hero = ({ heroData }: HeroProps) => {
       >
         {slides.map((slide: any, index: number) => (
           <SwiperSlide key={index}>
-            <div className="relative h-full w-full">
+            <div className="relative h-full w-full overflow-hidden">
               {/* Background Image — LCP optimization */}
               <Image
                 src={getStrapiImageUrl(slide.backgroundImage.url)}
                 alt={slide.title}
                 fill
                 priority={index === 0}
-                quality={85}
+                quality={90}
                 sizes="100vw"
                 style={{ objectFit: "cover" }}
-                className="absolute inset-0 z-0"
+                className="absolute inset-0 z-0 scale-110"
               />
 
               {/* Sophisticated Overlay */}

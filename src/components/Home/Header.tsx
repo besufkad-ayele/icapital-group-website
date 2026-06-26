@@ -45,7 +45,7 @@ const Header = ({ iconColor = "text-white" }: HeaderProps) => {
     { name: "Group Sectors", href: "/#sectors" },
     { name: "About Group", href: "/#about" },
     { name: "Features", href: "/#features" },
-    { name: "News and Updates", href: "/#news" },
+    { name: "News and Updates", href: "/news" },
     { name: "Our Journey", href: "/#journey" },
     { name: "Portfolio", href: "/#portfolio" },
   ];
@@ -122,14 +122,14 @@ const Header = ({ iconColor = "text-white" }: HeaderProps) => {
         )}
       >
         <div className="flex w-full items-center justify-between">
-          {/* Logo — 500×500 square asset, larger on mobile for visibility */}
-          <div className="relative h-14 w-14 flex-shrink-0 sm:h-16 sm:w-16 xl:h-16 xl:w-16">
+          {/* Logo — 500×500 square asset, larger on hero for visibility */}
+          <div className="relative h-16 w-16 flex-shrink-0 sm:h-20 sm:w-20 xl:h-24 xl:w-24">
             <Link href="/" aria-label="Home">
               <Image
                 src={IcapitalLogo}
                 alt="i-Capital Africa Institute"
                 fill
-                sizes="(max-width: 640px) 56px, (max-width: 1280px) 64px, 64px"
+                sizes="(max-width: 640px) 64px, (max-width: 1280px) 80px, 96px"
                 style={{ objectFit: "contain" }}
                 className={iconColor === "text-black" ? "" : "brightness-0 invert"}
                 priority
@@ -249,7 +249,7 @@ const Header = ({ iconColor = "text-white" }: HeaderProps) => {
             <div className="relative flex h-full flex-col px-6 py-6 md:px-12">
               {/* Header row */}
               <div className="flex items-center justify-between mb-16">
-                <div className="relative h-14 w-14 sm:h-16 sm:w-16">
+                <div className="relative h-16 w-16 sm:h-20 sm:w-20">
                   <Image
                     src={IcapitalLogo}
                     alt="i-Capital Africa Institute"

@@ -5,7 +5,7 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { getStrapiImageUrl } from "@/utils/getStrapiImageUrl";
 
-import { FaCalendarAlt, FaUser, FaClock, FaArrowRight, FaTag } from "react-icons/fa";
+import { FaCalendarAlt, FaUser, FaClock, FaArrowRight, FaTag, FaSearch } from "react-icons/fa";
 
 const getImageUrl = (url?: string) => {
   if (!url) return "/fallback-image.png";
@@ -219,6 +219,7 @@ export default function NewsClient({ articles = [] }: NewsClientProps) {
   // Filter out any potential null/undefined articles
   const validArticles = (articles || []).filter(Boolean);
   const [selectedCategory, setSelectedCategory] = useState("All");
+  const [searchQuery, setSearchQuery] = useState("");
 
   // Dynamically generate categories from articles
   const categoriesSet = new Set<string>();
@@ -229,7 +230,7 @@ export default function NewsClient({ articles = [] }: NewsClientProps) {
   });
   const categories = ["All", ...Array.from(categoriesSet)];
 
-  // Filter articles based on selected category
+  // Filter articles based on selected category and search
   const filtered =
     selectedCategory === "All"
       ? validArticles
@@ -237,27 +238,139 @@ export default function NewsClient({ articles = [] }: NewsClientProps) {
           (n: any) => n.category && n.category.name === selectedCategory,
         );
 
+  const searched = searchQuery.trim()
+    ? filtered.filter((article: any) => {
+        const q = searchQuery.toLowerCase();
+        return (
+          article.title?.toLowerCase().includes(q) ||
+          article.summary?.toLowerCase().includes(q) ||
+          article.category?.name?.toLowerCase().includes(q) ||
+          article.author?.name?.toLowerCase().includes(q)
+        );
+      })
+    : filtered;
+
   // Featured article logic: Latest article that is either:
   // 1. Marked as isFeatured, OR
   // 2. Has category "Announcements" or "Announcement"
   // If multiple match, show the latest one
-  const featuredCandidates = filtered.filter(
+  const featuredCandidates = searched.filter(
     (article: any) =>
       article.isFeatured ||
       article.category?.name?.toLowerCase().includes("announcement"),
   );
   const featured =
-    featuredCandidates.length > 0 ? featuredCandidates[0] : filtered[0];
+    featuredCandidates.length > 0 ? featuredCandidates[0] : searched[0];
 
-  // Show all filtered articles in the grid
-  const gridArticles = filtered;
+  // Exclude featured from grid to avoid duplication
+  const gridArticles = featured
+    ? searched.filter((a: any) => a.slug !== featured.slug)
+    : searched;
+
+  const latestDate = validArticles.reduce((latest: string | null, article: any) => {
+    if (!article.publicationDate) return latest;
+    if (!latest || new Date(article.publicationDate) > new Date(latest)) {
+      return article.publicationDate;
+    }
+    return latest;
+  }, null);
 
   return (
     <>
+      {/* Overview Section */}
+      <section className="mx-auto -mt-8 max-w-7xl px-4 md:-mt-12">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="rounded-[2rem] border border-gray-100 bg-white p-8 shadow-xl md:p-12"
+        >
+          <div className="grid gap-10 lg:grid-cols-2">
+            <div>
+              <h2 className="mb-4 text-2xl font-bold text-[#061C3D] md:text-3xl">
+                Your Source for Institutional News
+              </h2>
+              <p className="mb-4 leading-relaxed text-gray-600">
+                The i-Capital Africa Institute news hub brings together research
+                publications, partnership announcements, event highlights, and
+                sector analysis — all in one place. Whether you follow financial
+                inclusion, public-sector reform, or development finance, our
+                updates keep you connected to what matters.
+              </p>
+              <p className="leading-relaxed text-gray-500">
+                Browse by category, search by keyword, or dive into our featured
+                story for the latest headline from across the institute.
+              </p>
+            </div>
+            <div className="grid gap-4 sm:grid-cols-2">
+              <div className="rounded-2xl bg-orange-50 p-6">
+                <div className="mb-1 text-3xl font-black text-orange-500">
+                  {validArticles.length}
+                </div>
+                <div className="text-sm font-semibold text-[#061C3D]">
+                  Total Articles
+                </div>
+                <p className="mt-2 text-xs text-gray-500">
+                  Research, announcements, and stories
+                </p>
+              </div>
+              <div className="rounded-2xl bg-[#061C3D]/5 p-6">
+                <div className="mb-1 text-3xl font-black text-[#061C3D]">
+                  {categoriesSet.size}
+                </div>
+                <div className="text-sm font-semibold text-[#061C3D]">
+                  Categories
+                </div>
+                <p className="mt-2 text-xs text-gray-500">
+                  Filter by topic area
+                </p>
+              </div>
+              <div className="rounded-2xl bg-gray-50 p-6 sm:col-span-2">
+                <div className="text-sm font-semibold text-[#061C3D]">
+                  Most Recent Update
+                </div>
+                <p className="mt-1 text-lg font-bold text-orange-500">
+                  {latestDate
+                    ? new Date(latestDate).toLocaleDateString("en-US", {
+                        month: "long",
+                        day: "numeric",
+                        year: "numeric",
+                      })
+                    : "Coming soon"}
+                </p>
+              </div>
+            </div>
+          </div>
+        </motion.div>
+      </section>
+
       {featured && <FeaturedNews article={featured} />}
 
-      {/* Category Filters */}
+      {/* Search & Category Filters */}
       <section className="mx-auto mt-16 max-w-7xl px-4">
+        <div className="mb-6 text-center">
+          <h2 className="text-2xl font-bold text-[#061C3D] md:text-3xl">
+            Browse All Articles
+          </h2>
+          <p className="mt-2 text-gray-500">
+            {searched.length} article{searched.length !== 1 ? "s" : ""} found
+            {selectedCategory !== "All" ? ` in ${selectedCategory}` : ""}
+          </p>
+        </div>
+
+        {/* Search Bar */}
+        <div className="relative mx-auto mb-8 max-w-xl">
+          <FaSearch className="absolute left-5 top-1/2 -translate-y-1/2 text-gray-400" />
+          <input
+            type="text"
+            placeholder="Search articles by title, topic, or author..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="w-full rounded-full border border-gray-200 bg-white py-4 pl-14 pr-6 text-sm shadow-sm transition focus:border-orange-300 focus:outline-none focus:ring-2 focus:ring-orange-100"
+          />
+        </div>
+
         <div className="mb-8 flex flex-wrap justify-center gap-3">
           {categories.map((cat: string) => (
             <button
@@ -276,9 +389,15 @@ export default function NewsClient({ articles = [] }: NewsClientProps) {
       </section>
 
       {/* News Grid */}
-      {gridArticles.length > 0 && (
+      {gridArticles.length > 0 ? (
         <div className="mb-20">
           <NewsGrid articles={gridArticles} />
+        </div>
+      ) : (
+        <div className="mx-auto mb-20 max-w-7xl px-4 text-center">
+          <p className="text-lg text-gray-500">
+            No articles match your search. Try a different keyword or category.
+          </p>
         </div>
       )}
     </>
