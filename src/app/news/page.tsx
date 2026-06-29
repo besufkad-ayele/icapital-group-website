@@ -33,17 +33,9 @@ export default async function NewsPage() {
   // Extract articles from response (flattened array)
   const articles = articlesData?.articles || [];
 
-  const categoriesSet = new Set<string>();
-  articles.forEach((article: any) => {
-    if (article?.category?.name) categoriesSet.add(article.category.name);
-  });
-
   return (
-    <main className="min-h-screen bg-gray-50">
-      <NewsHero
-        articleCount={articles.length}
-        categoryCount={categoriesSet.size}
-      />
+    <main className="relative min-h-screen bg-gray-50">
+      <NewsHero />
       <NewsClient articles={articles} />
       <Subscribe subscribeData={subscribeData} />
       {/* <GetStarted getStartedData={getStartedData} /> */}

@@ -6,10 +6,19 @@ import { BlocksRenderer } from "@/lib/blocks-renderer";
 import { FiArrowLeft, FiClock, FiCalendar, FiTag, FiUser } from "react-icons/fi";
 import { getStrapiImageUrl } from "@/utils/getStrapiImageUrl";
 import BackToTop from "@/components/BackToTop";
+import BackToNews from "@/components/BackToNews";
 
 const getImageUrl = (url?: string) => {
   if (!url) return "/fallback-image.png";
   return getStrapiImageUrl(url);
+};
+
+/** Prefer Strapi dimensions; fallback to 16:9 for cards/heroes */
+const getAspectRatio = (image?: { width?: number; height?: number }) => {
+  if (image?.width && image?.height) {
+    return `${image.width} / ${image.height}`;
+  }
+  return "16 / 9";
 };
 
 // Helper to calculate reading time
@@ -55,13 +64,17 @@ export default function NewsDetailClient({
             transition={{ duration: 0.5 }}
             className="lg:col-span-2"
           >
-            <div className="relative aspect-video overflow-hidden rounded-2xl bg-gray-100">
+            <div
+              className="relative w-full overflow-hidden rounded-2xl bg-white"
+              style={{ aspectRatio: getAspectRatio(article.featuredImage) }}
+            >
               {article.featuredImage?.url && (
                 <Image
                   src={getImageUrl(article.featuredImage.url)}
                   alt={article.title}
                   fill
-                  className="object-contain"
+                  className="object-cover"
+                  sizes="(max-width: 1024px) 100vw, 66vw"
                   priority
                 />
               )}
@@ -107,13 +120,14 @@ export default function NewsDetailClient({
                   >
                     <div className="flex gap-4">
                       {/* Thumbnail */}
-                      <div className="relative aspect-video w-32 flex-shrink-0 overflow-hidden rounded-lg bg-gray-100 md:w-36">
+                      <div className="relative aspect-video w-32 flex-shrink-0 overflow-hidden rounded-lg md:w-36">
                         {relatedArticle.featuredImage?.url && (
                           <Image
                             src={getImageUrl(relatedArticle.featuredImage.url)}
                             alt={relatedArticle.title}
                             fill
-                            className="object-contain transition-transform group-hover:scale-105"
+                            className="object-cover transition-transform group-hover:scale-105"
+                            sizes="144px"
                           />
                         )}
                       </div>
@@ -262,6 +276,7 @@ export default function NewsDetailClient({
         </div>
       </section>
       <BackToTop />
+      <BackToNews />
     </div>
   );
 }
